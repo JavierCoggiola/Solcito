@@ -1,0 +1,417 @@
+{% load static %}
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Solcito</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+        <style>
+            @media(min-width:768px) {
+                .side-nav {
+                    position: fixed;
+                    top: 51px;
+                    left: 225px;
+                    width: 0px;
+                    margin-left: -225px;
+                    border: none;
+                    border-radius: 0;
+                    overflow-y: auto;
+                    background-color: #222;
+                    bottom: 0;
+                    overflow-x: hidden;
+                    padding-bottom: 40px;
+                }
+
+                .side-nav>li>a {
+                    width: 225px;
+                }
+
+                .side-nav li a:hover,
+                .side-nav li a:focus {
+                    outline: none;
+                    background-color: #000 !important;
+                }
+            }
+
+            .side-nav>li>ul {
+                padding: 0;
+            }
+
+            .side-nav>li>ul>li>a {
+                display: block;
+                padding: 10px 15px 10px 38px;
+                text-decoration: none;
+                color: #999;
+            }
+
+            .side-nav>li>ul>li>a:hover {
+                color: #fff;
+            }
+            @media(min-width:768px) {
+                #wrapper {
+                    padding-left: 0px;
+                }
+
+                #page-wrapper {
+                    padding: 0px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Solcito - Gestion de Administracion</a>
+                </div>
+                <!-- Top Menu Items -->
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <a href="#" ><i class="fa fa-user"></i> Iniciar Sesion</a>
+                    </li>
+                </ul>
+                <div class="collapse navbar-collapse navbar-ex1-collapse" id="side-list">
+                    <ul class="nav navbar-nav side-nav" id="side-list">
+                        <li class="active">
+                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Planilla</a>
+                        </li>
+
+                        <li>
+
+                            <a href="javascript:;" id="product_btn"><i class="fa fa-fw fa-shopping-cart"></i> Productos </a>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+
+            <!--Aca va lo nuestro-->
+            <div id="page-wrapper">
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Matriculacion
+                            </h1>
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h3>Alumno</h3>
+                            <form role="form">
+
+                                <div class="form-group">
+                                    <label>Nombre del alumno</label>
+                                    <input id="inp-nombre-alumno" class="form-control" >
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido del alumno</label>
+                                    <input id="inp-apellido-alumno" class="form-control" >
+                                </div>
+                                <div class="form-group">
+                                    <label>DNI</label>
+                                    <input id="inp-dni-alumno"type="number"class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Fecha de Nacimiento</label>
+                                    <input id="inp-nacimiento-alumno" type="date"class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Calle</label>
+                                    <input id="inp-calle-alumno" class="form-control" placeholder="Calle de residencia del alumno">
+                                </div>
+                                <div class="form-group">
+                                    <label>Torre</label>
+                                    <input id="inp-torre-alumno" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Codigo Postal</label>
+                                    <input id="inp-postal-alumno" type="number"class="form-control" >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Telefono Fijo</label>
+                                    <input id="inp-fijo-alumno" class="form-control" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Genero</label>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="inp-genero-alumno"  value="option1" checked>Masculino
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Lugar de Nacimiento</label>
+                                    <input id="inp-lugar_nacimiento-alumno" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Altura</label>
+                                    <input id="inp-lugar_nacimiento-alumno" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Text Input with Placeholder</label>
+                                    <input class="form-control" placeholder="Enter text">
+                                </div>
+(Nombre Alumno, Apellido Alumno, DNI, Fecha de Nacimiento, Calle, Torre, Código Postal, Tel.Fijo, Sexo, Lugar de Nacimiento, Altura de la Casa, Piso, Localidad, Tel.Celular, Religión, Nacionalidad, Barrio, Departamento, E-mail)
+                                <div class="form-group">
+                                    <label>Static Control</label>
+                                    <p class="form-control-static">email@example.com</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>File input</label>
+                                    <input type="file">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Text area</label>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Checkboxes</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="">Checkbox 1
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="">Checkbox 2
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="">Checkbox 3
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Inline Checkboxes</label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">1
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">2
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox">3
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Radio Buttons</label>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Inline Radio Buttons</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Selects</label>
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Multiple Selects</label>
+                                    <select multiple class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-default">Submit Button</button>
+                                <button type="reset" class="btn btn-default">Reset Button</button>
+
+                            </form>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <h1>Disabled Form States</h1>
+
+                            <form role="form">
+
+                                <fieldset disabled>
+
+                                    <div class="form-group">
+                                        <label for="disabledSelect">Disabled input</label>
+                                        <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="disabledSelect">Disabled select menu</label>
+                                        <select id="disabledSelect" class="form-control">
+                                            <option>Disabled select</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox">Disabled Checkbox
+                                        </label>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Disabled Button</button>
+
+                                </fieldset>
+
+                            </form>
+
+                            <h1>Form Validation</h1>
+
+                            <form role="form">
+
+                                <div class="form-group has-success">
+                                    <label class="control-label" for="inputSuccess">Input with success</label>
+                                    <input type="text" class="form-control" id="inputSuccess">
+                                </div>
+
+                                <div class="form-group has-warning">
+                                    <label class="control-label" for="inputWarning">Input with warning</label>
+                                    <input type="text" class="form-control" id="inputWarning">
+                                </div>
+
+                                <div class="form-group has-error">
+                                    <label class="control-label" for="inputError">Input with error</label>
+                                    <input type="text" class="form-control" id="inputError">
+                                </div>
+
+                            </form>
+
+                            <h1>Input Groups</h1>
+
+                            <form role="form">
+
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">@</span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-addon">.00</span>
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                    <input type="text" class="form-control" placeholder="Font Awesome Icon">
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-addon">.00</span>
+                                </div>
+
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                                </div>
+
+                            </form>
+
+                            <p>For complete documentation, please visit <a href="http://getbootstrap.com/css/#forms">Bootstrap's Form Documentation</a>.</p>
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+
+
+
+            <!-- jQuery -->
+            <script src="{% static 'js/jquery.js' %}"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+            <!-- Morris Charts JavaScript -->
+            <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
+            <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
+            <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
+
+
+            <script>
+
+
+            </script>
+        </div>
+    </body>
+
+</html>

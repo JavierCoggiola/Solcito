@@ -8,9 +8,9 @@ from django.conf import settings
 # Create your models here.
 
 sex = (
-    ("M", "Male"),
-    ("F", "Female"),
-    ("O", "Other"),
+    (M, "Male"),
+    (F, "Female"),
+    (O, "Other"),
 )
 
 class Student(models.Model):
@@ -18,7 +18,7 @@ class Student(models.Model):
     name = models.CharField(u'Name', max_length=50, null=False)
     lastName = models.CharField(u'Last Name', max_length=50, null=False)
     dni = models.IntegerField(u'DNI', null=False)
-    sex = models.CharField(u'Sex', max_length=1, choices=sex, default='M')
+    sex = models.CharField(u'Sex', max_length=1, choices=sex, default=M)
     religion = models.CharField(u'Religion', max_length=50, null=False)
     birthDate = models.DateTimeField(u'Birth Date', null=False)
     birthPlace = models.CharField(u'Birth Place', max_length=50, null=False)
@@ -49,21 +49,24 @@ class Registration(models.Model):
     qDueSubjects = models.IntegerField(u'Due Subjects', null=True)
     isActive = models.BooleanField(u'Active Registration', default=True, null=False)
     student = models.OneToOneField(Student, related_name='ownerregistration')
-
-    
-tutor_rol = (
-    ("FATHER", "Father"),
-    ("MOTHER", "Mother"),
-    ("TUTOR", "Tutor"),
-)
     
 class Tutor (models.Model):
+ 
+    FATHER = 0
+    MOTHER = 1
+    TUTOR = 2
+    TUTOR_ROL = (
+        (FATHER, "Father"),
+        (MOTHER, "Mother"),
+        (TUTOR, "Tutor"),
+    )
+    
     idTutor = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Name', max_length=50, null=False)
     lastName = models.CharField(u'Last Name', max_length=50, null=False)
     dni = models.IntegerField(u'DNI', null=False)
     cuil = models.IntegerField(u'Cuil', null=False)
-    rol = models.CharField(u'Rol', max_length=6, choices=tutor_rol, default="TUTOR")
+    rol = models.IntegerField(u'Rol', choices=TUTOR_ROL, default=TUTOR)
     workPlace = models.CharField(u'Work Place', max_length=50, null=False)
     profession = models.CharField(u'Profession', max_length=50, null=False)
     nacionality = models.CharField(u'Nacionality', max_length=50, null=False)

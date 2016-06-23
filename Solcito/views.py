@@ -5,3 +5,6 @@ from django.template import RequestContext
 def index(request):
     context = RequestContext(request)
     return render_to_response('matricular.html',{},context)
+def submitMatricula(request):
+    context = RequestContext(request)
+    return render_to_response('matricular.html',{},context)

@@ -131,7 +131,7 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            <h3>Alumno</h3>
+                            <h2>Alumno</h2>
                             <form role="form">
 
                                 <div class="form-group">
@@ -146,28 +146,30 @@
                                     <label>DNI</label>
                                     <input id="inp-dni-alumno"type="number"class="form-control" >
                                 </div>
-
                                 <div class="form-group">
-                                    <label>Fecha de Nacimiento</label>
-                                    <input id="inp-nacimiento-alumno" type="date"class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Calle</label>
-                                    <input id="inp-calle-alumno" class="form-control" placeholder="Calle de residencia del alumno">
+                                    <label>Religion</label>
+                                    <input id="inp-religion-alumno" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Torre</label>
-                                    <input id="inp-torre-alumno" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
+                                    <label>Nacionalidad del alumno</label>
+                                    <input id="inp-nacionalidad-alumno" class="form-control" >
                                 </div>
-                                <div class="form-group">
-                                    <label>Codigo Postal</label>
-                                    <input id="inp-postal-alumno" type="number"class="form-control" >
-                                </div>
-
                                 <div class="form-group">
                                     <label>Telefono Fijo</label>
                                     <input id="inp-fijo-alumno" class="form-control" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefono Celular</label>
+                                    <input id="inp-celular-alumno" class="form-control" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>E-Mail</label>
+                                    <input id="inp-mail-alumno" class="form-control" >
+                                </div>
+                                <h4>Nacimiento</h4>
+                                <div class="form-group">
+                                    <label>Fecha de Nacimiento</label>
+                                    <input id="inp-nacimiento-alumno" type="date"class="form-control" >
                                 </div>
                                 <div class="form-group">
                                     <label>Genero</label>
@@ -181,119 +183,48 @@
                                     <label>Lugar de Nacimiento</label>
                                     <input id="inp-lugar_nacimiento-alumno" class="form-control">
                                 </div>
-
+                                <h4>Recidencia</h4>
+                                <div class="form-group">
+                                    <label>Localidad</label>
+                                    <input id="inp-localidad-alumno" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Barrio</label>
+                                    <input id="inp-barrio-alumno" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Calle</label>
+                                    <input id="inp-calle-alumno" class="form-control" placeholder="Calle de residencia del alumno">
+                                </div>
                                 <div class="form-group">
                                     <label>Altura</label>
-                                    <input id="inp-lugar_nacimiento-alumno" class="form-control">
+                                    <input id="inp-altura-alumno" class="form-control" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>Text Input with Placeholder</label>
-                                    <input class="form-control" placeholder="Enter text">
+                                    <label>Torre</label>
+                                    <input id="inp-torre-alumno" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
                                 </div>
-(Nombre Alumno, Apellido Alumno, DNI, Fecha de Nacimiento, Calle, Torre, Código Postal, Tel.Fijo, Sexo, Lugar de Nacimiento, Altura de la Casa, Piso, Localidad, Tel.Celular, Religión, Nacionalidad, Barrio, Departamento, E-mail)
                                 <div class="form-group">
-                                    <label>Static Control</label>
-                                    <p class="form-control-static">email@example.com</p>
+                                    <label>Piso</label>
+                                    <input id="inp-piso-alumno" class="form-control" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Departamento</label>
+                                    <input id="inp-departamento-alumno" class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>File input</label>
-                                    <input type="file">
+                                    <label>Codigo Postal</label>
+                                    <input id="inp-postal-alumno" type="number"class="form-control" >
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Text area</label>
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Checkboxes</label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">Checkbox 1
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">Checkbox 2
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">Checkbox 3
-                                        </label>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Inline Checkboxes</label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox">1
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox">2
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox">3
-                                    </label>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Radio Buttons</label>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                        </label>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Inline Radio Buttons</label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                    </label>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Selects</label>
-                                    <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Multiple Selects</label>
-                                    <select multiple class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
 
-                                <button type="submit" class="btn btn-default">Submit Button</button>
-                                <button type="reset" class="btn btn-default">Reset Button</button>
 
                             </form>
 

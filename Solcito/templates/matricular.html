@@ -219,6 +219,7 @@
                                 </div>
 
 
+                                <button type="submit" id="submit_matricula" class="btn btn-default">Submit Button</button>
 
 
 
@@ -532,7 +533,6 @@
 
 
 
-                                        <button type="submit" id="submit_matricula" class="btn btn-default">Submit Button</button>
                                         <!-- /.row -->
                                     </form>
                                 </form>
@@ -543,43 +543,50 @@
                         </div>
 
 
-
-                        <!-- jQuery -->
-                        <script src="{% static 'js/jquery.js' %}"></script>
-
-                        <!-- Bootstrap Core JavaScript -->
-                        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-                        <!-- Morris Charts JavaScript -->
-                        <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
-                        <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
-                        <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
-
-
-                        <script>
-
-                            $('#submit_matricula').click(function submit(){
-                                verificacionAlumno();
-                            });
-                            function verificacionAlumno(){
-                                if ($('#inp-nombre-alumno').val()=="" || $('#inp-apellido-alumno').val()=="" || $('#inp-dni-alumno').val()==""
-                                    || $('#inp-religion-alumno').val()==""
-                                    || $('#inp-nacionalidad-alumno').val()==""
-                                    || $('#inp-fijo-alumno').val()==""
-                                    || $('#inp-mail-alumno').val()==""
-                                    || $('#inp-nacimiento-alumno').val()==""
-                                    || $('#inp-lugar_nacimiento-alumno').val()==""
-                                    || $('#inp-localidad-alumno').val()==""
-                                    || $('#inp-barrio-alumno').val()==""
-                                    || $('#inp-calle-alumno').val()==""
-                                    || $('#inp-altura-alumno').val()==""
-                                    || $('#inp-postal-alumno').val()==""){
-                                    alert("Error: Porfavor complete los campos obligatorios");
-                                }
-
-                            }
-                        </script>
                     </div>
-                    </body>
+                </div>
+            </div>
+        </div>
+        <!-- jQuery -->
+        <script src="{% static 'js/jquery.js' %}"></script>
 
-                </html>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
+        <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
+        <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
+        <script src="{% static 'js/verimail.jquery.js' %}"></script>
+
+        <script>
+
+            $('#submit_matricula').click(function submit(){
+                verificacionAlumno();
+            });
+            function verificacionAlumno(){
+                if ($('#inp-nombre-alumno').val()=="" || $('#inp-apellido-alumno').val()=="" || $('#inp-dni-alumno').val()==""
+                    || $('#inp-religion-alumno').val()==""
+                    || $('#inp-nacionalidad-alumno').val()==""
+                    || $('#inp-fijo-alumno').val()==""
+                    || $('#inp-mail-alumno').val()==""
+                    || $('#inp-nacimiento-alumno').val()==""
+                    || $('#inp-lugar_nacimiento-alumno').val()==""
+                    || $('#inp-localidad-alumno').val()==""
+                    || $('#inp-barrio-alumno').val()==""
+                    || $('#inp-calle-alumno').val()==""
+                    || $('#inp-altura-alumno').val()==""
+                    || $('#inp-postal-alumno').val()==""){
+                    alert("Error: Porfavor complete los campos obligatorios");
+                }
+                $("input#email-address").verimail({
+                    messageElement: "p#status-message"
+                });
+            }
+
+
+        </script>
+
+    </body>
+
+</html>

@@ -8,9 +8,9 @@ from django.conf import settings
 # Create your models here.
 
 sex = (
-    (M, "Male"),
-    (F, "Female"),
-    (O, "Other"),
+    ("M", "Male"),
+    ("F", "Female"),
+    ("O", "Other"),
 )
 
 class Student(models.Model):
@@ -18,7 +18,7 @@ class Student(models.Model):
     name = models.CharField(u'Name', max_length=50, null=False)
     lastName = models.CharField(u'Last Name', max_length=50, null=False)
     dni = models.IntegerField(u'DNI', null=False)
-    sex = models.CharField(u'Sex', max_length=1, choices=sex, default=M)
+    sex = models.CharField(u'Sex', max_length=1, choices=sex, default='M')
     religion = models.CharField(u'Religion', max_length=50, null=False)
     birthDate = models.DateTimeField(u'Birth Date', null=False)
     birthPlace = models.CharField(u'Birth Place', max_length=50, null=False)

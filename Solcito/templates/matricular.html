@@ -135,27 +135,27 @@
                             <form role="form">
 
                                 <div class="form-group">
-                                    <label>Nombre del alumno</label>
+                                    <label>Nombre del alumno*</label>
                                     <input id="inp-nombre-alumno" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Apellido del alumno</label>
+                                    <label>Apellido del alumno*</label>
                                     <input id="inp-apellido-alumno" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>DNI</label>
+                                    <label>DNI*</label>
                                     <input id="inp-dni-alumno"type="number"class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Religion</label>
+                                    <label>Religion*</label>
                                     <input id="inp-religion-alumno" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Nacionalidad del alumno</label>
+                                    <label>Nacionalidad del alumno*</label>
                                     <input id="inp-nacionalidad-alumno" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Telefono Fijo</label>
+                                    <label>Telefono Fijo*</label>
                                     <input id="inp-fijo-alumno" class="form-control" type="number">
                                 </div>
                                 <div class="form-group">
@@ -163,16 +163,16 @@
                                     <input id="inp-celular-alumno" class="form-control" type="number">
                                 </div>
                                 <div class="form-group">
-                                    <label>E-Mail</label>
-                                    <input id="inp-mail-alumno" class="form-control" >
+                                    <label>E-Mail*</label>
+                                    <input id="inp-mail-alumno" type="email" class="form-control" >
                                 </div>
                                 <h4>Nacimiento</h4>
                                 <div class="form-group">
-                                    <label>Fecha de Nacimiento</label>
+                                    <label>Fecha de Nacimiento*</label>
                                     <input id="inp-nacimiento-alumno" type="date"class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>Genero</label>
+                                    <label>Genero*</label>
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="optionsRadios" id="inp-genero-alumno"  value="option1" checked>Masculino
@@ -180,24 +180,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Lugar de Nacimiento</label>
+                                    <label>Lugar de Nacimiento*</label>
                                     <input id="inp-lugar_nacimiento-alumno" class="form-control">
                                 </div>
                                 <h4>Recidencia</h4>
                                 <div class="form-group">
-                                    <label>Localidad</label>
+                                    <label>Localidad*</label>
                                     <input id="inp-localidad-alumno" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>Barrio</label>
+                                    <label>Barrio*</label>
                                     <input id="inp-barrio-alumno" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>Calle</label>
+                                    <label>Calle*</label>
                                     <input id="inp-calle-alumno" class="form-control" placeholder="Calle de residencia del alumno">
                                 </div>
                                 <div class="form-group">
-                                    <label>Altura</label>
+                                    <label>Altura*</label>
                                     <input id="inp-altura-alumno" class="form-control" type="number">
                                 </div>
                                 <div class="form-group">
@@ -214,8 +214,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Codigo Postal</label>
-                                    <input id="inp-postal-alumno" type="number"class="form-control" >
+                                    <label>Codigo Postal*</label>
+                                    <input id="inp-postal-alumno" type="number"class="form-control" placeholder="(Solo Numeros)">
                                 </div>
 
 
@@ -314,8 +314,9 @@
                             </form>
 
                             <p>For complete documentation, please visit <a href="http://getbootstrap.com/css/#forms">Bootstrap's Form Documentation</a>.</p>
-
+                            <button type="submit" id="submit_matricula" class="btn btn-default">Submit Button</button>
                         </div>
+
                     </div>
                     <!-- /.row -->
 
@@ -340,7 +341,26 @@
 
             <script>
 
+                $('#submit_matricula').click(function submit(){
+                    verificacionAlumno();
+                });
+                function verificacionAlumno(){
+                    if ($('#inp-nombre-alumno').val()=="" || $('#inp-apellido-alumno').val()=="" || $('#inp-dni-alumno').val()==""
+                       || $('#inp-religion-alumno').val()==""
+                       || $('#inp-nacionalidad-alumno').val()==""
+                       || $('#inp-fijo-alumno').val()==""
+                       || $('#inp-mail-alumno').val()==""
+                       || $('#inp-nacimiento-alumno').val()==""
+                       || $('#inp-lugar_nacimiento-alumno').val()==""
+                       || $('#inp-localidad-alumno').val()==""
+                       || $('#inp-barrio-alumno').val()==""
+                       || $('#inp-calle-alumno').val()==""
+                       || $('#inp-altura-alumno').val()==""
+                       || $('#inp-postal-alumno').val()==""){
+                        alert("Error: Porfavor complete los campos obligatorios");
+                    }
 
+                }
             </script>
         </div>
     </body>

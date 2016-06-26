@@ -20,7 +20,7 @@ class Student(models.Model):
     dni = models.IntegerField(u'DNI', null=False)
     sex = models.CharField(u'Sex', max_length=1, choices=sex, default='M')
     religion = models.CharField(u'Religion', max_length=50, null=False)
-    birthDate = models.DateTimeField(u'Birth Date', null=False)
+    birthDate = models.DateField(u'Birth Date', null=False)
     birthPlace = models.CharField(u'Birth Place', max_length=50, null=False)
     nacionality = models.CharField(u'Nacionality', max_length=50, null=False)
     street = models.CharField(u'Street', max_length=50, null=False)

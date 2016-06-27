@@ -13,6 +13,14 @@ sex = (
     ("O", "Other"),
 )
 
+class Imagen (models.Model):
+    class Meta:
+        verbose_name = "Imagen"
+        verbose_name_plural = "Imagenes"
+
+    img = models.FileField(u'Imagen de portada',upload_to = 'photos', default='null')
+    desc = models.TextField(u'Descripcion Imagen' , max_length = 100 , default=' ')
+
 class Student(models.Model):
     idStudent = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Name', max_length=50, null=False)
@@ -37,7 +45,7 @@ class Student(models.Model):
     photo = models.FileField(u'Photo', upload_to='photos/', null=True)
 
     def __str__(self):
-		return self.name
+        return self.name
     
 class Registration(models.Model):
     idRegistration = models.AutoField(primary_key=True, editable=False)

@@ -8,6 +8,11 @@ from django.core.exceptions import ObjectDoesNotExist
 def index(request):
     context = RequestContext(request)
     return render_to_response('matricular.html',{},context)
+
+def search(request):
+    context = RequestContext(request)
+    return render_to_response('buscar.html',{},context)
+
 def submitMatricula(request):
     context = RequestContext(request)
     if request.method=='POST':

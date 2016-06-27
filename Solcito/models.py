@@ -18,7 +18,7 @@ class Student(models.Model):
     name = models.CharField(u'Name', max_length=50, null=False)
     lastName = models.CharField(u'Last Name', max_length=50, null=False)
     dni = models.IntegerField(u'DNI', null=False)
-    sex = models.CharField(u'Sex', max_length=1, choices=sex, default='M')
+    sex = models.CharField(u'Sex', max_length=1, choices=sex, default='M', null=False)
     religion = models.CharField(u'Religion', max_length=50, null=False)
     birthDate = models.DateField(u'Birth Date', null=False)
     birthPlace = models.CharField(u'Birth Place', max_length=50, null=False)
@@ -48,7 +48,7 @@ class Registration(models.Model):
     previousSchool = models.CharField(u'Previous School', max_length=50, null=True)
     qDueSubjects = models.IntegerField(u'Due Subjects', null=True)
     isActive = models.BooleanField(u'Active Registration', default=True, null=False)
-    student = models.OneToOneField(Student, related_name='ownerregistration')
+    student = models.ForeignKey('Student', related_name='ownerregistration')
     
 class Tutor (models.Model):
  
@@ -66,7 +66,7 @@ class Tutor (models.Model):
     lastName = models.CharField(u'Last Name', max_length=50, null=False)
     dni = models.IntegerField(u'DNI', null=False)
     cuil = models.IntegerField(u'Cuil', null=False)
-    rol = models.IntegerField(u'Rol', choices=TUTOR_ROL, default=TUTOR)
+    rol = models.IntegerField(u'Rol', choices=TUTOR_ROL, default=TUTOR, null=False)
     workPlace = models.CharField(u'Work Place', max_length=50, null=False)
     profession = models.CharField(u'Profession', max_length=50, null=False)
     nacionality = models.CharField(u'Nacionality', max_length=50, null=False)

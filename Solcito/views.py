@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
-from Solcito.models import Student
+from Solcito.models import Student, Registration
 # exepciones
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
@@ -92,138 +92,163 @@ def submitMatricula(request):
 
         try:
             alumno = Student.objects.get(dni=int(alumno_dni))
+            matriculas = Registration.objects.filter(student=alumno)
+            for i in matriculas:
+                print i.nameStudent
+                i.isActive = False
+                i.save()
             print "Alumno Existe"
         except ObjectDoesNotExist:
             print "Alumno NO Existe"
             alumno = Student()
-        alumno.name = alumno_nombre
-        alumno.lastName = alumno_apellido
-        alumno.dni = int(alumno_dni)
-        alumno.sex = alumno_sexo
-        alumno.religion = alumno_religion
-        alumno.birthDate = alumno_nacimiento
-        alumno.birthPlace = alumno_lugar_nacimiento
-        alumno.nacionality = alumno_nacionalidad
-        alumno.street = alumno_calle
-        alumno.numberStreet = int(alumno_altura)
-        alumno.neighborhood = alumno_barrio
-        alumno.tower = alumno_torre
-        print alumno_torre
+            alumno.name = alumno_nombre
+            alumno.lastName = alumno_apellido
+            alumno.dni = int(alumno_dni)
+            alumno.sex = alumno_sexo
+            alumno.religion = alumno_religion
+            alumno.birthDate = alumno_nacimiento
+            alumno.birthPlace = alumno_lugar_nacimiento
+            alumno.nacionality = alumno_nacionalidad
+            alumno.street = alumno_calle
+            alumno.numberStreet = int(alumno_altura)
+            alumno.neighborhood = alumno_barrio
+            alumno.tower = alumno_torre
+            print alumno_torre
+            if alumno_piso != "":
+                alumno.floorDepartment = int(alumno_piso)
+                print alumno_piso
+            alumno.department = alumno_departamento
+            alumno.PC = int(alumno_postal)
+            alumno.nacionality = alumno_nacionalidad
+            alumno.email = alumno_mail
+            alumno.landline = int(alumno_fijo)
+            if alumno_celular != "":
+                alumno.cellphone = int(alumno_celular)
+            alumno.save()
+
+        alumno = Student.objects.get(dni=int(alumno_dni))
+        matricula = Registration()
+
+        matricula.student = alumno
+
+        matricula.nameStudent = alumno_nombre
+        matricula.lastNameStudent = alumno_apellido
+        matricula.dniStudent = int(alumno_dni)
+        matricula.sexStudent = alumno_sexo
+        matricula.religionStudent = alumno_religion
+        matricula.birthDateStudent = alumno_nacimiento
+        matricula.birthPlaceStudent = alumno_lugar_nacimiento
+        matricula.nacionalityStudent = alumno_nacionalidad
+        matricula.streetStudent = alumno_calle
+        matricula.numberStreetStudent = int(alumno_altura)
+        matricula.neighborhoodStudent = alumno_barrio
+        matricula.towerStudent = alumno_torre
         if alumno_piso != "":
-            alumno.floorDepartment = int(alumno_piso)
+            matricula.floorDepartmentStudent = int(alumno_piso)
             print alumno_piso
-        alumno.department = alumno_departamento
-        alumno.PC = int(alumno_postal)
-        alumno.nacionality = alumno_nacionalidad
-        alumno.email = alumno_mail
-        alumno.landline = int(alumno_fijo)
+        matricula.departmentStudent = alumno_departamento
+        matricula.PCStudent = int(alumno_postal)
+        matricula.nacionalityStudent = alumno_nacionalidad
+        matricula.emailStudent = alumno_mail
+        matricula.landlineStudent = int(alumno_fijo)
         if alumno_celular != "":
-            alumno.cellphone = int(alumno_celular)
-        alumno.save()
+            matricula.cellphoneStudent = int(alumno_celular)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        madre = Tutor.rol= 1
-        madre.name = madre_nombre
-        madre.lastName = madre_apellido
-        madre.dni = int(madre_dni)
-        madre.cuil = int(madre_cuil)
-        madre.workPlace = madre_trabajo
-        madre.profession = madre_profesion
-        madre.nacionality = madre_nacionalidad
-        madre.street = madre_calle
-        madre.numberStreet = madre_altura
-        madre.neighborhood = madre_barrio
-        madre.tower = madre_torre
+        matricula.nameMother = madre_nombre
+        matricula.lastNameMother = madre_apellido
+        if madre_dni != "":
+            matricula.dniMother = int(madre_dni)
+        if madre_cuil != "":
+            matricula.cuilMother = int(madre_cuil)
+        matricula.workPlaceMother = madre_trabajo
+        matricula.professionMother = madre_profesion
+        matricula.nacionalityMother = madre_nacionalidad
+        matricula.streetMother = madre_calle
+        if madre_altura != "":
+            matricula.numberStreetMother = int(madre_altura)
+        matricula.neighborhoodMother = madre_barrio
+        matricula.towerMother = madre_torre
         if madre_piso != "":
-            madre.floorDepartment = int(madre_piso)
-        madre.department = madre_departamento
-        madre.PC = madre_postal
-        madre.locality = madre_localidad
-        madre.email = madre_mail
-        madre.landline = madre_fijo
+            matricula.floorDepartmentMother = int(madre_piso)
+        matricula.departmentMother = madre_departamento
+        if madre_postal != "":
+            matricula.PCMother = int(madre_postal)
+        matricula.localityMother = madre_localidad
+        matricula.emailMother = madre_mail
+        if madre_fijo != "":
+            matricula.landlineMother = int(madre_fijo)
         if madre_celular != "":
-            madre.cellphone = int(madre_celular)
+            matricula.cellphoneMother = int(madre_celular)
         if madre_tlaboral != "":
-            madre.workPhone = int(madre_tlaboral)
-        madre.save()
+            matricula.workPhoneMother = int(madre_tlaboral)
 
 
         #student (decir a que estudiante corresponde el tutor)
 
 
 
-        padre = Tutor.rol= 0
-        padre.name = padre_nombre
-        padre.lastName = padre_apellido
-        padre.dni = int(padre_dni)
-        padre.cuil = int(padre_cuil)
-        padre.workPlace = padre_trabajo
-        padre.profession = padre_profesion
-        padre.nacionality = padre_nacionalidad
-        padre.street = padre_calle
-        padre.numberStreet = padre_altura
-        padre.neighborhood = padre_barrio
-        padre.tower = padre_torre
+        matricula.nameFather = padre_nombre
+        matricula.lastNameFather = padre_apellido
+        if padre_dni != "":
+            matricula.dniFather = int(padre_dni)
+        if padre_cuil != "":
+            matricula.cuilFather = int(padre_cuil)
+        matricula.workPlaceFather = padre_trabajo
+        matricula.professionFather = padre_profesion
+        matricula.nacionalityFather = padre_nacionalidad
+        matricula.streetFather = padre_calle
+        if padre_altura != "":
+            matricula.numberStreetFather = int(padre_altura)
+        matricula.neighborhoodFather = padre_barrio
+        matricula.towerFather = padre_torre
         if padre_piso != "":
-            padre.floorDepartment = int(padre_piso)
-        padre.department = padre_departamento
-        padre.PC = padre_postal
-        padre.locality = padre_localidad
-        padre.email = padre_mail
-        padre.landline = padre_fijo
+            matricula.floorDepartmentFather = int(padre_piso)
+        matricula.departmentFather = padre_departamento
+        if padre_postal != "":
+            matricula.PCFather = int(padre_postal)
+        matricula.localityFather = padre_localidad
+        matricula.emailFather = padre_mail
+        if padre_fijo != "":
+            matricula.landlineFather = int(padre_fijo)
         if padre_celular != "":
-            padre.cellphone = int(padre_celular)
+            matricula.cellphoneFather = int(padre_celular)
         if padre_tlaboral != "":
-            padre.workPhone = int(padre_tlaboral)
-        padre.save()
+            matricula.workPhoneFather = int(padre_tlaboral)
 
 
         #student (decir a que estudiante corresponde el tutor)
 
 
 
-        tutor = Tutor.rol= 2
-        tutor.name = tutor_nombre
-        tutor.lastName = tutor_apellido
-        tutor.dni = int(tutor_dni)
-        tutor.cuil = int(tutor_cuil)
-        tutor.workPlace = tutor_trabajo
-        tutor.profession = tutor_profesion
-        tutor.nacionality = tutor_nacionalidad
-        tutor.street = tutor_calle
-        tutor.numberStreet = tutor_altura
-        tutor.neighborhood = tutor_barrio
-        tutor.tower = tutor_torre
+        matricula.nameTutor = tutor_nombre
+        matricula.lastNameTutor = tutor_apellido
+        if tutor_dni != "":
+            matricula.dniTutor = int(tutor_dni)
+        if tutor_cuil != "":
+            matricula.cuilTutor = int(tutor_cuil)
+        matricula.workPlaceTutor = tutor_trabajo
+        matricula.professionTutor = tutor_profesion
+        matricula.nacionalityTutor = tutor_nacionalidad
+        matricula.streetTutor = tutor_calle
+        if tutor_altura != "":
+            matricula.numberStreetTutor = int(tutor_altura)
+        matricula.neighborhoodTutor = tutor_barrio
+        matricula.towerTutor = tutor_torre
         if tutor_piso != "":
-            tutor.floorDepartment = int(tutor_piso)
-        tutor.department = tutor_departamento
-        tutor.PC = tutor_postal
-        tutor.locality = tutor_localidad
-        tutor.email = tutor_mail
-        tutor.landline = tutor_fijo
+            matricula.floorDepartmentTutor = int(tutor_piso)
+        matricula.departmentTutor = tutor_departamento
+        if tutor_postal != "":
+            matricula.PCTutor = int(tutor_postal)
+        matricula.localityTutor = tutor_localidad
+        matricula.emailTutor = tutor_mail
+        if tutor_fijo != "":
+            matricula.landlineTutor = int(tutor_fijo)
         if tutor_celular != "":
-            tutor.cellphone = int(tutor_celular)
+            matriculaFather.cellphoneTutor = int(tutor_celular)
         if tutor_tlaboral != "":
-            tutor.workPhone = int(tutor_tlaboral)
-        tutor.save()
+            matricula.workPhoneTutor = int(tutor_tlaboral)
 
-
-        #student (decir a que estudiante corresponde el tutor)
+        matricula.save()
 
 
 

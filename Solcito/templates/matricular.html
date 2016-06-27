@@ -307,7 +307,7 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
                                 </div>
 
                                 <label>Barrio</label>
-                                <input id="inp-calle-madre" class="form-control" >
+                                <input id="inp-barrio-madre" class="form-control" >
 
                                 <div class="form-group">
                                     <label>Torre</label>
@@ -336,7 +336,7 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
 
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input id="inp-fijo-madre" class="form-control" type="email">
+                                    <input id="inp-email-madre" class="form-control" type="email">
                                 </div>
 
                                 <div class="form-group">
@@ -419,7 +419,7 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
                                     </div>
 
                                     <label>Barrio</label>
-                                    <input id="inp-calle-padre" class="form-control" >
+                                    <input id="inp-barrio-padre" class="form-control" >
 
                                     <div class="form-group">
                                         <label>Torre</label>
@@ -448,7 +448,7 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
 
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input id="inp-fijo-padre" class="form-control" type="email">
+                                        <input id="inp-email-padre" class="form-control" type="email">
                                     </div>
 
                                     <div class="form-group">
@@ -526,7 +526,7 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
                                         </div>
 
                                         <label>Barrio</label>
-                                        <input id="inp-calle-tutor" class="form-control" >
+                                        <input id="inp-barrio-tutor" class="form-control" >
 
                                         <div class="form-group">
                                             <label>Torre</label>
@@ -555,7 +555,7 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
 
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input id="inp-fijo-tutor" class="form-control" type="email">
+                                            <input id="inp-email-tutor" class="form-control" type="email">
                                         </div>
 
                                         <div class="form-group">
@@ -629,7 +629,64 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
                     localidad : $('#inp-localidad-alumno').val(),
                     mail : $('#inp-mail-alumno').val(),
                     fijo : $('#inp-fijo-alumno').val(),
-                    celular : $('#inp-celular-alumno').val()
+                    celular : $('#inp-celular-alumno').val(),
+                       nombrem : $('#inp-nombre-madre').val(),
+                    apellidom: $('#inp-apellido-madre').val(),
+                    dnim: $('#inp-dni-madre').val(),
+                    cuilm: $('#inp-cuil-madre').val(),
+                    lugartrabajom: $('#inp-trabajo-madre').val(),
+                    profesionm: $('#inp-profesion-madre').val(),
+                    nacionalidadm: $('#inp-nacionalidad-madre').val(),
+                    callem: $('#inp-calle-madre').val(),
+                    alturam: $('#inp-numcalle-madre').val(),
+                    barriom: $('#inp-barrio-madre').val(),
+                    torrem: $('#inp-torre-madre').val(),
+                    pisom: $('#inp-piso-madre').val(),
+                    departamentom: $('#inp-dpto-madre').val(),
+                    postalm: $('#inp-postal-madre').val(),
+                    localidadm: $('#inp-localidad-madre').val(),
+                    mailm: $('#inp-email-madre').val(),
+                    fijom: $('#inp-fijo-madre').val(),
+                    celularm: $('#inp-celular-madre').val(),
+                    tlaboralm: $('#inp-tlaboral-madre').val(),
+                      nombrep : $('#inp-nombre-padre').val(),
+                    apellidop: $('#inp-apellido-padre').val(),
+                    dnip: $('#inp-dni-padre').val(),
+                    cuilp: $('#inp-cuil-padre').val(),
+                    lugartrabajop: $('#inp-trabajo-padre').val(),
+                    profesionp: $('#inp-profesion-padre').val(),
+                    nacionalidadp: $('#inp-nacionalidad-padre').val(),
+                    callep: $('#inp-calle-padre').val(),
+                    alturap: $('#inp-numcalle-padre').val(),
+                    barriop: $('#inp-barrio-padre').val(),
+                    torrep: $('#inp-torre-padre').val(),
+                    pisop: $('#inp-piso-padre').val(),
+                    departamentop: $('#inp-dpto-padre').val(),
+                    postalp: $('#inp-postal-padre').val(),
+                    localidadp: $('#inp-localidad-padre').val(),
+                    mailp: $('#inp-email-padre').val(),
+                    fijop: $('#inp-fijo-padre').val(),
+                    celularp: $('#inp-celular-padre').val(),
+                    tlaboralp: $('#inp-tlaboral-padre').val(),
+                     nombret : $('#inp-nombre-tutor').val(),
+                    apellidot: $('#inp-apellido-tutor').val(),
+                    dnit: $('#inp-dni-tutor').val(),
+                    cuilt: $('#inp-cuil-tutor').val(),
+                    lugartrabajot: $('#inp-trabajo-tutor').val(),
+                    profesiont: $('#inp-profesion-tutor').val(),
+                    nacionalidadt: $('#inp-nacionalidad-tutor').val(),
+                    callet: $('#inp-calle-tutor').val(),
+                    alturat: $('#inp-numcalle-tutor').val(),
+                    barriot: $('#inp-barrio-tutor').val(),
+                    torret: $('#inp-torre-tutor').val(),
+                    pisot: $('#inp-piso-tutor').val(),
+                    departamentot: $('#inp-dpto-tutor').val(),
+                    postalt: $('#inp-postal-tutor').val(),
+                    localidadt: $('#inp-localidad-tutor').val(),
+                    mailt: $('#inp-email-tutor').val(),
+                    fijot: $('#inp-fijo-tutor').val(),
+                    celulart: $('#inp-celular-tutor').val(),
+                    tlaboralt: $('#inp-tlaboral-tutor').val()
                 }
                 console.log(data);
                 $.ajax({
@@ -676,3 +733,5 @@ Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.
     </body>
 
 </html>
+
+

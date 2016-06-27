@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
 from Solcito.models import Student
+# exepciones
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def index(request):
     context = RequestContext(request)
@@ -87,7 +89,13 @@ def submitMatricula(request):
         tutor_celular=request.POST['celulart']
         tutor_tlaboral=request.POST['tlaboralt']
 
-        alumno = Student()
+
+        try:
+            alumno = Student.objects.get(dni=int(alumno_dni))
+            print "Alumno Existe"
+        except ObjectDoesNotExist:
+            print "Alumno NO Existe"
+            alumno = Student()
         alumno.name = alumno_nombre
         alumno.lastName = alumno_apellido
         alumno.dni = int(alumno_dni)
@@ -113,3 +121,4 @@ def submitMatricula(request):
             alumno.cellphone = int(alumno_celular)
         alumno.save()
         return render_to_response('matricular_success.html',{},context)
+    return render_to_response('matricular_bug.html',{},context)

@@ -13,6 +13,14 @@ sex = (
     ("O", "Other"),
 )
 
+class Imagen (models.Model):
+    class Meta:
+        verbose_name = "Imagen"
+        verbose_name_plural = "Imagenes"
+
+    img = models.FileField(u'Imagen de portada',upload_to = 'photos', default='null')
+    desc = models.TextField(u'Descripcion Imagen' , max_length = 100 , default=' ')
+
 class Student(models.Model):
     idStudent = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Name', max_length=50, blank=False)
@@ -37,7 +45,7 @@ class Student(models.Model):
     photo = models.FileField(u'Photo', upload_to='photos/', blank=True, null=True)
 
     def __str__(self):
-		return self.name
+        return self.name
     
 class Registration(models.Model):
     idRegistration = models.AutoField(primary_key=True, editable=False)
@@ -70,7 +78,7 @@ class Registration(models.Model):
     landlineStudent = models.IntegerField(u'Landline Student', blank=False, null=True)
     cellphoneStudent = models.IntegerField(u'Cellphone Student', blank=True, null=True)
     photoStudent = models.FileField(u'Photo Student', upload_to='photos/', blank=True, null=True)
-    
+
     nameFather = models.CharField(u'Name Father', max_length=50, blank=True, null=True)
     lastNameFather = models.CharField(u'Last Name Father', max_length=50, blank=True, null=True)
     dniFather = models.IntegerField(u'DNI Father', blank=True, null=True)
@@ -132,10 +140,10 @@ class Registration(models.Model):
     workPhoneTutor = models.IntegerField(u'Work Phone Tutor', blank=True, null=True)
 
     def __str__(self):
-		return self.nameStudent
+        return self.nameStudent
     
 class Tutor (models.Model):
- 
+
     FATHER = 0
     MOTHER = 1
     TUTOR = 2
@@ -144,7 +152,7 @@ class Tutor (models.Model):
         (MOTHER, "Mother"),
         (TUTOR, "Tutor"),
     )
-    
+
     idTutor = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Name', max_length=50, blank=False)
     lastName = models.CharField(u'Last Name', max_length=50, blank=False)
@@ -166,4 +174,3 @@ class Tutor (models.Model):
     landline = models.IntegerField(u'Landline', blank=False)
     cellphone = models.IntegerField(u'Cellphone', blank=True, null=True)
     workPhone = models.IntegerField(u'Work Phone', blank=True, null=True)
-    student = models.OneToOneField(Student, related_name='son')

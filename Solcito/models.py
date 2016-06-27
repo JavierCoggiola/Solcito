@@ -35,8 +35,7 @@ class Student(models.Model):
     landline = models.IntegerField(u'Landline', null=False)
     cellphone = models.IntegerField(u'Cellphone', null=True)
     photo = models.FileField(u'Photo', upload_to='photos/', null=True)
-    registration = models.OneToManyField(Registration, related_name='registrations')
-    
+
     def __str__(self):
 		return self.name
     
@@ -49,6 +48,7 @@ class Registration(models.Model):
     previousSchool = models.CharField(u'Previous School', max_length=50, null=True)
     qDueSubjects = models.IntegerField(u'Due Subjects', null=True)
     isActive = models.BooleanField(u'Active Registration', default=True, null=False)
+    student = models.ForeignKey('Student', related_name='ownerregistration')
     
 class Tutor (models.Model):
  

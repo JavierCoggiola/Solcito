@@ -112,4 +112,111 @@ def submitMatricula(request):
         if alumno_celular != "":
             alumno.cellphone = int(alumno_celular)
         alumno.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        madre = Tutor.rol= 1
+        madre.name = madre_nombre
+        madre.lastName = madre_apellido
+        madre.dni = int(madre_dni)
+        madre.cuil = int(madre_cuil)
+        madre.workPlace = madre_trabajo
+        madre.profession = madre_profesion
+        madre.nacionality = madre_nacionalidad
+        madre.street = madre_calle
+        madre.numberStreet = madre_altura
+        madre.neighborhood = madre_barrio
+        madre.tower = madre_torre
+         if madre_piso != "":
+            madre.floorDepartment = int(madre_piso)
+        madre.department = madre_departamento
+        madre.PC = madre_postal
+        madre.locality = madre_localidad
+        madre.email = madre_mail
+        madre.landline = madre_fijo
+         if madre_celular != "":
+            madre.cellphone = int(madre_celular)
+             if madre_tlaboral != "":
+            madre.workPhone = int(madre_tlaboral)
+        madre.save()
+
+
+        #student (decir a que estudiante corresponde el tutor)
+
+
+
+        padre = Tutor.rol= 0
+        padre.name = padre_nombre
+        padre.lastName = padre_apellido
+        padre.dni = int(padre_dni)
+        padre.cuil = int(padre_cuil)
+        padre.workPlace = padre_trabajo
+        padre.profession = padre_profesion
+        padre.nacionality = padre_nacionalidad
+        padre.street = padre_calle
+        padre.numberStreet = padre_altura
+        padre.neighborhood = padre_barrio
+        padre.tower = padre_torre
+         if padre_piso != "":
+            padre.floorDepartment = int(padre_piso)
+        padre.department = padre_departamento
+        padre.PC = padre_postal
+        padre.locality = padre_localidad
+        padre.email = padre_mail
+        padre.landline = padre_fijo
+         if padre_celular != "":
+            padre.cellphone = int(padre_celular)
+             if padre_tlaboral != "":
+            padre.workPhone = int(padre_tlaboral)
+        padre.save()
+
+
+        #student (decir a que estudiante corresponde el tutor)
+
+
+
+        tutor = Tutor.rol= 2
+        tutor.name = tutor_nombre
+        tutor.lastName = tutor_apellido
+        tutor.dni = int(tutor_dni)
+        tutor.cuil = int(tutor_cuil)
+        tutor.workPlace = tutor_trabajo
+        tutor.profession = tutor_profesion
+        tutor.nacionality = tutor_nacionalidad
+        tutor.street = tutor_calle
+        tutor.numberStreet = tutor_altura
+        tutor.neighborhood = tutor_barrio
+        tutor.tower = tutor_torre
+         if tutor_piso != "":
+            tutor.floorDepartment = int(tutor_piso)
+        tutor.department = tutor_departamento
+        tutor.PC = tutor_postal
+        tutor.locality = tutor_localidad
+        tutor.email = tutor_mail
+        tutor.landline = tutor_fijo
+         if tutor_celular != "":
+            tutor.cellphone = int(tutor_celular)
+             if tutor_tlaboral != "":
+            tutor.workPhone = int(tutor_tlaboral)
+        tutor.save()
+
+
+        #student (decir a que estudiante corresponde el tutor)
+
+
+
         return render_to_response('matricular_success.html',{},context)

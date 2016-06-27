@@ -48,7 +48,7 @@ class Registration(models.Model):
     previousSchool = models.CharField(u'Previous School', max_length=50, null=True)
     qDueSubjects = models.IntegerField(u'Due Subjects', null=True)
     isActive = models.BooleanField(u'Active Registration', default=True, null=False)
-    student = models.OneToOneField(Student, related_name='ownerregistration')
+    student = models.ManyToOneField(Student, related_name='ownerregistration')
     
 class Tutor (models.Model):
  

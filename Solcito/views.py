@@ -1,7 +1,8 @@
+
 from django.shortcuts import render
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
-from Solcito.models import Student
+from Solcito.models import Student, Registration, Tutor
 # exepciones
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
@@ -12,6 +13,11 @@ def index(request):
 def search(request):
     context = RequestContext(request)
     return render_to_response('buscar.html',{},context)
+
+def editMatricula(request, idReg):
+    context = RequestContext(request)
+    matricula = Registration.objects.get(pk='00001')
+    return render_to_response('edit_matricula.html',{'matricula':matricula},context)
 
 def submitMatricula(request):
     context = RequestContext(request)
@@ -126,22 +132,6 @@ def submitMatricula(request):
             alumno.cellphone = int(alumno_celular)
         alumno.save()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         madre = Tutor.rol= 1
         madre.name = madre_nombre
         madre.lastName = madre_apellido
@@ -167,10 +157,7 @@ def submitMatricula(request):
             madre.workPhone = int(madre_tlaboral)
         madre.save()
 
-
         #student (decir a que estudiante corresponde el tutor)
-
-
 
         padre = Tutor.rol= 0
         padre.name = padre_nombre
@@ -197,10 +184,7 @@ def submitMatricula(request):
             padre.workPhone = int(padre_tlaboral)
         padre.save()
 
-
         #student (decir a que estudiante corresponde el tutor)
-
-
 
         tutor = Tutor.rol= 2
         tutor.name = tutor_nombre
@@ -227,10 +211,7 @@ def submitMatricula(request):
             tutor.workPhone = int(tutor_tlaboral)
         tutor.save()
 
-
         #student (decir a que estudiante corresponde el tutor)
-
-
 
         return render_to_response('matricular_success.html',{},context)
     return render_to_response('matricular_bug.html',{},context)

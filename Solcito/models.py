@@ -57,7 +57,7 @@ class Registration(models.Model):
     religionStudent = models.CharField(u'Religion Student', max_length=50, blank=False, null=True)
     birthDateStudent = models.DateField(u'Birth Date Student', blank=False, null=True)
     birthPlaceStudent = models.CharField(u'Birth Place Student', max_length=50, blank=False, null=True)
-    nacionalityStudent = models.CharField(u'Nacionality Student', max_length=50, blank=False, null=True)
+    localityStudent = models.CharField(u'Locality Student', max_length=50, blank=False, null=True)
     streetStudent = models.CharField(u'Street Student', max_length=50, blank=False, null=True)
     numberStreetStudent = models.IntegerField(u'Number Street Student', blank=False, null=True)
     neighborhoodStudent = models.CharField(u'Neighborhood Student', max_length=50, blank=False, null=True)

@@ -39,10 +39,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">SB Admin</a>
+                    <a class="navbar-brand" href="/">SB Admin</a>
                 </div>
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <a href="{% url 'Solcito:logout' %}" ><i class="fa fa-user"></i> Salir</a>
+                    </li>
                 </ul>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -188,7 +191,7 @@
                 }
                 $.ajax({
                     type: "GET",
-                    url: "{% url 'Solcito:edit_matricula' %}",
+                    url: "{% url 'Solcito:solcito' %}",
                     data:data,
                     success: function(result){
                         $('#wrapper').html(result);

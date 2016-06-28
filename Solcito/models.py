@@ -13,14 +13,6 @@ sex = (
     ("O", "Other"),
 )
 
-class Imagen (models.Model):
-    class Meta:
-        verbose_name = "Imagen"
-        verbose_name_plural = "Imagenes"
-
-    img = models.FileField(u'Imagen de portada',upload_to = 'photos', default='null')
-    desc = models.TextField(u'Descripcion Imagen' , max_length = 100 , default=' ')
-
 class Student(models.Model):
     idStudent = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Name', max_length=50, blank=False)
@@ -42,7 +34,7 @@ class Student(models.Model):
     email = models.CharField(u'Email', max_length=50, blank=False)
     landline = models.IntegerField(u'Landline', blank=False)
     cellphone = models.IntegerField(u'Cellphone', blank=True, null=True)
-    photo = models.FileField(u'Photo', upload_to='photos/', blank=True, null=True)
+    photo = models.FileField(u'Photo', upload_to='photos/', default='null')
 
     def __str__(self):
         return self.name
@@ -77,7 +69,7 @@ class Registration(models.Model):
     emailStudent = models.CharField(u'Email Student', max_length=50, blank=False, null=True)
     landlineStudent = models.IntegerField(u'Landline Student', blank=False, null=True)
     cellphoneStudent = models.IntegerField(u'Cellphone Student', blank=True, null=True)
-    photoStudent = models.FileField(u'Photo Student', upload_to='photos/', blank=True, null=True)
+    photoStudent = models.FileField(u'Photo', upload_to='photos/', default='null')
 
     nameFather = models.CharField(u'Name Father', max_length=50, blank=True, null=True)
     lastNameFather = models.CharField(u'Last Name Father', max_length=50, blank=True, null=True)

@@ -4,19 +4,16 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-from Solcito.models import Imagen, Student, Registration
+from Solcito.models import Student, Registration
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
-def entrada(request):
+def entradaImg(request):
     context = RequestContext(request)
     if request.method=='POST':
-
-
-        img=Imagen()
-        img.img=request.FILES[img]
-        img.desc=request.POST[desc]
-        img.save()
+        student=Student()
+        student.photo=request.FILES['photo']
+        student.save()
         return redirect("/")
     return render_to_response('matricular.html',
 context)

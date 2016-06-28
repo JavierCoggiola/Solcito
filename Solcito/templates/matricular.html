@@ -139,13 +139,10 @@
                                             <td>
                                                 <div>Foto</div>
                                                 <div>
-                                                    <form action="{% url 'Solcito:entrada' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
+                                                    <form action="{% url 'Solcito:entradaImg' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
                                                         <div>
                                                             <img id='alum'src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
-                                                            <input type='file' id='imgInp1' name='img1' multiple accept='image/*'/>
-                                                        </div>
-                                                        <div>
-                                                            <input placeholder='Comentario de la foto' maxlength='100' name='desc1' type='text' value=''>
+                                                            <input type='file' id='imgInp1' name='photo' multiple accept='image/*'/>
                                                         </div>
                                                         <a href="#" id="crear">Subir public</a>
                                                     </form>
@@ -630,7 +627,7 @@
 
     <script>
             $('#crear').click(function() {
-                if($('input:file[name=img1]').val()==""){
+                if($('input:file[name=photo]').val()==""){
                     alert('Debe cargar las imagenes');
                 }else{
                     $("#cargar").submit();

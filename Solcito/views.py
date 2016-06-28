@@ -26,6 +26,10 @@ def index(request):
     context = RequestContext(request)
     return render_to_response('matricular.html',{},context)
 
+def getFilter(request):
+    context = RequestContext(request)
+    return render_to_response('buscador.html',{},context)
+
 def submitMatricula(request):
     context = RequestContext(request)
     if request.method=='POST':

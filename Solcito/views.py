@@ -7,6 +7,45 @@ from django.http import HttpResponse
 from Solcito.models import Imagen, Student, Registration
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
+# User
+from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+
+
+def logMeIn(request): #Logueo
+    context = RequestContext(request)
+    errors = []
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user) #logueo de usuario por defecto de django
+                return redirect('/solcito')
+        else:
+            errors.append(u"El usuario o la contrasena son incorrectos")
+    return render_to_response('login.html',
+                              {'errors':errors},
+                              context)
+
+def logMeOut(request):
+    logout(request) #Logout de django
+    context = RequestContext(request)
+    return redirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
 
 def entrada(request):
     context = RequestContext(request)
@@ -25,11 +64,11 @@ context)
 def index(request):
     context = RequestContext(request)
     return render_to_response('matricular.html',{},context)
-
+@login_required(login_url='/login/')
 def getFilter(request):
     context = RequestContext(request)
     return render_to_response('buscador.html',{},context)
-
+@login_required(login_url='/login/')
 def search(request):
     context = RequestContext(request)
     if request.method=='GET':

@@ -1,0 +1,27 @@
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Curso</th>
+                <th>Divicion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for matricula in matriculas %}
+                <tr onclick="getMatricula({{matricula.idRegistration}})">
+                    <td>{{matricula.nameStudent}}</td>
+                    <td>{{matricula.lastNameStudent}}</td>
+                    <td>{{matricula.dniStudent}}</td>
+                    <td>{{matricula.grade}}</td>
+                    <td>{{matricula.division}}</td>
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>

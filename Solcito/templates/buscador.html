@@ -79,12 +79,13 @@
                         </div>
                         <div class="col-lg-2">
                             <label>DNI</label>
-                            <input id="sDNI"class="form-control">
+                            <input id="sDNI"class="form-control"type="number">
                         </div>
                         <div class="col-lg-2">
                             <label>Curso</label>
                             <select class="form-control"id="sCurso">
                                 <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
+                                    <option> <a></a></option>
                                     <option> <a>1</a></option>
                                     <option> <a>2</a></option>
                                     <option> <a>3</a></option>
@@ -96,24 +97,23 @@
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <label>Especialidad</label>
+                            <label>Divicion</label>
                             <select class="form-control"id="sEspecialidad">
                                 <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
-                                    <option> <a>Cliclo Basico</a></option>
-                                    <option> <a>Programacion</a></option>
-                                    <option> <a>Electromecanica</a></option>
-                                    <option> <a>Electronica</a></option>
-
+                                    <option> <a></a></option>
+                                    <option> <a>A</a></option>
+                                    <option> <a>B</a></option>
+                                    <option> <a>C</a></option>
                                 </ul>
                             </select>
                         </div>
                         <div class="col-lg-2">
                             <label>N° Matricula</label>
-                            <input id="sMatricula"class="form-control">
+                            <input id="sMatricula"class="form-control"type="number">
                         </div>
                         <div class="col-lg-2">
                             <label>N° Legajo</label>
-                            <input id="sLegajo"class="form-control">
+                            <input id="sLegajo"class="form-control"type="number">
                         </div>
                         <div class="col-lg-2">
                             <label>Nombre Madre</label>
@@ -137,6 +137,8 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" id="list">
+                </div>
             </div>
         </div>
 
@@ -151,8 +153,51 @@
         <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
         <script>
             $('#search').click(function search(){
-                alert();
+                var data = {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    nombre : $('#sNombre').val(),
+                    apellido : $('#sApellido').val(),
+                    dni : $('#sDNI').val(),
+                    curso : $('#sCurso').val(),
+                    especialidad : $('#sEspecialidad').val(),
+                    matricula : $('#sMatricula').val(),
+                    legajo : $('#sLegajo').val(),
+                    nombreMadre : $('#sNombreMadre').val(),
+                    apellidoMadre : $('#sApellidoMadre').val(),
+                    nombrePadre : $('#sNombrePadre').val(),
+                    apellidoPadre : $('#sApellidoPadre').val(),
+
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'Solcito:search_student' %}",
+                    data:data,
+                    success: function(result){
+                        $('#list').html(result);
+                    },
+                    error: function(){
+                        alert("Error");
+                    }
+                });
             });
+
+            function getMatricula(idMatricula){
+                var data = {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    idMatricula : idMatricula,
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'Solcito:edit_matricula' %}",
+                    data:data,
+                    success: function(result){
+                        $('#wrapper').html(result);
+                    },
+                    error: function(){
+                        alert("Error");
+                    }
+                });
+            }
         </script>
     </body>
 </html>

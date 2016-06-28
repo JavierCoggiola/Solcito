@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-
+from django.http import HttpResponse
 from Solcito.models import Imagen, Student, Registration
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
@@ -29,6 +29,59 @@ def index(request):
 def getFilter(request):
     context = RequestContext(request)
     return render_to_response('buscador.html',{},context)
+
+def search(request):
+    context = RequestContext(request)
+    if request.method=='GET':
+        nombreA=request.GET['nombre']
+        apellidoA=request.GET['apellido']
+        dniA=request.GET['dni']
+        especialidadA=request.GET['especialidad']
+        cursoA=request.GET['curso']
+        matriculaA=request.GET['matricula']
+        legajoA = request.GET['legajo']
+        nombreM=request.GET['nombreMadre']
+        apellidoM=request.GET['apellidoMadre']
+        nombreP=request.GET['nombrePadre']
+        apellidoP=request.GET['apellidoPadre']
+        matriculas = Registration.objects.all()
+        # Vamos filtrando por cada campo que el usuario completo
+        if nombreA != "":
+            matriculas = matriculas.filter(nameStudent=nombreA)
+            print matriculas
+        if apellidoA != "":
+            matriculas = matriculas.filter(lastNameStudent=apellidoA)
+            print matriculas
+        if dniA != "":
+            matriculas = matriculas.filter(dniStudent=dniA)
+            print matriculas
+        if especialidadA != "":
+            matriculas = matriculas.filter(division=especialidadA)
+            print matriculas
+        if cursoA != "":
+            matriculas = matriculas.filter(grade=cursoA)
+            print matriculas
+        if matriculaA != "":
+            matriculas = matriculas.filter(administrativeFile=matriculaA)
+            print matriculas
+        if legajoA != "":
+            matriculas = matriculas.filter(studentFile=legajoA)
+            print matriculas
+        if nombreM != "":
+            matriculas = matriculas.filter(nameMother=nombreM)
+            print matriculas
+        if apellidoM != "":
+            matriculas = matriculas.filter(lastNameMother=apellidoM)
+            print matriculas
+        if nombreP != "":
+            matriculas = matriculas.filter(nameFather=nombreP)
+            print matriculas
+        if apellidoP != "":
+            matriculas = matriculas.filter(lastNameFather=apellidoP)
+            print matriculas
+        #De todas las matriculas del alumno muestra la activa
+        matriculas = matriculas.filter(isActive=True)
+        return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
 
 def submitMatricula(request):
     context = RequestContext(request)

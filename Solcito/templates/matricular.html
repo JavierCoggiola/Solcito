@@ -139,12 +139,12 @@
                                             <td>
                                                 <div>Foto</div>
                                                 <div>
-                                                    <form action="{% url 'Solcito:entradaImg' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
+                                                    <form action="" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
                                                         <div>
                                                             <img id='alum'src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
-                                                            <input type='file' id='imgInp1' name='photo' multiple accept='image/*'/>
+                                                            <input type='file' id='photo' name='photo' multiple accept='image/*'/>
                                                         </div>
-                                                        <a href="#" id="crear">Subir public</a>
+                                                        <!--<a href="#" id="crear">Subir public</a>-->
                                                     </form>
                                                 </div>
                                             </td>
@@ -644,7 +644,7 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
-            $('#imgInp1').change(function(){
+            $('#photo').change(function(){
                 readURL(this);
             });
 
@@ -727,7 +727,9 @@
                     mailt: $('#inp-email-tutor').val(),
                     fijot: $('#inp-fijo-tutor').val(),
                     celulart: $('#inp-celular-tutor').val(),
-                    tlaboralt: $('#inp-tlaboral-tutor').val()
+                    tlaboralt: $('#inp-tlaboral-tutor').val(),
+
+                    photo: $('input:file[name=photo]').val()
                 }
                 console.log(data);
                 $.ajax({

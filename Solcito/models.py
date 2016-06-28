@@ -69,7 +69,7 @@ class Registration(models.Model):
     emailStudent = models.CharField(u'Email Student', max_length=50, blank=False, null=True)
     landlineStudent = models.IntegerField(u'Landline Student', blank=False, null=True)
     cellphoneStudent = models.IntegerField(u'Cellphone Student', blank=True, null=True)
-    photoStudent = models.FileField(u'Photo Student', upload_to='photos/', blank=True, null=True)
+    photoStudent = models.FileField(u'Photo', upload_to='photos/', default='null')
 
     nameFather = models.CharField(u'Name Father', max_length=50, blank=True, null=True)
     lastNameFather = models.CharField(u'Last Name Father', max_length=50, blank=True, null=True)

@@ -36,28 +36,6 @@ def logMeOut(request):
     return redirect('/')
 
 
-
-
-
-
-
-
-
-
-
-
-
-def entradaImg(request):
-    context = RequestContext(request)
-    if request.method=='POST':
-        student=Student()
-        student.photo=request.FILES['photo']
-        student.save()
-        return redirect("/")
-    return render_to_response('matricular.html',
-context)
-
-
 def index(request):
     context = RequestContext(request)
     return render_to_response('matricular.html',{},context)
@@ -84,37 +62,37 @@ def search(request):
         # Vamos filtrando por cada campo que el usuario completo
         if nombreA != "":
             matriculas = matriculas.filter(nameStudent=nombreA)
-            print matriculas
+            print (matriculas)
         if apellidoA != "":
             matriculas = matriculas.filter(lastNameStudent=apellidoA)
-            print matriculas
+            print (matriculas)
         if dniA != "":
             matriculas = matriculas.filter(dniStudent=dniA)
-            print matriculas
+            print (matriculas)
         if especialidadA != "":
             matriculas = matriculas.filter(division=especialidadA)
-            print matriculas
+            print (matriculas)
         if cursoA != "":
             matriculas = matriculas.filter(grade=cursoA)
-            print matriculas
+            print (matriculas)
         if matriculaA != "":
             matriculas = matriculas.filter(administrativeFile=matriculaA)
-            print matriculas
+            print (matriculas)
         if legajoA != "":
             matriculas = matriculas.filter(studentFile=legajoA)
-            print matriculas
+            print (matriculas)
         if nombreM != "":
             matriculas = matriculas.filter(nameMother=nombreM)
-            print matriculas
+            print (matriculas)
         if apellidoM != "":
             matriculas = matriculas.filter(lastNameMother=apellidoM)
-            print matriculas
+            print (matriculas)
         if nombreP != "":
             matriculas = matriculas.filter(nameFather=nombreP)
-            print matriculas
+            print (matriculas)
         if apellidoP != "":
             matriculas = matriculas.filter(lastNameFather=apellidoP)
-            print matriculas
+            print (matriculas)
         #De todas las matriculas del alumno muestra la activa
         matriculas = matriculas.filter(isActive=True)
         return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
@@ -199,18 +177,19 @@ def submitMatricula(request):
         tutor_fijo=request.POST['fijot']
         tutor_celular=request.POST['celulart']
         tutor_tlaboral=request.POST['tlaboralt']
+        photo_student=request.POST['photo']
 
 
         try:
             alumno = Student.objects.get(dni=int(alumno_dni))
             matriculas = Registration.objects.filter(student=alumno)
             for i in matriculas:
-                print i.nameStudent
+                print (i.nameStudent)
                 i.isActive = False
                 i.save()
-            print "Alumno Existe"
+            print ("Alumno Existe")
         except ObjectDoesNotExist:
-            print "Alumno NO Existe"
+            print ("Alumno NO Existe")
             alumno = Student()
             alumno.name = alumno_nombre
             alumno.lastName = alumno_apellido
@@ -224,10 +203,10 @@ def submitMatricula(request):
             alumno.numberStreet = int(alumno_altura)
             alumno.neighborhood = alumno_barrio
             alumno.tower = alumno_torre
-            print alumno_torre
+            print (alumno_torre)
             if alumno_piso != "":
                 alumno.floorDepartment = int(alumno_piso)
-                print alumno_piso
+                print (alumno_piso)
             alumno.department = alumno_departamento
             alumno.PC = int(alumno_postal)
             alumno.nacionality = alumno_nacionalidad
@@ -256,7 +235,7 @@ def submitMatricula(request):
         matricula.towerStudent = alumno_torre
         if alumno_piso != "":
             matricula.floorDepartmentStudent = int(alumno_piso)
-            print alumno_piso
+            print (alumno_piso)
         matricula.departmentStudent = alumno_departamento
         matricula.PCStudent = int(alumno_postal)
         matricula.nacionalityStudent = alumno_nacionalidad
@@ -358,6 +337,8 @@ def submitMatricula(request):
             matriculaFather.cellphoneTutor = int(tutor_celular)
         if tutor_tlaboral != "":
             matricula.workPhoneTutor = int(tutor_tlaboral)
+
+        matricula.photoStudent = photo_student
 
         matricula.save()
 

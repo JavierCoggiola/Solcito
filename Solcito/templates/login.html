@@ -1,0 +1,150 @@
+{% load static %}
+{% load staticfiles %}
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Solcito</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+        <style>
+            @media(min-width:768px) {
+                .side-nav {
+                    position: fixed;
+                    top: 51px;
+                    left: 225px;
+                    width: 0px;
+                    margin-left: -225px;
+                    border: none;
+                    border-radius: 0;
+                    overflow-y: auto;
+                    background-color: #222;
+                    bottom: 0;
+                    overflow-x: hidden;
+                    padding-bottom: 40px;
+                }
+
+                .side-nav>li>a {
+                    width: 225px;
+                }
+
+                .side-nav li a:hover,
+                .side-nav li a:focus {
+                    outline: none;
+                    background-color: #000 !important;
+                }
+            }
+
+            .side-nav>li>ul {
+                padding: 0;
+            }
+
+            .side-nav>li>ul>li>a {
+                display: block;
+                padding: 10px 15px 10px 38px;
+                text-decoration: none;
+                color: #999;
+            }
+
+            .side-nav>li>ul>li>a:hover {
+                color: #fff;
+            }
+            @media(min-width:768px) {
+                #wrapper {
+                    padding-left: 0px;
+                }
+
+                #page-wrapper {
+                    padding: 0px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Solcito - Gestion de Administracion</a>
+                </div>
+                <!-- Top Menu Items -->
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <a href="#" ><i class="fa fa-user"></i> Iniciar Sesion</a>
+                    </li>
+                </ul>
+                <div class="collapse navbar-collapse navbar-ex1-collapse" id="side-list">
+                    <ul class="nav navbar-nav side-nav" id="side-list">
+                        <li class="active">
+                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Planilla</a>
+                        </li>
+
+                        <li>
+
+                            <a href="javascript:;" id="product_btn"><i class="fa fa-fw fa-shopping-cart"></i> Productos </a>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+
+            <!--Aca va lo nuestro-->
+            <div id="page-wrapper">
+        <div class="text-center card-titles" style="background-color: #212121">
+                    <br>
+                    <h2 style="color:white">Sign in</h2>
+                    <hr class="primary">
+                    {% for error in errors %}
+                    <p class="red">{{error}}</p>
+                    {% endfor %}
+                    <br>
+                </div>
+
+                <div class="card-content text-left" style="color:#AA2408">
+                  <form class="row" action="{% url 'Solcito:login' %}" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="col-md-8 col-md-offset-2">
+                          <h4>Username:</h4>
+                          <input type="text" name="username" class="form-control" placeholder="Username">
+                        </div>
+
+                      <div class="col-md-8 col-md-offset-2">
+                          <h4>Password:</h4>
+                          <input type="password" class="form-control" name="password" placeholder="Password">
+                      </div>
+                      <input class="col-md-4 col-md-offset-4 btn btn-primary" type="submit" id="login" value="Sign in" style="margin-top: 25px;">
+                  </form>
+                </div>
+
+            </div>
+        </div>
+    </body>
+
+</html>

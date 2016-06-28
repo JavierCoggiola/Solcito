@@ -355,7 +355,7 @@ def submitMatricula(request):
         if tutor_fijo != "":
             matricula.landlineTutor = int(tutor_fijo)
         if tutor_celular != "":
-            matriculaFather.cellphoneTutor = int(tutor_celular)
+            matricula.cellphoneTutor = int(tutor_celular)
         if tutor_tlaboral != "":
             matricula.workPhoneTutor = int(tutor_tlaboral)
 

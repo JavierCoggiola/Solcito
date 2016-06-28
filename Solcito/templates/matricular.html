@@ -136,18 +136,18 @@
                             <div>
                                 <table border="1px">
                                     <tr>
-                                            <td>
-                                                <div>Foto</div>
-                                                <div>
-                                                    <form action="{% url 'Solcito:entradaImg' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
-                                                        <div>
-                                                            <img id='alum'src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
-                                                            <input type='file' id='imgInp1' name='photo' multiple accept='image/*'/>
-                                                        </div>
-                                                        <a href="#" id="crear">Subir public</a>
-                                                    </form>
-                                                </div>
-                                            </td>
+                                        <td>
+                                            <div>Foto</div>
+                                            <div>
+                                                <form action="{% url 'Solcito:entradaImg' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
+                                                    <div>
+                                                        <img id='alum'src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
+                                                        <input type='file' id='imgInp1' name='photo' multiple accept='image/*'/>
+                                                    </div>
+                                                    <a href="#" id="crear">Subir public</a>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -626,30 +626,30 @@
     <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
 
     <script>
-            $('#crear').click(function() {
-                if($('input:file[name=photo]').val()==""){
-                    alert('Debe cargar las imagenes');
-                }else{
-                    $("#cargar").submit();
-                }
-            });
-
-            /*previsualisacion de foto*/
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#alum').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
+        $('#crear').click(function() {
+            if($('input:file[name=photo]').val()==""){
+                alert('Debe cargar las imagenes');
+            }else{
+                $("#cargar").submit();
             }
-            $('#imgInp1').change(function(){
-                readURL(this);
-            });
+        });
+
+        /*previsualisacion de foto*/
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#alum').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#imgInp1').change(function(){
+            readURL(this);
+        });
 
         $('#submit_matricula').click(function submit(){
-            if(verificacionAlumno()){
+            if(verificacionAlumno()&&verificacionTutores()){
                 var data = {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     nombre : $('#inp-nombre-alumno').val(),
@@ -771,6 +771,96 @@
         function isEmail(email) {
             var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             return regex.test(email);
+        }
+
+
+        function verificacionTutores(){
+            var cantTutores = 0;
+            if($('#inp-nombre-madre').val()!=""){
+
+                if(
+                    $('#inp-apellido-madre').val()==""
+                    || $('#inp-dni-madre').val()==""
+                    || $('#inp-cuil-madre').val()==""
+                    || $('#inp-profesion-madre').val()==""
+                    || $('#inp-trabajo-madre').val()==""
+                    || $('#inp-nacionalidad-madre').val()==""
+                    || $('#inp-fijo-madre').val()==""
+                    || $('#inp-email-madre').val()==""
+                    || $('#inp-localidad-madre').val()==""
+                    || $('#inp-barrio-madre').val()==""
+                    || $('#inp-calle-madre').val()==""
+                    || $('#inp-altura-madre').val()==""
+                    || $('#inp-postal-madre').val()==""
+                ){
+                    alert('Debe completar los campos obligatorios de Madre');
+                    return false;
+                }
+                else{
+                    cantTutores+=1
+                }
+
+            }
+
+            if($('#inp-nombre-padre').val()!=""){
+
+                if($('#inp-apellido-padre').val()==""
+                   || $('#inp-dni-padre').val()==""
+                   || $('#inp-cuil-padre').val()==""
+                   || $('#inp-profesion-padre').val()==""
+                   || $('#inp-trabajo-padre').val()==""
+                   || $('#inp-nacionalidad-padre').val()==""
+                   || $('#inp-fijo-padre').val()==""
+                   || $('#inp-email-padre').val()==""
+                   || $('#inp-localidad-padre').val()==""
+                   || $('#inp-barrio-padre').val()==""
+                   || $('#inp-calle-padre').val()==""
+                   || $('#inp-altura-padre').val()==""
+                   || $('#inp-postal-padre').val()=="")
+                {
+                    alert('Debe completar los campos obligatorios de Padre');
+                    return false;
+
+                }
+                else{
+                    cantTutores+=1
+
+                }
+            }
+
+
+
+            if($('#inp-nombre-tutor').val()!=""){
+                if($('#inp-apellido-tutor').val()==""
+                   || $('#inp-dni-tutor').val()==""
+                   || $('#inp-cuil-tutor').val()==""
+                   || $('#inp-profesion-tutor').val()==""
+                   || $('#inp-trabajo-tutor').val()==""
+                   || $('#inp-nacionalidad-tutor').val()==""
+                   || $('#inp-fijo-tutor').val()==""
+                   || $('#inp-email-tutor').val()==""
+                   || $('#inp-localidad-tutor').val()==""
+                   || $('#inp-barrio-tutor').val()==""
+                   || $('#inp-calle-tutor').val()==""
+                   || $('#inp-altura-tutor').val()==""
+                   || $('#inp-postal-tutor').val()=="")
+                {
+                    alert('Debe completar los campos obligatorios de Tutor');
+                    return false;
+                }
+                else{
+                    cantTutores+=1
+
+                }
+            }
+
+            if(cantTutores==0){
+                alert('El alumno debe tener por lo menos 1 tutor legal');
+                return false;
+            }
+            else{
+                return true;
+            }
         }
 
     </script>

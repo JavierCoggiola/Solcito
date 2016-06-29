@@ -6,8 +6,6 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from Solcito.models import Student, Registration
 from django.core.exceptions import ObjectDoesNotExist
-# Create your views here.
-# User
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -39,15 +37,20 @@ def logMeOut(request):
 def index(request):
     context = RequestContext(request)
     return render_to_response('matricular.html',{},context)
-<<<<<<< HEAD
 
 def editMatricula(request):
     context = RequestContext(request)
-    matricula = Registration.objects.get(pk='00001')
+    matricula = Registration.objects.get(pk='3')
     if request.method=='GET':
         return render_to_response('edit_matricula.html',{'matricula':matricula},context)
     if request.method=='POST':
         #print "POST"
+        mat_numero_legajo=request.POST['numleg']
+        mat_legajo_administrativo=request.POST['legadm']
+        mat_ano_to_mat=request.POST['anotomat']
+        mat_div_to_mat=request.POST['divtomat']
+        mat_prev_school=request.POST['prschool']
+        mat_q_due_mat=request.POST['qduemat']
         alumno_nombre=request.POST['nombre']
         alumno_apellido=request.POST['apellido']
         alumno_dni=request.POST['dni']
@@ -164,6 +167,13 @@ def editMatricula(request):
         alumno = Student.objects.get(dni=int(alumno_dni))
         matricula = Registration()
 
+        matricula.studentFile = int(mat_numero_legajo)
+        matricula.administrativeFile = int(mat_legajo_administrativo)
+        matricula.grade = int(mat_ano_to_mat)
+        matricula.division = mat_div_to_mat
+        matricula.previousSchool = mat_prev_school
+        matricula.qDueSubjects = int(mat_q_due_mat)
+        
         matricula.student = alumno
 
         matricula.nameStudent = alumno_nombre

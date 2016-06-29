@@ -135,7 +135,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Legajo Administrativo</label>
-                                                    <input id="inp-legako-administrativo" class="form-control" type="number" value="{{matricula.administrativeFile}}" >
+                                                    <input id="inp-legajo-administrativo" class="form-control" type="number" value="{{matricula.administrativeFile}}" >
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Año a Matricular</label>
@@ -157,7 +157,7 @@
                                         </div>
                                     </div>        
                                 </div>     
-                                    
+
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
@@ -203,7 +203,7 @@
                                                 <h4>Nacimiento</h4>
                                                 <div class="form-group">
                                                     <label>Fecha de Nacimiento*</label>
-                                                    <input id="inp-nacimiento-alumno" type="date" class="form-control" value="1998-04-02">
+                                                    <input id="inp-nacimiento-alumno" type="date" class="form-control" value="{{matricula.birthDateStudent | date:'Y-m-d'}}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Genero*</label>
@@ -553,11 +553,17 @@
         <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
 
         <script>
-            
+
             $('#edit_matricula').click(function submit(){
                 if(verificacionAlumno()){
                     var data = {
                         csrfmiddlewaretoken: '{{ csrf_token }}',
+                        numleg : $('#inp-legajo-escolar').val(),
+                        legadm : $('#inp-legajo-administrativo').val(),
+                        anotomat : $('#inp-ano-a-matricular').val(),
+                        divtomat : $('#inp-division-a-matricular').val(),
+                        prschool : $('#inp-colegio-de-procedencia').val(),
+                        qduemat : $('#inp-cantidad-de-materias-adeudadas').val(),
                         nombre : $('#inp-nombre-alumno').val(),
                         apellido : $('#inp-apellido-alumno').val(),
                         dni : $('#inp-dni-alumno').val(),
@@ -651,7 +657,13 @@
 
             });
             function verificacionAlumno(){
-                if ($('#inp-nombre-alumno').val()==""
+                if ($('#inp-legajo-escolar').val()==""
+                    || $('#inp-legajo-administrativo').val()==""
+                    || $('#inp-ano-a-matricular').val()==""
+                    || $('#inp-division-a-matricular').val()==""
+                    || $('#inp-colegio-de-procedencia').val()==""
+                    || $('#inp-cantidad-de-materias-adeudadas').val()==""
+                    || $('#inp-nombre-alumno').val()==""
                     || $('#inp-apellido-alumno').val()==""
                     || $('#inp-dni-alumno').val()==""
                     || $('#inp-religion-alumno').val()==""
@@ -665,9 +677,9 @@
                     || $('#inp-calle-alumno').val()==""
                     || $('#inp-altura-alumno').val()==""
                     || $('#inp-postal-alumno').val()==""){
-                    alert("Error: Porfavor complete los campos obligatorios");
-                    return false;
-                }
+                        alert("Error: Porfavor complete los campos obligatorios");
+                        return false;
+                    }
                 if( !isEmail($('#inp-mail-alumno').val())) {
                     alert("Email Alumno Invalido");
                     return false;

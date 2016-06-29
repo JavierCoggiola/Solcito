@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^search_student$', views.search, name="search_student"),
     url(r'^login/$', views.logMeIn, name='login'),
     url(r'^logout/$', views.logMeOut, name='logout'),
+    url(r'^subirphoto/$', views.subirPhoto, name='subirPhoto'),
 ]

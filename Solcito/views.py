@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-from Solcito.models import Student, Registration
+from Solcito.models import Imagen, Student, Registration
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 # User
@@ -29,6 +29,25 @@ def logMeIn(request): #Logueo
     return render_to_response('login.html',
                               {'errors':errors},
                               context)
+
+def subirPhoto(request):
+    context = RequestContext(request)
+    if request.method=='POST':
+        student=Imagen()
+        student.photo=request.FILES['photo']
+
+        nombre=request.POST.get("nombre")
+        apellido=request.POST.get("apellido")
+        dni=request.POST.get('dni')
+
+        spliting = student.photo.name.split(".")
+        extension = spliting[len(spliting)-1]
+        student.photo.name = nombre+apellido+"-"+dni+"."+extension
+        student.save()
+
+        return redirect("/")
+    return render_to_response('matricular.html',
+context)
 
 def logMeOut(request):
     logout(request) #Logout de django
@@ -177,8 +196,6 @@ def submitMatricula(request):
         tutor_fijo=request.POST['fijot']
         tutor_celular=request.POST['celulart']
         tutor_tlaboral=request.POST['tlaboralt']
-        photo_student=request.POST['photo']
-
 
         try:
             alumno = Student.objects.get(dni=int(alumno_dni))
@@ -337,11 +354,7 @@ def submitMatricula(request):
             matriculaFather.cellphoneTutor = int(tutor_celular)
         if tutor_tlaboral != "":
             matricula.workPhoneTutor = int(tutor_tlaboral)
-
-        matricula.photoStudent = photo_student
-
         matricula.save()
-
 
 
         return render_to_response('matricular_success.html',{},context)

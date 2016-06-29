@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.conf import settings
 
+from django.db.models import ImageField
+from django.db.models.fields.files import FileField
+from ITSGestion.settings import MEDIA_ROOT
 # Create your models here.
 
 sex = (
@@ -34,7 +37,6 @@ class Student(models.Model):
     email = models.CharField(u'Email', max_length=50, blank=False)
     landline = models.IntegerField(u'Landline', blank=False)
     cellphone = models.IntegerField(u'Cellphone', blank=True, null=True)
-    photo = models.FileField(u'Photo', upload_to='photos/', default='null')
 
     def __str__(self):
         return self.name
@@ -69,7 +71,6 @@ class Registration(models.Model):
     emailStudent = models.CharField(u'Email Student', max_length=50, blank=False, null=True)
     landlineStudent = models.IntegerField(u'Landline Student', blank=False, null=True)
     cellphoneStudent = models.IntegerField(u'Cellphone Student', blank=True, null=True)
-    photoStudent = models.FileField(u'Photo', upload_to='photos/', default='null')
 
     nameFather = models.CharField(u'Name Father', max_length=50, blank=True, null=True)
     lastNameFather = models.CharField(u'Last Name Father', max_length=50, blank=True, null=True)
@@ -134,6 +135,12 @@ class Registration(models.Model):
     def __str__(self):
         return self.nameStudent
     
+
+class Imagen (models.Model):
+
+    photo = models.FileField(u'Photo', upload_to="photos/", default='null')
+    #max_size = 2MB
+
 class Tutor (models.Model):
 
     FATHER = 0

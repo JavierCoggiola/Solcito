@@ -137,14 +137,18 @@
                                 <table border="1px">
                                     <tr>
                                             <td>
-                                                <div>Foto</div>
+                                                <div>Foto (Solo validas imagenes PNG/JPG)</div>
                                                 <div>
-                                                    <form action="" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
+                                                    <form action="{% url 'Solcito:subirPhoto' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
                                                         <div>
-                                                            <img id='alum'src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
-                                                            <input type='file' id='photo' name='photo' multiple accept='image/*'/>
+                                                            <img id='alum' src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
+                                                            <input type='file' id='photo' name='photo' multiple accept='image/png,image/jpeg'/>
                                                         </div>
-                                                        <!--<a href="#" id="crear">Subir public</a>-->
+                                                        <input name="nombre" id="form-nombre-alumno" type="hidden" class="form-control">
+                                                        <input name="apellido" id="form-apellido-alumno" type="hidden" class="form-control">
+                                                        <input name="dni" id="form-dni-alumno" type="hidden" class="form-control" >
+
+                                                        <button id="crear" hidden="true">Subir Foto</button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -152,7 +156,6 @@
                                 </table>
                             </div>
                             <form role="form">
-
                                 <div class="form-group">
                                     <label>Nombre del alumno*</label>
                                     <input id="inp-nombre-alumno" class="form-control" >
@@ -639,12 +642,12 @@
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
-                        $('#alum').attr('src', e.target.result);
+                        $('#alum1').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(input.files[0]);
                 }
             }
-            $('#photo').change(function(){
+            $('#photo1').change(function(){
                 readURL(this);
             });
 
@@ -728,8 +731,6 @@
                     fijot: $('#inp-fijo-tutor').val(),
                     celulart: $('#inp-celular-tutor').val(),
                     tlaboralt: $('#inp-tlaboral-tutor').val(),
-
-                    photo: $('input:file[name=photo]').val()
                 }
                 console.log(data);
                 $.ajax({
@@ -737,6 +738,15 @@
                     url: "{% url 'Solcito:submit_matricula' %}",
                     data:data,
                     success: function(result){
+                        if($('input:file[name=photo]').val()==""){
+                            alert('Debe cargar las imagenes');
+                        }else{
+                            $('#form-nombre-alumno').val($('#inp-nombre-alumno').val());
+                            $('#form-apellido-alumno').val($('#inp-apellido-alumno').val());
+                            $('#form-dni-alumno').val($('#inp-dni-alumno').val());
+                            $("#cargar").submit();
+                        }
+
                         $('#page-wrapper').html(result);
                     },
                     error: function(){

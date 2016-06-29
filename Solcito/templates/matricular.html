@@ -159,26 +159,26 @@
                             <div class="col-lg-6">
                                 <form role="form">
 
-                                <div class="form-group">
-                                    <label>Nombre del alumno*</label>
-                                    <input id="inp-nombre-alumno" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Apellido del alumno*</label>
-                                    <input id="inp-apellido-alumno" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label>DNI*</label>
-                                    <input id="inp-dni-alumno"type="number"class="form-control" >
-                                </div>
                                     <div class="form-group">
-                                    <label>E-Mail*</label>
-                                    <input id="inp-mail-alumno" type="email" class="form-control" >
-                                </div>
+                                        <label>Nombre del alumno*</label>
+                                        <input id="inp-nombre-alumno" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Apellido del alumno*</label>
+                                        <input id="inp-apellido-alumno" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>DNI*</label>
+                                        <input id="inp-dni-alumno"type="number"class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>E-Mail*</label>
+                                        <input id="inp-mail-alumno" type="email" class="form-control" >
+                                    </div>
                                     <br>
                                 </form>
                             </div>
-                             <form role="form">
+                            <form role="form">
                                 <div class="form-group">
                                     <label>Religion*</label>
                                     <input id="inp-religion-alumno" class="form-control" >
@@ -596,8 +596,6 @@
                                             </div>
 
                                         </div>
-                            <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar Matricula</button>
-
 
                                     </div>
 
@@ -606,6 +604,8 @@
                                     <!-- /.row -->
                                     </form>
                                 </form>
+                            <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar Matricula</button>
+
 
                         </div>
                         <!-- /.container-fluid -->
@@ -619,6 +619,24 @@
 
         </div>
         </div>
+    <div class="modal fade" id="cartel_error" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="textoError"> </h4>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" id="btn-volver" onclick="$('#cartel_error').modal('hide');" type="button">
+                        Volver
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <!-- jQuery -->
     <script src="{% static 'js/jquery.js' %}"></script>
 
@@ -764,11 +782,13 @@
                 || $('#inp-calle-alumno').val()==""
                 || $('#inp-altura-alumno').val()==""
                 || $('#inp-postal-alumno').val()==""){
-                alert("Error: Porfavor complete los campos obligatorios");
+                $('#textoError').text("Los campos señalados por * son obligatorios");
+                $('#cartel_error').modal('show');
                 return false;
             }
             if( !isEmail($('#inp-mail-alumno').val())) {
-                alert("Email Alumno Invalido");
+                $('#textoError').text("Email Alumno Invalido");
+                $('#cartel_error').modal('show');
                 return false;
             }
             return true;
@@ -800,13 +820,15 @@
                     || $('#inp-altura-madre').val()==""
                     || $('#inp-postal-madre').val()==""
                 ){
-                    alert('Debe completar los campos obligatorios de Madre');
+                    $('#textoError').text('Debe completar los campos obligatorios de Madre');
+                    $('#cartel_error').modal('show');
                     return false;
                 }
                 if( !isEmail($('#inp-email-madre').val())) {
-                    alert("Email Madre Invalido");
+                    $('#textoError').text("Email Madre Invalido");
+                    $('#cartel_error').modal('show');
                     return false;
-            }
+                }
                 else{
                     cantTutores+=1
                 }
@@ -829,14 +851,16 @@
                    || $('#inp-altura-padre').val()==""
                    || $('#inp-postal-padre').val()=="")
                 {
-                    alert('Debe completar los campos obligatorios de Padre');
+                    $('#textoError').text('Debe completar los campos obligatorios de Padre');
+                    $('#cartel_error').modal('show');
                     return false;
 
                 }
                 if( !isEmail($('#inp-email-padre').val())) {
-                    alert("Email Padre Invalido");
+                    $('#textoError').text("Email Padre Invalido");
+                    $('#cartel_error').modal('show');
                     return false;
-            }
+                }
                 else{
                     cantTutores+=1
 
@@ -860,13 +884,15 @@
                    || $('#inp-altura-tutor').val()==""
                    || $('#inp-postal-tutor').val()=="")
                 {
-                    alert('Debe completar los campos obligatorios de Tutor');
+                    $('#textoError').text('Debe completar los campos obligatorios de Tutor');
+                    $('#cartel_error').modal('show');
                     return false;
                 }
                 if( !isEmail($('#inp-email-tutor').val())) {
-                    alert("Email Tutor Invalido");
+                    $('#textoError').text("Email Tutor Invalido");
+                    $('#cartel_error').modal('show');
                     return false;
-            }
+                }
                 else{
                     cantTutores+=1
 
@@ -874,7 +900,8 @@
             }
 
             if(cantTutores==0){
-                $().alert('El alumno debe tener por lo menos 1 tutor legal');
+                $('#textoError').text('El alumno debe tener por lo menos 1 tutor legal');
+                $('#cartel_error').modal('show');
                 return false;
             }
             else{
@@ -883,9 +910,9 @@
         }
 
     </script>
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-  <span aria-hidden="true">&times;</span>
-</button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
     </body>
 
 </html>

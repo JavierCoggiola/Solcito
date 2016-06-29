@@ -57,6 +57,7 @@ class Registration(models.Model):
     religionStudent = models.CharField(u'Religion Student', max_length=50, blank=False, null=True)
     birthDateStudent = models.DateField(u'Birth Date Student', blank=False, null=True)
     birthPlaceStudent = models.CharField(u'Birth Place Student', max_length=50, blank=False, null=True)
+    localityStudent = models.CharField(u'Locality Student', max_length=50, blank=False, null=True)
     nacionalityStudent = models.CharField(u'Nacionality Student', max_length=50, blank=False, null=True)
     streetStudent = models.CharField(u'Street Student', max_length=50, blank=False, null=True)
     numberStreetStudent = models.IntegerField(u'Number Street Student', blank=False, null=True)
@@ -69,8 +70,8 @@ class Registration(models.Model):
     emailStudent = models.CharField(u'Email Student', max_length=50, blank=False, null=True)
     landlineStudent = models.IntegerField(u'Landline Student', blank=False, null=True)
     cellphoneStudent = models.IntegerField(u'Cellphone Student', blank=True, null=True)
-    photoStudent = models.FileField(u'Photo Student', upload_to='photos/', blank=True, null=True)
-
+    photoStudent = models.FileField(u'Photo', upload_to='photos/', default='null', blank=True, null=True)
+    
     nameFather = models.CharField(u'Name Father', max_length=50, blank=True, null=True)
     lastNameFather = models.CharField(u'Last Name Father', max_length=50, blank=True, null=True)
     dniFather = models.IntegerField(u'DNI Father', blank=True, null=True)

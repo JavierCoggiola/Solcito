@@ -33,6 +33,15 @@ def logMeOut(request):
     context = RequestContext(request)
     return redirect('/')
 
+def entradaImg(request):
+    context = RequestContext(request)
+    if request.method=='POST':
+        student=Student()
+        student.photo=request.FILES['photo']
+        student.save()
+        return redirect("/")
+    return render_to_response('matricular.html',
+context)
 
 def index(request):
     context = RequestContext(request)
@@ -40,7 +49,7 @@ def index(request):
 
 def editMatricula(request):
     context = RequestContext(request)
-    matricula = Registration.objects.get(pk='3')
+    matricula = Registration.objects.get(pk='1')
     if request.method=='GET':
         return render_to_response('edit_matricula.html',{'matricula':matricula},context)
     if request.method=='POST':
@@ -289,8 +298,8 @@ def editMatricula(request):
 def getFilter(request):
     context = RequestContext(request)
     return render_to_response('buscador.html',{},context)
-@login_required(login_url='/login/')
 
+@login_required(login_url='/login/')
 def search(request):
     context = RequestContext(request)
     if request.method=='GET':
@@ -308,38 +317,38 @@ def search(request):
         matriculas = Registration.objects.all()
         # Vamos filtrando por cada campo que el usuario completo
         if nombreA != "":
-            matriculas = matriculas.filter(nameStudent=nombreA)
-            print (matriculas)
+            matriculas = matriculas.filter(nameStudent__iexact=nombreA)
+            print matriculas
         if apellidoA != "":
-            matriculas = matriculas.filter(lastNameStudent=apellidoA)
-            print (matriculas)
+            matriculas = matriculas.filter(lastNameStudent__iexact=apellidoA)
+            print matriculas
         if dniA != "":
-            matriculas = matriculas.filter(dniStudent=dniA)
-            print (matriculas)
+            matriculas = matriculas.filter(dniStudent__iexact=dniA)
+            print matriculas
         if especialidadA != "":
-            matriculas = matriculas.filter(division=especialidadA)
-            print (matriculas)
+            matriculas = matriculas.filter(division__iexact=especialidadA)
+            print matriculas
         if cursoA != "":
-            matriculas = matriculas.filter(grade=cursoA)
-            print (matriculas)
+            matriculas = matriculas.filter(grade__iexact=cursoA)
+            print matriculas
         if matriculaA != "":
-            matriculas = matriculas.filter(administrativeFile=matriculaA)
-            print (matriculas)
+            matriculas = matriculas.filter(administrativeFile__iexact=matriculaA)
+            print matriculas
         if legajoA != "":
-            matriculas = matriculas.filter(studentFile=legajoA)
-            print (matriculas)
+            matriculas = matriculas.filter(studentFile__iexact=legajoA)
+            print matriculas
         if nombreM != "":
-            matriculas = matriculas.filter(nameMother=nombreM)
-            print (matriculas)
+            matriculas = matriculas.filter(nameMother__iexact=nombreM)
+            print matriculas
         if apellidoM != "":
-            matriculas = matriculas.filter(lastNameMother=apellidoM)
-            print (matriculas)
+            matriculas = matriculas.filter(lastNameMother__iexact=apellidoM)
+            print matriculas
         if nombreP != "":
-            matriculas = matriculas.filter(nameFather=nombreP)
-            print (matriculas)
+            matriculas = matriculas.filter(nameFather__iexact=nombreP)
+            print matriculas
         if apellidoP != "":
-            matriculas = matriculas.filter(lastNameFather=apellidoP)
-            print (matriculas)
+            matriculas = matriculas.filter(lastNameFather__iexact=apellidoP)
+            print matriculas
         #De todas las matriculas del alumno muestra la activa
         matriculas = matriculas.filter(isActive=True)
         return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)

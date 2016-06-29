@@ -1,85 +1,5 @@
-{% load static %}
 
-<html lang="es">
-
-    <head>
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>Solcito</title>
-
-        <!-- Bootstrap Core CSS -->
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-        <style>
-            @media(min-width:768px) {
-                .side-nav {
-                    position: fixed;
-                    top: 51px;
-                    left: 225px;
-                    width: 0px;
-                    margin-left: -225px;
-                    border: none;
-                    border-radius: 0;
-                    overflow-y: auto;
-                    background-color: #222;
-                    bottom: 0;
-                    overflow-x: hidden;
-                    padding-bottom: 40px;
-                }
-
-                .side-nav>li>a {
-                    width: 225px;
-                }
-
-                .side-nav li a:hover,
-                .side-nav li a:focus {
-                    outline: none;
-                    background-color: #000 !important;
-                }
-            }
-
-            .side-nav>li>ul {
-                padding: 0;
-            }
-
-            .side-nav>li>ul>li>a {
-                display: block;
-                padding: 10px 15px 10px 38px;
-                text-decoration: none;
-                color: #999;
-            }
-
-            .side-nav>li>ul>li>a:hover {
-                color: #fff;
-            }
-            @media(min-width:768px) {
-                #wrapper {
-                    padding-left: 0px;
-                }
-
-                #page-wrapper {
-                    padding: 0px;
-                }
-            }
-        </style>
-    </head>
-
-    <body>
-
-        <div id="wrapper">
+        <div id="pipa-wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -541,16 +461,7 @@
         </div>
 
 
-        <!-- jQuery -->
-        <script src="{% static 'js/jquery.js' %}"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-        <!-- Morris Charts JavaScript -->
-        <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
-        <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
-        <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
 
         <script>
 
@@ -693,6 +604,3 @@
 
         </script>
 
-    </body>
-
-</html>

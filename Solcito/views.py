@@ -83,37 +83,37 @@ def search(request):
         matriculas = Registration.objects.all()
         # Vamos filtrando por cada campo que el usuario completo
         if nombreA != "":
-            matriculas = matriculas.filter(nameStudent=nombreA)
+            matriculas = matriculas.filter(nameStudent__iexact=nombreA)
             print matriculas
         if apellidoA != "":
-            matriculas = matriculas.filter(lastNameStudent=apellidoA)
+            matriculas = matriculas.filter(lastNameStudent__iexact=apellidoA)
             print matriculas
         if dniA != "":
-            matriculas = matriculas.filter(dniStudent=dniA)
+            matriculas = matriculas.filter(dniStudent__iexact=dniA)
             print matriculas
         if especialidadA != "":
-            matriculas = matriculas.filter(division=especialidadA)
+            matriculas = matriculas.filter(division__iexact=especialidadA)
             print matriculas
         if cursoA != "":
-            matriculas = matriculas.filter(grade=cursoA)
+            matriculas = matriculas.filter(grade__iexact=cursoA)
             print matriculas
         if matriculaA != "":
-            matriculas = matriculas.filter(administrativeFile=matriculaA)
+            matriculas = matriculas.filter(administrativeFile__iexact=matriculaA)
             print matriculas
         if legajoA != "":
-            matriculas = matriculas.filter(studentFile=legajoA)
+            matriculas = matriculas.filter(studentFile__iexact=legajoA)
             print matriculas
         if nombreM != "":
-            matriculas = matriculas.filter(nameMother=nombreM)
+            matriculas = matriculas.filter(nameMother__iexact=nombreM)
             print matriculas
         if apellidoM != "":
-            matriculas = matriculas.filter(lastNameMother=apellidoM)
+            matriculas = matriculas.filter(lastNameMother__iexact=apellidoM)
             print matriculas
         if nombreP != "":
-            matriculas = matriculas.filter(nameFather=nombreP)
+            matriculas = matriculas.filter(nameFather__iexact=nombreP)
             print matriculas
         if apellidoP != "":
-            matriculas = matriculas.filter(lastNameFather=apellidoP)
+            matriculas = matriculas.filter(lastNameFather__iexact=apellidoP)
             print matriculas
         #De todas las matriculas del alumno muestra la activa
         matriculas = matriculas.filter(isActive=True)

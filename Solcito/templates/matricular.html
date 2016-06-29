@@ -133,8 +133,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h2>Alumno</h2>
-                            <div>
-                                <table border="1px">
+                            <div class="col-lg-6">
+                                <table>
                                     <tr>
                                         <td>
                                             <div>Foto</div>
@@ -151,7 +151,8 @@
                                     </tr>
                                 </table>
                             </div>
-                            <form role="form">
+                            <div class="col-lg-6">
+                                <form role="form">
 
                                 <div class="form-group">
                                     <label>Nombre del alumno*</label>
@@ -165,6 +166,14 @@
                                     <label>DNI*</label>
                                     <input id="inp-dni-alumno"type="number"class="form-control" >
                                 </div>
+                                    <div class="form-group">
+                                    <label>E-Mail*</label>
+                                    <input id="inp-mail-alumno" type="email" class="form-control" >
+                                </div>
+                                    <br>
+                                </form>
+                            </div>
+                             <form role="form">
                                 <div class="form-group">
                                     <label>Religion*</label>
                                     <input id="inp-religion-alumno" class="form-control" >
@@ -181,10 +190,7 @@
                                     <label>Telefono Celular</label>
                                     <input id="inp-celular-alumno" class="form-control" type="number">
                                 </div>
-                                <div class="form-group">
-                                    <label>E-Mail*</label>
-                                    <input id="inp-mail-alumno" type="email" class="form-control" >
-                                </div>
+
                                 <h4>Nacimiento</h4>
                                 <div class="form-group">
                                     <label>Fecha de Nacimiento*</label>
@@ -612,7 +618,9 @@
 
 
                 </div>
+
             </div>
+
         </div>
         </div>
     <!-- jQuery -->
@@ -870,7 +878,7 @@
             }
 
             if(cantTutores==0){
-                alert('El alumno debe tener por lo menos 1 tutor legal');
+                $().alert('El alumno debe tener por lo menos 1 tutor legal');
                 return false;
             }
             else{
@@ -879,7 +887,9 @@
         }
 
     </script>
-
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
     </body>
 
 </html>

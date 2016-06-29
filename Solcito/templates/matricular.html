@@ -141,21 +141,26 @@
                             <div class="col-lg-6">
                                 <table>
                                     <tr>
-                                        <td>
-                                            <div>Foto</div>
-                                            <div>
-                                                <form action="{% url 'Solcito:entradaImg' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
-                                                    <div>
-                                                        <img id='alum'src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
-                                                        <input type='file' id='imgInp1' name='photo' multiple accept='image/*'/>
-                                                    </div>
-                                                    <a href="#" id="crear">Subir public</a>
-                                                </form>
-                                            </div>
-                                        </td>
+                                            <td>
+                                                <div>Foto (Solo validas imagenes PNG/JPG)</div>
+                                                <div>
+                                                    <form action="{% url 'Solcito:subirPhoto' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
+                                                        <div>
+                                                            <img id='alum' src="{% static 'images/up.png' %}" alt='Foto alumno' style='width:180px; height:240px;margin-left:3%;'/>
+                                                            <input type='file' id='photo' name='photo' multiple accept='image/png,image/jpeg'/>
+                                                        </div>
+                                                        <input name="nombre" id="form-nombre-alumno" type="hidden" class="form-control">
+                                                        <input name="apellido" id="form-apellido-alumno" type="hidden" class="form-control">
+                                                        <input name="dni" id="form-dni-alumno" type="hidden" class="form-control" >
+
+                                                        <button id="crear" hidden="true">Subir Foto</button>
+                                                    </form>
+                                                </div>
+                                            </td>
                                     </tr>
                                 </table>
                             </div>
+
                             <div class="col-lg-6">
                                 <form role="form">
 
@@ -438,7 +443,7 @@
                                                         <input id="inp-numcalle-padre" class="form-control" type="number">
                                                     </div>
 
-                                                    <label>Barriode domicilio*</label>
+                                                    <label>Barrio de domicilio*</label>
                                                     <input id="inp-barrio-padre" class="form-control" >
 
                                                     <div class="form-group">
@@ -649,27 +654,27 @@
     <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
 
     <script>
-        $('#crear').click(function() {
-            if($('input:file[name=photo]').val()==""){
-                alert('Debe cargar las imagenes');
-            }else{
-                $("#cargar").submit();
-            }
-        });
-
-        /*previsualisacion de foto*/
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#alum').attr('src', e.target.result);
+            $('#crear').click(function() {
+                if($('input:file[name=photo]').val()==""){
+                    alert('Debe cargar las imagenes');
+                }else{
+                    $("#cargar").submit();
                 }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        $('#imgInp1').change(function(){
-            readURL(this);
-        });
+            });
+
+            /*previsualisacion de foto*/
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#alum').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }}
+
+            $('#photo').change(function(){
+                readURL(this);
+            });
 
         $('#submit_matricula').click(function submit(){
             if(verificacionAlumno()&&verificacionTutores()){
@@ -758,6 +763,15 @@
                     url: "{% url 'Solcito:submit_matricula' %}",
                     data:data,
                     success: function(result){
+                        if($('input:file[name=photo]').val()==""){
+                            alert('Debe cargar las imagenes');
+                        }else{
+                            $('#form-nombre-alumno').val($('#inp-nombre-alumno').val());
+                            $('#form-apellido-alumno').val($('#inp-apellido-alumno').val());
+                            $('#form-dni-alumno').val($('#inp-dni-alumno').val());
+                            $("#cargar").submit();
+                        }
+
                         $('#page-wrapper').html(result);
                     },
                     error: function(){

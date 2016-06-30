@@ -150,11 +150,11 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <h4>Foto</h4>
-                                            <h5>Peso máximo 5mb</h5>
+                                            <h2 align="center">Foto</h2>
+                                            <h5 align="center">Peso máximo 5mb (solo png/jpeg)</h5>
                                             <div>
                                                 <form action="{% url 'Solcito:subirPhoto' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
-                                                    <div>
+                                                    <div align="center">
                                                         <img id='alum' src="{% static 'images/up.jpg' %}" alt='Foto alumno' style='width:220px; height:220px;margin-left:3%;'/>
                                                         <input type='file' id='photo' name='photo' multiple accept='image/png,image/jpeg'/>
                                                     </div>

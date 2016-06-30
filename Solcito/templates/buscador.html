@@ -100,7 +100,7 @@
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <label>Divicion</label>
+                            <label>Division</label>
                             <select class="form-control"id="sEspecialidad">
                                 <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
                                     <option> <a></a></option>
@@ -134,6 +134,7 @@
                             <label>Apellido Padre</label>
                             <input id="sApellidoPadre"class="form-control">
                         </div>
+                        <input id="isActive" type="checkbox">Activo
                         <div class="col-lg-2">
                             <button id="search" class="btn btn-default">Buscar Alumno</button>
 
@@ -170,7 +171,7 @@
                     apellidoMadre : $('#sApellidoMadre').val(),
                     nombrePadre : $('#sNombrePadre').val(),
                     apellidoPadre : $('#sApellidoPadre').val(),
-
+                    activo : $('#isActive').is(':checked'),
                 }
                 $.ajax({
                     type: "GET",

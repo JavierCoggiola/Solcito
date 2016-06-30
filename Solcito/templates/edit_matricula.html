@@ -1,6 +1,8 @@
 
         <div id="pipa-wrapper">
+            <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -8,21 +10,27 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Solcito - Gestion de Administracion</a>
+                    <a class="navbar-brand" href="/"><i class="fa fa-sun-o" aria-hidden="true"></i> Solcito - Gestion de Administracion</a>
                 </div>
+                <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
                     <li class="dropdown">
-                        <a href="#" ><i class="fa fa-user"></i> Iniciar Sesion</a>
+                        <a href="{% url 'Solcito:logout' %}" ><i class="fa fa-user"></i> Salir</a>
                     </li>
                 </ul>
-                <div class="collapse navbar-collapse navbar-ex1-collapse" id="side-list">
-                    <ul class="nav navbar-nav side-nav" id="side-list">
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav side-nav">
                         <li class="active">
-                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Planilla</a>
+                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Alumnos</a>
                         </li>
                         <li>
-                            <a href="javascript:;" id="product_btn"><i class="fa fa-fw fa-shopping-cart"></i> Productos </a>
+                            <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Docentes</a>
                         </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Estadisticas</a>
+                        </li>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

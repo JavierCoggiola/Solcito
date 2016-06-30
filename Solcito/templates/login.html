@@ -111,15 +111,15 @@
                     <br>
                 </div>
 
-                <div class="card-content text-left " style="color:#AA2408">
+                <div class="card-content text-left " >
                   <form class="row" action="{% url 'Solcito:login' %}" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
-                      <div class="col-md-8 col-md-offset-2">
+                      <div class="col-md-4 col-md-offset-4">
                           <h4>Username:</h4>
                           <input type="text" name="username" class="form-control" placeholder="Username">
                         </div>
 
-                      <div class="col-md-8 col-md-offset-2">
+                      <div class="col-md-4 col-md-offset-4">
                           <h4>Password:</h4>
                           <input type="password" class="form-control" name="password" placeholder="Password">
                       </div>

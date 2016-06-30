@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.conf import settings
 
+from django.template.defaultfilters import filesizeformat
+from django.utils.translation import ugettext_lazy as _
+
 from django.db.models import ImageField
 from django.db.models.fields.files import FileField
 from ITSGestion.settings import MEDIA_ROOT
@@ -139,8 +142,15 @@ class Registration(models.Model):
 
 class Imagen (models.Model):
 
-    photo = models.FileField(u'Photo', upload_to="photos/", default='null')
-    #max_size = 2MB
+    def file_size(value): # add this to some file where you can import it from
+        limit = 5242880
+        if value.size > limit:
+            raise ValidationError('File too large. Size should not exceed 5 MB.')
+
+    photo = models.FileField(u'Photo', validators=[file_size], upload_to="photos/", default='null')
+
+
+    #max_size = 5MB
 
 class Tutor (models.Model):
 

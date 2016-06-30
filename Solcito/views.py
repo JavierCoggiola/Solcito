@@ -30,6 +30,8 @@ def logMeIn(request): #Logueo
 
 def subirPhoto(request):
     context = RequestContext(request)
+    max_upload_size = 5242880
+
     if request.method=='POST':
         student=Imagen()
         student.photo=request.FILES['photo']
@@ -41,7 +43,13 @@ def subirPhoto(request):
         spliting = student.photo.name.split(".")
         extension = spliting[len(spliting)-1]
         student.photo.name = nombre+"-"+apellido+"-"+dni+"."+extension
-        student.save()
+
+        if student.photo.size > max_upload_size:
+            print ("archivo pesado")
+            return render_to_response('matricular_foto.html',{},context)
+        else:
+            print ("guardado de alumno correcto")
+            student.save()
 
         return redirect("/")
     return render_to_response('matricular.html',

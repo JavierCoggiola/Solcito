@@ -83,6 +83,7 @@
         <div id="wrapper">
 
             <!-- Navigation -->
+            <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -92,26 +93,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Solcito - Gestion de Administracion</a>
+                    <a class="navbar-brand" href="/"><i class="fa fa-sun-o" aria-hidden="true"></i> Solcito - Gestion de Administracion</a>
                 </div>
                 <!-- Top Menu Items -->
-                <ul class="nav navbar-right top-nav">
-                    <li class="dropdown">
-                        <a href="#" ><i class="fa fa-user"></i> Iniciar Sesion</a>
-                    </li>
-                </ul>
-                <div class="collapse navbar-collapse navbar-ex1-collapse" id="side-list">
-                    <ul class="nav navbar-nav side-nav" id="side-list">
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Planilla</a>
-                        </li>
 
-                        <li>
-
-                            <a href="javascript:;" id="product_btn"><i class="fa fa-fw fa-shopping-cart"></i> Productos </a>
-
-                    </ul>
-                </div>
                 <!-- /.navbar-collapse -->
             </nav>
 
@@ -120,14 +105,13 @@
         <div class="text-center card-titles" style="background-color: #212121">
                     <br>
                     <h2 style="color:white">Sign in</h2>
-                    <hr class="primary">
                     {% for error in errors %}
                     <p class="" style="color:white">{{error}}</p>
                     {% endfor %}
                     <br>
                 </div>
 
-                <div class="card-content text-left" style="color:#AA2408">
+                <div class="card-content text-left " style="color:#AA2408">
                   <form class="row" action="{% url 'Solcito:login' %}" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                       <div class="col-md-8 col-md-offset-2">

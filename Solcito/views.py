@@ -323,6 +323,7 @@ def search(request):
         apellidoM=request.GET['apellidoMadre']
         nombreP=request.GET['nombrePadre']
         apellidoP=request.GET['apellidoPadre']
+        active=request.GET['activo']
         matriculas = Registration.objects.all()
         # Vamos filtrando por cada campo que el usuario completo
         if nombreA != "":
@@ -359,7 +360,8 @@ def search(request):
             matriculas = matriculas.filter(lastNameFather__iexact=apellidoP)
             #print matriculas
         #De todas las matriculas del alumno muestra la activa
-        matriculas = matriculas.filter(isActive=True)
+        if active == "true":
+            matriculas = matriculas.filter(isActive=active)
         return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
 
 def submitMatricula(request):

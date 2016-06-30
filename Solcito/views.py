@@ -66,12 +66,14 @@ def index(request):
 
 def editMatricula(request):
     context = RequestContext(request)
-    matricula = Registration.objects.get(pk='1')
+    
     if request.method=='GET':
+        matid=request.GET['idMatricula']
+        matricula = Registration.objects.get(pk=matid)
         return render_to_response('edit_matricula.html',{'matricula':matricula},context)
     if request.method=='POST':
         #print "POST"
-        mat_id=request.POST['matriculaID']
+        matid=request.POST['matid']
         mat_numero_legajo=request.POST['numleg']
         mat_legajo_administrativo=request.POST['legadm']
         mat_ano_to_mat=request.POST['anotomat']
@@ -192,7 +194,7 @@ def editMatricula(request):
             alumno.save()
 
         alumno = Student.objects.get(dni=int(alumno_dni))
-        matricula = Registration.objects.get(pk='1')
+        matricula = Registration.objects.get(pk=matid)
 
         matricula.studentFile = int(mat_numero_legajo)
         matricula.administrativeFile = int(mat_legajo_administrativo)

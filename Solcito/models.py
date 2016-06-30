@@ -142,13 +142,7 @@ class Registration(models.Model):
 
 class Imagen (models.Model):
 
-    def file_size(value): # add this to some file where you can import it from
-        limit = 5242880
-        if value.size > limit:
-            raise ValidationError('File too large. Size should not exceed 5 MB.')
-
-    photo = models.FileField(u'Photo', validators=[file_size], upload_to="photos/", default='null')
-
+    photo = models.FileField(u'Photo', upload_to="photos/", default='null')
 
     #max_size = 5MB
 

@@ -30,6 +30,8 @@ def logMeIn(request): #Logueo
 
 def subirPhoto(request):
     context = RequestContext(request)
+    max_upload_size = 5242880
+
     if request.method=='POST':
         student=Imagen()
         student.photo=request.FILES['photo']
@@ -41,7 +43,13 @@ def subirPhoto(request):
         spliting = student.photo.name.split(".")
         extension = spliting[len(spliting)-1]
         student.photo.name = nombre+"-"+apellido+"-"+dni+"."+extension
-        student.save()
+
+        if student.photo.size > max_upload_size:
+            print ("archivo pesado")
+            return render_to_response('matricular_foto.html',{},context)
+        else:
+            print ("guardado de alumno correcto")
+            student.save()
 
         return redirect("/")
     return render_to_response('matricular.html',
@@ -63,6 +71,7 @@ def editMatricula(request):
         return render_to_response('edit_matricula.html',{'matricula':matricula},context)
     if request.method=='POST':
         #print "POST"
+        mat_id=request.POST['matriculaID']
         mat_numero_legajo=request.POST['numleg']
         mat_legajo_administrativo=request.POST['legadm']
         mat_ano_to_mat=request.POST['anotomat']
@@ -151,7 +160,7 @@ def editMatricula(request):
             matriculas = Registration.objects.filter(student=alumno)
             for i in matriculas:
                 #print i.nameStudent
-                i.isActive = False
+                i.isActive = True
                 i.save()
             #print "Alumno Existe"
         except ObjectDoesNotExist:
@@ -183,7 +192,7 @@ def editMatricula(request):
             alumno.save()
 
         alumno = Student.objects.get(dni=int(alumno_dni))
-        matricula = Registration()
+        matricula = Registration.objects.get(pk='1')
 
         matricula.studentFile = int(mat_numero_legajo)
         matricula.administrativeFile = int(mat_legajo_administrativo)
@@ -299,8 +308,13 @@ def editMatricula(request):
             matriculaFather.cellphoneTutor = int(tutor_celular)
         if tutor_tlaboral != "":
             matricula.workPhoneTutor = int(tutor_tlaboral)
-        matricula.save()
-
+            
+        matriculas = Registration.objects.filter(student=alumno)
+        for i in matriculas:
+            #print i.nameStudent
+            i = matricula
+            i.save()
+                
         return render_to_response('matricular_success.html',{},context)
     return render_to_response('matricular_bug.html',{},context)
 

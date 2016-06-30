@@ -541,7 +541,7 @@
                                     </div>
                                     </form>
                                 </form>
-                            <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar Matricula</button>
+                            <button id="confirm_matricula" class="btn btn-primary btn-lg">Confirmar Matricula</button>
                         </div>
                         <!-- /.container-fluid -->
                     </div>
@@ -599,7 +599,7 @@
                 readURL(this);
             });
 
-        $('#submit_matricula').click(function submit(){
+            $('#confirm_matricula').click(function asda(){
             if(verificacionAlumno()&&verificacionTutores()){
                 var data = {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
@@ -683,18 +683,15 @@
                 console.log(data);
                 $.ajax({
                     type: "POST",
-                    url: "{% url 'Solcito:submit_matricula' %}",
+                    url: "{% url 'Solcito:confirm_matricula' %}",
                     data:data,
                     success: function(result){
-                        if($('input:file[name=photo]').val()==""){
-                            alert('Debe cargar las imagenes');
-                        }else{
+                        if($('input:file[name=photo]').val()!=""){
                             $('#form-nombre-alumno').val($('#inp-nombre-alumno').val());
                             $('#form-apellido-alumno').val($('#inp-apellido-alumno').val());
                             $('#form-dni-alumno').val($('#inp-dni-alumno').val());
-                            $("#cargar").submit();
+                            $("#cargar").submit();                        
                         }
-
                         $('#page-wrapper').html(result);
                     },
                     error: function(){
@@ -843,6 +840,7 @@
                 return true;
             }
         }
+
 
     </script>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

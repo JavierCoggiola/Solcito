@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^login/$', views.logMeIn, name='login'),
     url(r'^logout/$', views.logMeOut, name='logout'),
     url(r'^subirphoto/$', views.subirPhoto, name='subirPhoto'),
+    url(r'^genpdf/(?P<id_matricula>[0-9]+)/$', views.genpdf, name="genpdf"),
+    url(r'^confirm_matricula/$', views.confirmMatricula, name='confirm_matricula'),
 ]

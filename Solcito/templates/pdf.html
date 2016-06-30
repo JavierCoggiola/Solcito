@@ -1,0 +1,282 @@
+<html>
+<head>
+    <style type="text/css">
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1px;
+            text-align: center;
+            padding-top: 3px;
+            padding-left: 3px;
+            text-align: left;
+        }
+
+        table.firmas{
+            border: 0px solid black;
+        }
+        th.firmas{
+            border: 0px solid black;
+        }
+        td.firmas{
+            border: 0px solid black;
+        }
+
+        @page {
+            size: {{ pagesize }};
+            @frame header {
+                -pdf-frame-content: header;
+                margin-top: 0.5cm;
+                margin-left: 1cm;
+                margin-right: 1cm;
+            }
+            @frame content {
+                -pdf-frame-content: contenido;
+                margin-top: 2.5cm;
+                margin-left: 1cm;
+                margin-right: 1cm;
+            }
+            @frame footer {
+                -pdf-frame-content: footer;
+                margin-top: 25.7cm;
+                margin-left: 1cm;
+                margin-right: 1cm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lindo" id="header">
+        <table style="width:100%">
+            <tr>
+                <th class="from" style="width:11%;">Logo del colegio</th>
+                <th class="subject" style="width:78%;">
+                    <p align="center">Institucion Salesiana Artemides Zatti ARN
+                    <br>Instituto Tecnico Salesiano Villada
+                    <br>FICHA INDIVIDUAL DE INSCRIPCION</p>
+                </th>
+                <th class="date" style="width:11%;">Logo del Colegio</th>
+            </tr>
+        </table>
+    </div>
+    <div class="lindo" id="contenido">
+        <div id="datos escolares">
+            <caption><b>Datos Escolares</b></caption>
+            <table style="width:100%">
+                <tr>
+                    <td>Legajo Escolar:</td>
+                    <td>Legajo Administrativo:</td>
+                </tr>
+                <tr>
+                    <td>Curso a Matricular:</td>
+                    <td>Colegio de Procedencia:</td>
+                </tr>
+            </table>
+            <table style="width:100%">
+                <tr>
+                    <td>Cantidad de Materias Adeudadas:</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="lindo" id="datos alumnos">
+            <caption><b>Datos del Alumno</b></caption>
+            <table style="width:100%">
+                <tr>
+                    <td>Nombres del Alumno:<b> {{matricula.nameStudent}}</b></td>
+                    <td>Apellidos del Alumno:<b> {{matricula.lastNameStudent}}</b></td>
+                </tr>
+            </table>
+            <table style="width:100%"">
+                <tr>
+                    <td>DNI:<b> {{matricula.dniStudent}}</b></td>
+                    <td>Sexo:<b> {{matricula.sexStudent}}</b></td>
+                    <td>Religion:<b> {{matricula.religionStudent}}</b></td>
+                </tr>
+                <tr>
+                    <td>Fecha de Nacimiento:<b> {{matricula.birthDateStudent}}</b></td>
+                    <td>Lugar de Nacimiento:<b> {{matricula.birthPlaceStudent}}</b></td>
+                    <td>Nacionalidad:<b> {{matricula.nacionalityStudent}}</b></td>
+                </tr>
+                <tr>
+                    <td>Calle:<b> {{matricula.streetStudent}}</b></td>
+                    <td>Numero:<b> {{matricula.numberStreetStudent}}</b></td>
+                    <td>Barrio:<b> {{matricula.neighborhoodStudent}}</b></td>
+                </tr>
+                <tr>
+                    <td>Torre:<b> {{matricula.towerStudent}}</b></td>
+                    <td>Piso:<b> {{matricula.floorDepartmentStudent}}</b></td>
+                    <td>Departamento:<b> {{matricula.departmentStudent}}</b></td>
+                </tr>
+                <tr>
+                    <td>Codigo Postal:<b> {{matricula.PCStudent}}</b></td>
+                    <td>Localidad:<b> {{matricula.localityStudent}}</b></td>
+                    <td>Email:<b> {{matricula.emailStudent}}</b></td>
+                </tr>
+                <tr>
+                    <td>Tel.Fijo:<b> {{matricula.landlineStudent}}</b></td>
+                    <td>Tel.Celular:<b> {{matricula.cellphoneStudent}}</b></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="lindo" id="datos tutores">
+            <caption ><b>Datos de Padre/Madre/Tutor</b></caption>
+            <div id="padre">
+                <table style="width:100%">
+                    <tr>
+                        <td>Nombres del Padre:<b> {{matricula.nameFather}}</b></td>
+                        <td>Apellidos del Padre:<b> {{matricula.lastNameFather}}</b></td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td>DNI:<b> {{matricula.dniFather}}</b></td>
+                        <td>Cuil:<b> {{matricula.cuilFather}}</b></td>
+                        <td>Lugar de Trabajo:<b> {{matricula.workPlaceFather}}</b></td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td>Nacionalidad:<b> {{matricula.nacionalityFather}}</b></td>
+                        <td>Profesion:<b> {{matricula.professionFather}}</b></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>Calle:<b> {{matricula.streetFather}}</b></td>
+                        <td>Numero:<b> {{matricula.numberStreetFather}}</b></td>
+                        <td>Barrio:<b> {{matricula.neighborhoodFather}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Torre:<b> {{matricula.towerFather}}</b></td>
+                        <td>Piso:<b> {{matricula.floorDepartmentFather}}</b></td>
+                        <td>Departamento:<b> {{matricula.departmentFather}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Codigo Postal:<b> {{matricula.PCFather}}</b></td>
+                        <td>Localidad:<b> {{matricula.localityFather}}</b></td>
+                        <td>Email:<b> {{matricula.emailFather}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Tel.Fijo:<b> {{matricula.landlineFather}}</b></td>
+                        <td>Tel.Celular:<b> {{matricula.cellphoneFather}}</b></td>
+                        <td>Tel.Laboral<b> {{matricula.workPhoneFather}}</b></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div id="madre">
+                <table style="width:100%">
+                    <tr>
+                        <td>Nombres de la Madre:<b> {{matricula.nameMother}}</b></td>
+                        <td>Apellidos de la Madre:<b> {{matricula.lastNameMother}}</b></td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td>DNI:<b> {{matricula.dniMother}}</b></td>
+                        <td>Cuil:<b> {{matricula.cuilMother}}</b></td>
+                        <td>Lugar de Trabajo:<b> {{matricula.workPlaceMother}}</b></td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td>Nacionalidad:<b> {{matricula.nacionalityMother}}</b></td>
+                        <td>Profesion:<b> {{matricula.professionMother}}</b></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>Calle:<b> {{matricula.streetMother}}</b></td>
+                        <td>Numero:<b> {{matricula.numberStreetMother}}</b></td>
+                        <td>Barrio:<b> {{matricula.neighborhoodMother}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Torre:<b> {{matricula.towerMother}}</b></td>
+                        <td>Piso:<b> {{matricula.floorDepartmentMother}}</b></td>
+                        <td>Departamento:<b> {{matricula.departmentMother}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Codigo Postal:<b> {{matricula.PCMother}}</b></td>
+                        <td>Localidad:<b> {{matricula.localityMother}}</b></td>
+                        <td>Email:<b> {{matricula.emailMother}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Tel.Fijo:<b> {{matricula.landlineMother}}</b></td>
+                        <td>Tel.Celular:<b> {{matricula.cellphoneMother}}</b></td>
+                        <td>Tel.Laboral:<b> {{matricula.workPhoneMother}}</b></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div id="tutor">
+                <table style="width:100%">
+                    <tr>
+                        <td>Nombres del Tutor:<b> {{matricula.nameTutor}}</b></td>
+                        <td>Apellidos del Tutor:<b> {{matricula.lastNameTutor}}</b></td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td>DNI:<b> {{matricula.dniTutor}}</b></td>
+                        <td>Cuil:<b> {{matricula.cuilTutor}}</b></td>
+                        <td>Lugar de Trabajo:<b> {{matricula.workPlaceTutor}}</b></td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td>Nacionalidad:<b> {{matricula.nacionalityTutor}}</b></td>
+                        <td>Profesion:<b> {{matricula.professionTutor}}</b></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>Calle:<b> {{matricula.streetTutor}}</b></td>
+                        <td>Numero:<b> {{matricula.numberStreetTutor}}</b></td>
+                        <td>Barrio:<b> {{matricula.neighborhoodTutor}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Torre:<b> {{matricula.towerTutor}}</b></td>
+                        <td>Piso:<b> {{matricula.floorDepartmentTutor}}</b></td>
+                        <td>Departamento:<b> {{matricula.departmentTutor}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Codigo Postal:<b> {{matricula.PCTutor}}</b></td>
+                        <td>Localidad:<b> {{matricula.localityTutor}}</b></td>
+                        <td>Email:<b> {{matricula.emailTutor}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Tel.Fijo:<b> {{matricula.landlineTutor}}</b></td>
+                        <td>Tel.Celular:<b> {{matricula.cellphoneTutor}}</b></td>
+                        <td>Tel.Laboral:<b> {{matricula.workPhoneTutor}}</b></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <h6>*Este Formulario se debe Completar, Firmar y entregar en Secretaria. Tiene caracter de Declaracion Jurada</h6>
+    </div>
+    <div id="footer">
+        <div id="fecha-hora">
+            <p>Lugar, Fecha y Hora: Cordoba ____ de ____________ de 20______, ____:____Hs.</p>
+        </div>
+        <div >
+            <table class="firmas" style="width:100%" style="border:none;" >
+              <tr class="firmas">
+                <td class="firmas" style="text-align:center;">.........................................<br>Frima del Alumno</td>
+                <td class="firmas" style="text-align:center;">.........................................<br>Frima del Padre</td>
+                <td class="firmas" style="text-align:center;">.........................................<br>Frima de la Madre </td>
+                <td class="firmas" style="text-align:center;">.........................................<br>Frima del Tutor</td>
+            </tr>
+        </table>
+    </div>
+        <div id="informacion">
+            <h6 align="center" style="border: black 1.2px solid;padding-top:5px;">ITS Villada: Camino a La Calera Km. 7½, B°Valle Escondido, C.P. X5023AAA, Cordoba Argentina.<br>Direccion Web: http://www.itsv.edu.ar Telefonos: 0054-351-4841000 / 4848200</h6>
+        </div>
+    </div>
+</body>
+</html>

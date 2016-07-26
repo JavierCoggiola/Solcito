@@ -75,6 +75,8 @@
                     padding: 0px;
                 }
             }
+
+
         </style>
     </head>
 
@@ -83,7 +85,7 @@
         <div id="wrapper">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -92,7 +94,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/" >Solcito - Gestion de Administracion</a>
+                    <a class="navbar-brand" href="/" ><i class="fa fa-sun-o" aria-hidden="true"></i> Solcito - Gestion de Administracion</a>
                 </div>
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
@@ -100,15 +102,6 @@
                         <a href="{% url 'Solcito:login' %}" ><i class="fa fa-user"></i> Iniciar Sesion</a>
                     </li>
                 </ul>
-                <div class="collapse navbar-collapse navbar-ex1-collapse" id="side-list">
-                    <ul class="nav navbar-nav side-nav" id="side-list">
-                        <li class="active">
-                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Planilla</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" id="product_btn"><i class="fa fa-fw fa-shopping-cart"></i> Productos </a>
-                    </ul>
-                </div>
                 <!-- /.navbar-collapse -->
             </nav>
 
@@ -122,8 +115,7 @@
                             <h1 class="page-header">
                                 Matriculacion
                             </h1>
-                            <hr>
-                           <h4> <p class="text-center">Todos los datos con  * son obligatorios. Es necesario completar al menos un formulario ya sea el de padre madre o tutor. No olvidarse de una vez completado todo guardarlo e imprimirlo para presentarlo en la secretaria del colegio. Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.</p></h4>
+                            <h4> <p class="text-center">Todos los datos con  * son obligatorios. Es necesario completar al menos un formulario ya sea el de padre madre o tutor. No olvidarse de una vez completado todo guardarlo e imprimirlo para presentarlo en la secretaria del colegio. Leer bien los datos ingresador para no enviar datos erroneos de matriculacion.</p></h4>
                             <hr>
                         </div>
 
@@ -132,33 +124,10 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            <h2>Alumno</h2>
-                            <div class="col-lg-6">
-                                <table>
-                                    <tr>
-                                            <td>
-                                                <h4>Foto (Solo validas imagenes PNG/JPG)</h4>
-                                                <div>
-                                                    <form action="{% url 'Solcito:subirPhoto' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
-                                                        <div>
-                                                            <img id='alum' src="{% static 'images/up.jpg' %}" alt='Foto alumno' style='width:200px; height:240px;margin-left:3%;'/>
-                                                            <input type='file' id='photo' name='photo' multiple accept='image/png,image/jpeg'/>
-                                                        </div>
-                                                        <input name="nombre" id="form-nombre-alumno" type="hidden" class="form-control">
-                                                        <input name="apellido" id="form-apellido-alumno" type="hidden" class="form-control">
-                                                        <input name="dni" id="form-dni-alumno" type="hidden" class="form-control" >
-
-                                                        <button id="crear" hidden="true">Subir Foto</button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                    </tr>
-                                </table>
-                            </div>
-
+                            <h2 align="center">Datos del Alumno</h2>
+                            <br>
                             <div class="col-lg-6">
                                 <form role="form">
-
                                     <div class="form-group">
                                         <label>Nombre del alumno*</label>
                                         <input id="inp-nombre-alumno" class="form-control" >
@@ -175,85 +144,199 @@
                                         <label>E-Mail*</label>
                                         <input id="inp-mail-alumno" type="email" class="form-control" >
                                     </div>
-                                    <br>
                                 </form>
                             </div>
-                            <form role="form">
-                                <div class="form-group">
-                                    <label>Religion*</label>
-                                    <input id="inp-religion-alumno" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Nacionalidad del alumno*</label>
-                                    <input id="inp-nacionalidad-alumno" class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Telefono Fijo*</label>
-                                    <input id="inp-fijo-alumno" class="form-control" type="number">
-                                </div>
-                                <div class="form-group">
-                                    <label>Telefono Celular</label>
-                                    <input id="inp-celular-alumno" class="form-control" type="number">
-                                </div>
-
-                                <h4>Nacimiento</h4>
-                                <div class="form-group">
-                                    <label>Fecha de Nacimiento*</label>
-                                    <input id="inp-nacimiento-alumno" type="date"class="form-control" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Genero*</label>
-                                    <select id="inp-genero-alumno">
-                                        <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
-                                            <option> <a>Hombre</a></option>
-                                            <option> <a>Mujer</a></option>
-                                            <option> <a>Otro</a></option>
-                                        </ul>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Lugar de Nacimiento*</label>
-                                    <input id="inp-lugar_nacimiento-alumno" class="form-control">
-                                </div>
-                                <h4>Recidencia</h4>
-                                <div class="form-group">
-                                    <label>Localidad*</label>
-                                    <input id="inp-localidad-alumno" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Barrio*</label>
-                                    <input id="inp-barrio-alumno" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Calle*</label>
-                                    <input id="inp-calle-alumno" class="form-control" placeholder="Calle de residencia del alumno">
-                                </div>
-                                <div class="form-group">
-                                    <label>Altura*</label>
-                                    <input id="inp-altura-alumno" class="form-control" type="number">
-                                </div>
-                                <div class="form-group">
-                                    <label>Torre</label>
-                                    <input id="inp-torre-alumno" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
-                                </div>
-                                <div class="form-group">
-                                    <label>Piso</label>
-                                    <input id="inp-piso-alumno" class="form-control" type="number">
-                                </div>
-                                <div class="form-group">
-                                    <label>Departamento</label>
-                                    <input id="inp-departamento-alumno" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Codigo Postal*</label>
-                                    <input id="inp-postal-alumno" type="number"class="form-control" placeholder="(Solo Numeros)">
-                                </div>
-                            </form>
+                            <div class="col-lg-6">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h2 align="center">Foto</h2>
+                                            <h5 align="center">Peso máximo 5mb (solo png/jpeg)</h5>
+                                            <div>
+                                                <form action="{% url 'Solcito:subirPhoto' %}" method="POST" enctype="multipart/form-data" id="cargar"> {% csrf_token %}
+                                                    <div align="center">
+                                                        <img id='alum' src="{% static 'images/up.jpg' %}" alt='Foto alumno' style='width:220px; height:220px;margin-left:3%;'/>
+                                                        <input type='file' id='photo' name='photo' multiple accept='image/png,image/jpeg'/>
+                                                    </div>
+                                                    <input name="nombre" id="form-nombre-alumno" type="hidden" class="form-control">
+                                                    <input name="apellido" id="form-apellido-alumno" type="hidden" class="form-control">
+                                                    <input name="dni" id="form-dni-alumno" type="hidden" class="form-control" >
+                                                    <button id="crear" hidden="true">Subir Foto</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-12">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label>Religion*</label>
+                                        <input id="inp-religion-alumno" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nacionalidad del alumno*</label>
+                                        <input id="inp-nacionalidad-alumno" class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Telefono Fijo*</label>
+                                        <input id="inp-fijo-alumno" class="form-control" type="number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Telefono Celular</label>
+                                        <input id="inp-celular-alumno" class="form-control" type="number">
+                                    </div>
+                                    <h4>Nacimiento</h4>
+                                    <div class="form-group">
+                                        <label>Fecha de Nacimiento*</label>
+                                        <input id="inp-nacimiento-alumno" type="date"class="form-control" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Genero*</label>
+                                        <select id="inp-genero-alumno">
+                                            <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
+                                                <option> <a>Hombre</a></option>
+                                                <option> <a>Mujer</a></option>
+                                                <option> <a>Otro</a></option>
+                                            </ul>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lugar de Nacimiento*</label>
+                                        <input id="inp-lugar_nacimiento-alumno" class="form-control">
+                                    </div>
+                                    <h4>Residencia</h4>
+                                    <div class="form-group">
+                                        <label>Localidad*</label>
+                                        <input id="inp-localidad-alumno" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Barrio*</label>
+                                        <input id="inp-barrio-alumno" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Calle*</label>
+                                        <input id="inp-calle-alumno" class="form-control" placeholder="Calle de residencia del alumno">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Altura*</label>
+                                        <input id="inp-altura-alumno" class="form-control" type="number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Torre</label>
+                                        <input id="inp-torre-alumno" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Piso</label>
+                                        <input id="inp-piso-alumno" class="form-control" type="number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Departamento</label>
+                                        <input id="inp-departamento-alumno" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Codigo Postal*</label>
+                                        <input id="inp-postal-alumno" type="number"class="form-control" placeholder="(Solo Numeros)">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <div class="col-lg-6">
+                            <h2 align="center">Datos de los Padres</h2>
+                            <br>
                             <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                                Formulario Padre</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Nombre del padre*</label>
+                                                <input id="inp-nombre-padre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Apellido del padre*</label>
+                                                <input id="inp-apellido-padre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>DNI*</label>
+                                                <input id="inp-dni-padre"type="number"class="form-control" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Cuil*</label>
+                                                <input id="inp-cuil-padre"type="number"class="form-control" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Lugar de trabajo*</label>
+                                                <input id="inp-trabajo-padre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Profesion*</label>
+                                                <input id="inp-profesion-padre" class="form-control" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Nacionalidad*</label>
+                                                <input id="inp-nacionalidad-padre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Calle de domicilio*</label>
+                                                <input id="inp-calle-padre" class="form-control" placeholder="Calle de residencia del padre">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Numero*</label>
+                                                <input id="inp-numcalle-padre" class="form-control" type="number">
+                                            </div>
+                                            <label>Barrio de domicilio*</label>
+                                            <input id="inp-barrio-padre" class="form-control" >
+
+                                            <div class="form-group">
+                                                <label>Torre</label>
+                                                <input id="inp-torre-padre" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Piso</label>
+                                                <input id="inp-piso-padre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Departamento</label>
+                                                <input id="inp-dpto-padre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Codigo Postal*</label>
+                                                <input id="inp-postal-padre" type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Localidad*</label>
+                                                <input id="inp-localidad-padre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email*</label>
+                                                <input id="inp-email-padre" class="form-control" type="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono Fijo*</label>
+                                                <input id="inp-fijo-padre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono celular</label>
+                                                <input id="inp-celular-padre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono laboral</label>
+                                                <input id="inp-tlaboral-padre" class="form-control" type="number">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
@@ -261,329 +344,219 @@
                                                 Formulario Madre</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <h1>Formulario Madre</h1>
-
-                                            <form role="form">
-                                                <div class="form-group">
-                                                    <label>Nombre de la madre*</label>
-                                                    <input id="inp-nombre-madre" class="form-control" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Apellido de la madre*</label>
-                                                    <input id="inp-apellido-madre" class="form-control" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>DNI*</label>
-                                                    <input id="inp-dni-madre"type="number"class="form-control" >
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Cuil*</label>
-                                                    <input id="inp-cuil-madre"type="number"class="form-control" >
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Lugar de trabajo*</label>
-                                                    <input id="inp-trabajo-madre" class="form-control" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Profesion*</label>
-                                                    <input id="inp-profesion-madre" class="form-control" >
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Nacionalidad*</label>
-                                                    <input id="inp-nacionalidad-madre" class="form-control" >
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label>Calle de domicilio*</label>
-                                                    <input id="inp-calle-madre" class="form-control" placeholder="Calle de residencia de la madre">
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label>Numero*</label>
-                                                    <input id="inp-numcalle-madre" class="form-control" type="number">
-                                                </div>
-
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Nombre de la madre*</label>
+                                                <input id="inp-nombre-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Apellido de la madre*</label>
+                                                <input id="inp-apellido-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>DNI*</label>
+                                                <input id="inp-dni-madre"type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cuil*</label>
+                                                <input id="inp-cuil-madre"type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Lugar de trabajo*</label>
+                                                <input id="inp-trabajo-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Profesion*</label>
+                                                <input id="inp-profesion-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nacionalidad*</label>
+                                                <input id="inp-nacionalidad-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Calle de domicilio*</label>
+                                                <input id="inp-calle-madre" class="form-control" placeholder="Calle de residencia de la madre">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Numero*</label>
+                                                <input id="inp-numcalle-madre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Barrio de domicilio*</label>
                                                 <input id="inp-barrio-madre" class="form-control" >
-
-                                                <div class="form-group">
-                                                    <label>Torre</label>
-                                                    <input id="inp-torre-madre" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Piso</label>
-                                                    <input id="inp-piso-madre" class="form-control" type="number">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Departamento</label>
-                                                    <input id="inp-dpto-madre" class="form-control" >
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Codigo Postal*</label>
-                                                    <input id="inp-postal-madre" type="number"class="form-control" >
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>localidad*</label>
-                                                    <input id="inp-localidad-madre" class="form-control" >
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Email*</label>
-                                                    <input id="inp-email-madre" class="form-control" type="email">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label>Telefono Fijo*</label>
-                                                    <input id="inp-fijo-madre" class="form-control" type="number">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Telefono celular</label>
-                                                    <input id="inp-celular-madre" class="form-control" type="number">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Telefono laboral</label>
-                                                    <input id="inp-tlaboral-madre" class="form-control" type="number">
-                                                </div>
-                                                </div>
-                                        </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Torre</label>
+                                                <input id="inp-torre-madre" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Piso</label>
+                                                <input id="inp-piso-madre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Departamento</label>
+                                                <input id="inp-dpto-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Codigo Postal*</label>
+                                                <input id="inp-postal-madre" type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Localidad *</label>
+                                                <input id="inp-localidad-madre" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email*</label>
+                                                <input id="inp-email-madre" class="form-control" type="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono Fijo*</label>
+                                                <input id="inp-fijo-madre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono celular</label>
+                                                <input id="inp-celular-madre" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono laboral</label>
+                                                <input id="inp-tlaboral-madre" class="form-control" type="number">
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                                    Formulario Padre</a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse2" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <h1>Formulario Padre</h1>
-                                                <form role="form">
-                                                    <div class="form-group">
-                                                        <label>Nombre del padre*</label>
-                                                        <input id="inp-nombre-padre" class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Apellido del padre*</label>
-                                                        <input id="inp-apellido-padre" class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>DNI*</label>
-                                                        <input id="inp-dni-padre"type="number"class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Cuil*</label>
-                                                        <input id="inp-cuil-padre"type="number"class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Lugar de trabajo*</label>
-                                                        <input id="inp-trabajo-padre" class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Profesion*</label>
-                                                        <input id="inp-profesion-padre" class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Nacionalidad*</label>
-                                                        <input id="inp-nacionalidad-padre" class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Calle de domicilio*</label>
-                                                        <input id="inp-calle-padre" class="form-control" placeholder="Calle de residencia del padre">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Numero*</label>
-                                                        <input id="inp-numcalle-padre" class="form-control" type="number">
-                                                    </div>
-                                                    <label>Barrio de domicilio*</label>
-                                                    <input id="inp-barrio-padre" class="form-control" >
-
-                                                    <div class="form-group">
-                                                        <label>Torre</label>
-                                                        <input id="inp-torre-padre" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Piso</label>
-                                                        <input id="inp-piso-padre" class="form-control" type="number">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Departamento</label>
-                                                        <input id="inp-dpto-padre" class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Codigo Postal*</label>
-                                                        <input id="inp-postal-padre" type="number"class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>localidad*</label>
-                                                        <input id="inp-localidad-padre" class="form-control" >
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Email*</label>
-                                                        <input id="inp-email-padre" class="form-control" type="email">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Telefono Fijo*</label>
-                                                        <input id="inp-fijo-padre" class="form-control" type="number">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Telefono celular</label>
-                                                        <input id="inp-celular-padre" class="form-control" type="number">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Telefono laboral</label>
-                                                        <input id="inp-tlaboral-padre" class="form-control" type="number">
-                                                    </div>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                                        Formulario Tutor</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse3" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    <h1>Formulario Tutor</h1>
-                                                    <form role="form">
-                                                        <div class="form-group">
-                                                            <label>Nombre del tutor*</label>
-                                                            <input id="inp-nombre-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Apellido del tutor*</label>
-                                                            <input id="inp-apellido-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>DNI*</label>
-                                                            <input id="inp-dni-tutor"type="number"class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Cuil*</label>
-                                                            <input id="inp-cuil-tutor"type="number"class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Lugar de trabajo*</label>
-                                                            <input id="inp-trabajo-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Profesion*</label>
-                                                            <input id="inp-profesion-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Nacionalidad*</label>
-                                                            <input id="inp-nacionalidad-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Calle de domicilio*</label>
-                                                            <input id="inp-calle-tutor" class="form-control" placeholder="Calle de residencia del tutor">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Numero*</label>
-                                                            <input id="inp-numcalle-tutor" class="form-control" type="number">
-                                                        </div>
-                                                        <label>Barrio de domicilio*</label>
-                                                        <input id="inp-barrio-tutor" class="form-control" >
-                                                        <div class="form-group">
-                                                            <label>Torre</label>
-                                                            <input id="inp-torre-tutor" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Piso</label>
-                                                            <input id="inp-piso-tutor" class="form-control" type="number">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Departamento</label>
-                                                            <input id="inp-dpto-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Codigo Postal*</label>
-                                                            <input id="inp-postal-tutor" type="number"class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>localidad*</label>
-                                                            <input id="inp-localidad-tutor" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Email*</label>
-                                                            <input id="inp-email-tutor" class="form-control" type="email">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Telefono Fijo*</label>
-                                                            <input id="inp-fijo-tutor" class="form-control" type="number">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Telefono celular</label>
-                                                            <input id="inp-celular-tutor" class="form-control" type="number">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Telefono laboral</label>
-                                                            <input id="inp-tlaboral-tutor" class="form-control" type="number">
-                                                        </div>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                                Formulario Tutor</a>
+                                        </h4>
                                     </div>
-                                    </form>
-                                </form>
-                            <button id="confirm_matricula" class="btn btn-primary btn-lg">Confirmar Matricula</button>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Nombre del tutor*</label>
+                                                <input id="inp-nombre-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Apellido del tutor*</label>
+                                                <input id="inp-apellido-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>DNI*</label>
+                                                <input id="inp-dni-tutor"type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cuil*</label>
+                                                <input id="inp-cuil-tutor"type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Lugar de trabajo*</label>
+                                                <input id="inp-trabajo-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Profesion*</label>
+                                                <input id="inp-profesion-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nacionalidad*</label>
+                                                <input id="inp-nacionalidad-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Calle de domicilio*</label>
+                                                <input id="inp-calle-tutor" class="form-control" placeholder="Calle de residencia del tutor">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Numero*</label>
+                                                <input id="inp-numcalle-tutor" class="form-control" type="number">
+                                            </div>
+                                            <label>Barrio de domicilio*</label>
+                                            <input id="inp-barrio-tutor" class="form-control" >
+                                            <div class="form-group">
+                                                <label>Torre</label>
+                                                <input id="inp-torre-tutor" class="form-control" placeholder="En caso de ser necesario especificar la torre de residencia">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Piso</label>
+                                                <input id="inp-piso-tutor" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Departamento</label>
+                                                <input id="inp-dpto-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Codigo Postal*</label>
+                                                <input id="inp-postal-tutor" type="number"class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Localidad*</label>
+                                                <input id="inp-localidad-tutor" class="form-control" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email*</label>
+                                                <input id="inp-email-tutor" class="form-control" type="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono Fijo*</label>
+                                                <input id="inp-fijo-tutor" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono celular</label>
+                                                <input id="inp-celular-tutor" class="form-control" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Telefono laboral</label>
+                                                <input id="inp-tlaboral-tutor" class="form-control" type="number">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.container-fluid -->
+                        <div class="col-lg-12" align="right">
+                            <div class="panel-heading">
+                                <button id="confirm_matricula" class="btn btn-primary btn-lg">Guardar Matricula</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+        <div class="modal fade" id="cartel_error" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="textoError"> </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" id="btn-volver" onclick="$('#cartel_error').modal('hide');" type="button">
+                            Volver
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-    <div class="modal fade" id="cartel_error" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="textoError"> </h4>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-warning" id="btn-volver" onclick="$('#cartel_error').modal('hide');" type="button">
-                        Volver
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery.js' %}"></script>
+        <!-- jQuery -->
+        <script src="{% static 'js/jquery.js' %}"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
-    <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
-    <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
+        <!-- Morris Charts JavaScript -->
+        <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
+        <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
+        <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
 
-    <script>
-            $('#crear').click(function() {
-                if($('input:file[name=photo]').val()==""){
-                    alert('Debe cargar las imagenes');
-                }else{
-                    $("#cargar").submit();
-                }
-            });
+        <script>
+
 
             /*previsualisacion de foto*/
             function readURL(input) {
@@ -593,244 +566,255 @@
                         $('#alum').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(input.files[0]);
-                }}
+                }
+            }
 
             $('#photo').change(function(){
                 readURL(this);
             });
 
-            $('#confirm_matricula').click(function asda(){
-            if(verificacionAlumno()&&verificacionTutores()){
-                var data = {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    nombre : $('#inp-nombre-alumno').val(),
-                    apellido : $('#inp-apellido-alumno').val(),
-                    dni : $('#inp-dni-alumno').val(),
-                    religion : $('#inp-religion-alumno').val(),
-                    sexo : $('#inp-genero-alumno').val(),
-                    nacimiento : $('#inp-nacimiento-alumno').val(),
-                    lugar_nacimiento : $('#inp-lugar_nacimiento-alumno').val(),
-                    nacionalidad : $('#inp-nacionalidad-alumno').val(),
-                    calle : $('#inp-calle-alumno').val(),
-                    altura : $('#inp-altura-alumno').val(),
-                    barrio: $('#inp-barrio-alumno').val(),
-                    torre : $('#inp-torre-alumno').val(),
-                    piso : $('#inp-piso-alumno').val(),
-                    departamento : $('#inp-departamento-alumno').val(),
-                    postal : $('#inp-postal-alumno').val(),
-                    localidad : $('#inp-localidad-alumno').val(),
-                    mail : $('#inp-mail-alumno').val(),
-                    fijo : $('#inp-fijo-alumno').val(),
-                    celular : $('#inp-celular-alumno').val(),
-                    nombrem : $('#inp-nombre-madre').val(),
-                    apellidom: $('#inp-apellido-madre').val(),
-                    dnim: $('#inp-dni-madre').val(),
-                    cuilm: $('#inp-cuil-madre').val(),
-                    lugartrabajom: $('#inp-trabajo-madre').val(),
-                    profesionm: $('#inp-profesion-madre').val(),
-                    nacionalidadm: $('#inp-nacionalidad-madre').val(),
-                    callem: $('#inp-calle-madre').val(),
-                    alturam: $('#inp-numcalle-madre').val(),
-                    barriom: $('#inp-barrio-madre').val(),
-                    torrem: $('#inp-torre-madre').val(),
-                    pisom: $('#inp-piso-madre').val(),
-                    departamentom: $('#inp-dpto-madre').val(),
-                    postalm: $('#inp-postal-madre').val(),
-                    localidadm: $('#inp-localidad-madre').val(),
-                    mailm: $('#inp-email-madre').val(),
-                    fijom: $('#inp-fijo-madre').val(),
-                    celularm: $('#inp-celular-madre').val(),
-                    tlaboralm: $('#inp-tlaboral-madre').val(),
-                    nombrep : $('#inp-nombre-padre').val(),
-                    apellidop: $('#inp-apellido-padre').val(),
-                    dnip: $('#inp-dni-padre').val(),
-                    cuilp: $('#inp-cuil-padre').val(),
-                    lugartrabajop: $('#inp-trabajo-padre').val(),
-                    profesionp: $('#inp-profesion-padre').val(),
-                    nacionalidadp: $('#inp-nacionalidad-padre').val(),
-                    callep: $('#inp-calle-padre').val(),
-                    alturap: $('#inp-numcalle-padre').val(),
-                    barriop: $('#inp-barrio-padre').val(),
-                    torrep: $('#inp-torre-padre').val(),
-                    pisop: $('#inp-piso-padre').val(),
-                    departamentop: $('#inp-dpto-padre').val(),
-                    postalp: $('#inp-postal-padre').val(),
-                    localidadp: $('#inp-localidad-padre').val(),
-                    mailp: $('#inp-email-padre').val(),
-                    fijop: $('#inp-fijo-padre').val(),
-                    celularp: $('#inp-celular-padre').val(),
-                    tlaboralp: $('#inp-tlaboral-padre').val(),
-                    nombret : $('#inp-nombre-tutor').val(),
-                    apellidot: $('#inp-apellido-tutor').val(),
-                    dnit: $('#inp-dni-tutor').val(),
-                    cuilt: $('#inp-cuil-tutor').val(),
-                    lugartrabajot: $('#inp-trabajo-tutor').val(),
-                    profesiont: $('#inp-profesion-tutor').val(),
-                    nacionalidadt: $('#inp-nacionalidad-tutor').val(),
-                    callet: $('#inp-calle-tutor').val(),
-                    alturat: $('#inp-numcalle-tutor').val(),
-                    barriot: $('#inp-barrio-tutor').val(),
-                    torret: $('#inp-torre-tutor').val(),
-                    pisot: $('#inp-piso-tutor').val(),
-                    departamentot: $('#inp-dpto-tutor').val(),
-                    postalt: $('#inp-postal-tutor').val(),
-                    localidadt: $('#inp-localidad-tutor').val(),
-                    mailt: $('#inp-email-tutor').val(),
-                    fijot: $('#inp-fijo-tutor').val(),
-                    celulart: $('#inp-celular-tutor').val(),
-                    tlaboralt: $('#inp-tlaboral-tutor').val()
-                }
-                console.log(data);
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'Solcito:confirm_matricula' %}",
-                    data:data,
-                    success: function(result){
+            $('#confirm_matricula').click(function confirm(){
+                if(verificacionAlumno()&&verificacionTutores()){
+                    var data = {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        nombre : $('#inp-nombre-alumno').val(),
+                        apellido : $('#inp-apellido-alumno').val(),
+                        dni : $('#inp-dni-alumno').val(),
+                        religion : $('#inp-religion-alumno').val(),
+                        sexo : $('#inp-genero-alumno').val(),
+                        nacimiento : $('#inp-nacimiento-alumno').val(),
+                        lugar_nacimiento : $('#inp-lugar_nacimiento-alumno').val(),
+                        nacionalidad : $('#inp-nacionalidad-alumno').val(),
+                        calle : $('#inp-calle-alumno').val(),
+                        altura : $('#inp-altura-alumno').val(),
+                        barrio: $('#inp-barrio-alumno').val(),
+                        torre : $('#inp-torre-alumno').val(),
+                        piso : $('#inp-piso-alumno').val(),
+                        departamento : $('#inp-departamento-alumno').val(),
+                        postal : $('#inp-postal-alumno').val(),
+                        localidad : $('#inp-localidad-alumno').val(),
+                        mail : $('#inp-mail-alumno').val(),
+                        fijo : $('#inp-fijo-alumno').val(),
+                        celular : $('#inp-celular-alumno').val(),
+                        nombrem : $('#inp-nombre-madre').val(),
+                        apellidom: $('#inp-apellido-madre').val(),
+                        dnim: $('#inp-dni-madre').val(),
+                        cuilm: $('#inp-cuil-madre').val(),
+                        lugartrabajom: $('#inp-trabajo-madre').val(),
+                        profesionm: $('#inp-profesion-madre').val(),
+                        nacionalidadm: $('#inp-nacionalidad-madre').val(),
+                        callem: $('#inp-calle-madre').val(),
+                        alturam: $('#inp-numcalle-madre').val(),
+                        barriom: $('#inp-barrio-madre').val(),
+                        torrem: $('#inp-torre-madre').val(),
+                        pisom: $('#inp-piso-madre').val(),
+                        departamentom: $('#inp-dpto-madre').val(),
+                        postalm: $('#inp-postal-madre').val(),
+                        localidadm: $('#inp-localidad-madre').val(),
+                        mailm: $('#inp-email-madre').val(),
+                        fijom: $('#inp-fijo-madre').val(),
+                        celularm: $('#inp-celular-madre').val(),
+                        tlaboralm: $('#inp-tlaboral-madre').val(),
+                        nombrep : $('#inp-nombre-padre').val(),
+                        apellidop: $('#inp-apellido-padre').val(),
+                        dnip: $('#inp-dni-padre').val(),
+                        cuilp: $('#inp-cuil-padre').val(),
+                        lugartrabajop: $('#inp-trabajo-padre').val(),
+                        profesionp: $('#inp-profesion-padre').val(),
+                        nacionalidadp: $('#inp-nacionalidad-padre').val(),
+                        callep: $('#inp-calle-padre').val(),
+                        alturap: $('#inp-numcalle-padre').val(),
+                        barriop: $('#inp-barrio-padre').val(),
+                        torrep: $('#inp-torre-padre').val(),
+                        pisop: $('#inp-piso-padre').val(),
+                        departamentop: $('#inp-dpto-padre').val(),
+                        postalp: $('#inp-postal-padre').val(),
+                        localidadp: $('#inp-localidad-padre').val(),
+                        mailp: $('#inp-email-padre').val(),
+                        fijop: $('#inp-fijo-padre').val(),
+                        celularp: $('#inp-celular-padre').val(),
+                        tlaboralp: $('#inp-tlaboral-padre').val(),
+                        nombret : $('#inp-nombre-tutor').val(),
+                        apellidot: $('#inp-apellido-tutor').val(),
+                        dnit: $('#inp-dni-tutor').val(),
+                        cuilt: $('#inp-cuil-tutor').val(),
+                        lugartrabajot: $('#inp-trabajo-tutor').val(),
+                        profesiont: $('#inp-profesion-tutor').val(),
+                        nacionalidadt: $('#inp-nacionalidad-tutor').val(),
+                        callet: $('#inp-calle-tutor').val(),
+                        alturat: $('#inp-numcalle-tutor').val(),
+                        barriot: $('#inp-barrio-tutor').val(),
+                        torret: $('#inp-torre-tutor').val(),
+                        pisot: $('#inp-piso-tutor').val(),
+                        departamentot: $('#inp-dpto-tutor').val(),
+                        postalt: $('#inp-postal-tutor').val(),
+                        localidadt: $('#inp-localidad-tutor').val(),
+                        mailt: $('#inp-email-tutor').val(),
+                        fijot: $('#inp-fijo-tutor').val(),
+                        celulart: $('#inp-celular-tutor').val(),
+                        tlaboralt: $('#inp-tlaboral-tutor').val()
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'Solcito:confirm_matricula' %}",
+                        data:data,
+                        success: function(result){
                         if($('input:file[name=photo]').val()!=""){
                             $('#form-nombre-alumno').val($('#inp-nombre-alumno').val());
                             $('#form-apellido-alumno').val($('#inp-apellido-alumno').val());
                             $('#form-dni-alumno').val($('#inp-dni-alumno').val());
-                            $("#cargar").submit();                        
+                            $("#cargar").submit();
                         }
-                        $('#page-wrapper').html(result);
-                    },
-                    error: function(){
-                        alert("Error");
+                            $('#page-wrapper').html(result);
+                        },
+                        error: function(){
+                            alert("Error");
+
+                        }
+                    })
+                }
+            });
+
+
+            function verificacionAlumno(){
+                if ($('#inp-nombre-alumno').val()==""
+                    || $('#inp-apellido-alumno').val()==""
+                    || $('#inp-dni-alumno').val()==""
+                    || $('#inp-religion-alumno').val()==""
+                    || $('#inp-nacionalidad-alumno').val()==""
+                    || $('#inp-fijo-alumno').val()==""
+                    || $('#inp-mail-alumno').val()==""
+                    || $('#inp-nacimiento-alumno').val()==""
+                    || $('#inp-lugar_nacimiento-alumno').val()==""
+                    || $('#inp-localidad-alumno').val()==""
+                    || $('#inp-barrio-alumno').val()==""
+                    || $('#inp-calle-alumno').val()==""
+                    || $('#inp-altura-alumno').val()==""
+                    || $('#inp-postal-alumno').val()==""){
+                    $('#textoError').text("Los campos señalados por * son obligatorios");
+                    $('#cartel_error').modal('show');
+                    return false;
+                }
+                if( !isEmail($('#inp-mail-alumno').val())) {
+                    $('#textoError').text("Email Alumno Invalido");
+                    $('#cartel_error').modal('show');
+                    return false;
+                }
+                return true;
+            }
+
+
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            }
+
+
+            function verificacionTutores(){
+                var cantTutores = 0;
+                if($('#inp-nombre-madre').val()!=""){
+
+                    if(
+                        $('#inp-apellido-madre').val()==""
+                        || $('#inp-dni-madre').val()==""
+                        || $('#inp-cuil-madre').val()==""
+                        || $('#inp-profesion-madre').val()==""
+                        || $('#inp-trabajo-madre').val()==""
+                        || $('#inp-nacionalidad-madre').val()==""
+                        || $('#inp-fijo-madre').val()==""
+                        || $('#inp-email-madre').val()==""
+                        || $('#inp-localidad-madre').val()==""
+                        || $('#inp-barrio-madre').val()==""
+                        || $('#inp-calle-madre').val()==""
+                        || $('#inp-altura-madre').val()==""
+                        || $('#inp-postal-madre').val()==""
+                    ){
+                        $('#textoError').text('Debe completar los campos obligatorios de Madre');
+                        $('#cartel_error').modal('show');
+                        return false;
                     }
-                });
-            }
-
-        });
-        function verificacionAlumno(){
-            if ($('#inp-nombre-alumno').val()==""
-                || $('#inp-apellido-alumno').val()==""
-                || $('#inp-dni-alumno').val()==""
-                || $('#inp-religion-alumno').val()==""
-                || $('#inp-nacionalidad-alumno').val()==""
-                || $('#inp-fijo-alumno').val()==""
-                || $('#inp-mail-alumno').val()==""
-                || $('#inp-nacimiento-alumno').val()==""
-                || $('#inp-lugar_nacimiento-alumno').val()==""
-                || $('#inp-localidad-alumno').val()==""
-                || $('#inp-barrio-alumno').val()==""
-                || $('#inp-calle-alumno').val()==""
-                || $('#inp-altura-alumno').val()==""
-                || $('#inp-postal-alumno').val()==""){
-                $('#textoError').text("Los campos señalados por * son obligatorios");
-                $('#cartel_error').modal('show');
-                return false;
-            }
-            if( !isEmail($('#inp-mail-alumno').val())) {
-                $('#textoError').text("Email Alumno Invalido");
-                $('#cartel_error').modal('show');
-                return false;
-            }
-            return true;
-        }
-
-
-        function isEmail(email) {
-            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            return regex.test(email);
-        }
-
-
-        function verificacionTutores(){
-            var cantTutores = 0;
-            if($('#inp-nombre-madre').val()!=""){
-
-                if(
-                    $('#inp-apellido-madre').val()==""
-                    || $('#inp-dni-madre').val()==""
-                    || $('#inp-cuil-madre').val()==""
-                    || $('#inp-profesion-madre').val()==""
-                    || $('#inp-trabajo-madre').val()==""
-                    || $('#inp-nacionalidad-madre').val()==""
-                    || $('#inp-fijo-madre').val()==""
-                    || $('#inp-email-madre').val()==""
-                    || $('#inp-localidad-madre').val()==""
-                    || $('#inp-barrio-madre').val()==""
-                    || $('#inp-calle-madre').val()==""
-                    || $('#inp-altura-madre').val()==""
-                    || $('#inp-postal-madre').val()==""
-                ){
-                    $('#textoError').text('Debe completar los campos obligatorios de Madre');
-                    $('#cartel_error').modal('show');
-                    return false;
-                }
-                if( !isEmail($('#inp-email-madre').val())) {
-                    $('#textoError').text("Email Madre Invalido");
-                    $('#cartel_error').modal('show');
-                    return false;
-                }
-                else{
-                    cantTutores+=1
-                }
-
-            }
-
-            if($('#inp-nombre-padre').val()!=""){
-
-                if($('#inp-apellido-padre').val()==""
-                   || $('#inp-dni-padre').val()==""
-                   || $('#inp-cuil-padre').val()==""
-                   || $('#inp-profesion-padre').val()==""
-                   || $('#inp-trabajo-padre').val()==""
-                   || $('#inp-nacionalidad-padre').val()==""
-                   || $('#inp-fijo-padre').val()==""
-                   || $('#inp-email-padre').val()==""
-                   || $('#inp-localidad-padre').val()==""
-                   || $('#inp-barrio-padre').val()==""
-                   || $('#inp-calle-padre').val()==""
-                   || $('#inp-altura-padre').val()==""
-                   || $('#inp-postal-padre').val()=="")
-                {
-                    $('#textoError').text('Debe completar los campos obligatorios de Padre');
-                    $('#cartel_error').modal('show');
-                    return false;
+                    if( !isEmail($('#inp-email-madre').val())) {
+                        $('#textoError').text("Email Madre Invalido");
+                        $('#cartel_error').modal('show');
+                        return false;
+                    }
+                    else{
+                        cantTutores+=1
+                    }
 
                 }
-                if( !isEmail($('#inp-email-padre').val())) {
-                    $('#textoError').text("Email Padre Invalido");
+
+                if($('#inp-nombre-padre').val()!=""){
+
+                    if($('#inp-apellido-padre').val()==""
+                       || $('#inp-dni-padre').val()==""
+                       || $('#inp-cuil-padre').val()==""
+                       || $('#inp-profesion-padre').val()==""
+                       || $('#inp-trabajo-padre').val()==""
+                       || $('#inp-nacionalidad-padre').val()==""
+                       || $('#inp-fijo-padre').val()==""
+                       || $('#inp-email-padre').val()==""
+                       || $('#inp-localidad-padre').val()==""
+                       || $('#inp-barrio-padre').val()==""
+                       || $('#inp-calle-padre').val()==""
+                       || $('#inp-altura-padre').val()==""
+                       || $('#inp-postal-padre').val()=="")
+                    {
+                        $('#textoError').text('Debe completar los campos obligatorios de Padre');
+                        $('#cartel_error').modal('show');
+                        return false;
+
+                    }
+                    if( !isEmail($('#inp-email-padre').val())) {
+                        $('#textoError').text("Email Padre Invalido");
+                        $('#cartel_error').modal('show');
+                        return false;
+                    }
+                    else{
+                        cantTutores+=1
+                    }
+                }
+
+
+                if($('#inp-nombre-tutor').val()!=""){
+                    if($('#inp-apellido-tutor').val()==""
+                       || $('#inp-dni-tutor').val()==""
+                       || $('#inp-cuil-tutor').val()==""
+                       || $('#inp-profesion-tutor').val()==""
+                       || $('#inp-trabajo-tutor').val()==""
+                       || $('#inp-nacionalidad-tutor').val()==""
+                       || $('#inp-fijo-tutor').val()==""
+                       || $('#inp-email-tutor').val()==""
+                       || $('#inp-localidad-tutor').val()==""
+                       || $('#inp-barrio-tutor').val()==""
+                       || $('#inp-calle-tutor').val()==""
+                       || $('#inp-altura-tutor').val()==""
+                       || $('#inp-postal-tutor').val()=="")
+                    {
+                        $('#textoError').text('Debe completar los campos obligatorios de Tutor');
+                        $('#cartel_error').modal('show');
+                        return false;
+                    }
+                    if( !isEmail($('#inp-email-tutor').val())) {
+                        $('#textoError').text("Email Tutor Invalido");
+                        $('#cartel_error').modal('show');
+                        return false;
+                    }
+                    else{
+                        cantTutores+=1
+
+                    }
+                }
+
+                if(cantTutores==0){
+                    $('#textoError').text('El alumno debe tener por lo menos 1 tutor legal');
                     $('#cartel_error').modal('show');
                     return false;
                 }
                 else{
-                    cantTutores+=1
+                    return true;
                 }
-            }
-
-
-            if($('#inp-nombre-tutor').val()!=""){
-                if($('#inp-apellido-tutor').val()==""
-                   || $('#inp-dni-tutor').val()==""
-                   || $('#inp-cuil-tutor').val()==""
-                   || $('#inp-profesion-tutor').val()==""
-                   || $('#inp-trabajo-tutor').val()==""
-                   || $('#inp-nacionalidad-tutor').val()==""
-                   || $('#inp-fijo-tutor').val()==""
-                   || $('#inp-email-tutor').val()==""
-                   || $('#inp-localidad-tutor').val()==""
-                   || $('#inp-barrio-tutor').val()==""
-                   || $('#inp-calle-tutor').val()==""
-                   || $('#inp-altura-tutor').val()==""
-                   || $('#inp-postal-tutor').val()=="")
-                {
-                    $('#textoError').text('Debe completar los campos obligatorios de Tutor');
-                    $('#cartel_error').modal('show');
-                    return false;
-                }
-                if( !isEmail($('#inp-email-tutor').val())) {
-                    $('#textoError').text("Email Tutor Invalido");
-                    $('#cartel_error').modal('show');
-                    return false;
-                }
-                else{
-                    cantTutores+=1
-
-                }
-            }
-
+            
             if(cantTutores==0){
                 $('#textoError').text('El alumno debe tener por lo menos 1 tutor legal');
                 $('#cartel_error').modal('show');
@@ -840,12 +824,15 @@
                 return true;
             }
         }
+    
+
 
 
     </script>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
+
     </body>
 
 </html>

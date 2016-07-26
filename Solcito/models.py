@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.conf import settings
 
+from django.template.defaultfilters import filesizeformat
+from django.utils.translation import ugettext_lazy as _
+
 from django.db.models import ImageField
 from django.db.models.fields.files import FileField
 from ITSGestion.settings import MEDIA_ROOT
@@ -136,11 +139,32 @@ class Registration(models.Model):
     def __str__(self):
         return self.nameStudent
     
+    def get_foto(self):
+        try:
+            name = "photos/{}-{}-{}".format(self.nameStudent,self.lastNameStudent,self.dniStudent)
+            img = Imagen.objects.filter(photo__startswith = name)
+            if img.count()>0:
+                return img.first()
+        except Exception as e:
+            return None
 
 class Imagen (models.Model):
 
     photo = models.FileField(u'Photo', upload_to="photos/", default='null')
-    #max_size = 2MB
+
+    def __str__(self):
+        #return "<a href='/photos/{}'>{}</a>".format(self.photo, self.photo)
+        return  "<img src='/photos/{}' style='width:100px; height:100px;'/>".format(self.photo)
+        #<img id='alum' src="{% static 'images/up.jpg' %}" alt='Foto alumno' style='width:200px; height:240px;margin-left:3%;'/>
+
+    #def get_nombre(self):
+    #   try:
+    #        name = "photos/{}-{}-{}".format(self.nameStudent,self.lastNameStudent,self.dniStudent)
+    #        alum = Registration.objects.filter(nameStudent = name)
+    #        if img.count()>0:
+    #            return img.first()
+    #    except Exception as e:
+    #        return None
 
 class Tutor (models.Model):
 

@@ -189,6 +189,7 @@
             <div class="" align="right" style="margin-bottom:2%;"> <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar e Imprimir Matricula</button></div>
         </div>
             <script>
+                
         $('#submit_matricula').click(function submit(){
                 var data = {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
@@ -280,12 +281,7 @@
                     url: "{% url 'Solcito:submit_matricula' %}",
                     data:data,
                     success: function(result){
-                        if($('input:file[name=photo]').val()!=""){
-                            $('#form-nombre-alumno').val($('#inp-nombre-alumno').val());
-                            $('#form-apellido-alumno').val($('#inp-apellido-alumno').val());
-                            $('#form-dni-alumno').val($('#inp-dni-alumno').val());
-                            $("#cargar").submit();
-                        }
+
                         window.location = '/genpdf/'+result;
                     },
                     error: function(){

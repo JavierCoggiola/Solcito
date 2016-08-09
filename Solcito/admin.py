@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Solcito.models import Student, Registration, Imagen
+from Solcito.models import Student, Registration, Imagen, Tutor
 # Register your models here.
 
 class RegistrationAdmin(admin.ModelAdmin):
@@ -20,5 +20,6 @@ class RegistrationAdminFoto(admin.ModelAdmin):
     _get_foto.allow_tags = True
 
 admin.site.register(Student)
-admin.site.register(Registration, RegistrationAdmin)
-admin.site.register(Imagen, RegistrationAdminFoto)
+admin.site.register(Tutor)
+admin.site.register(Registration)
+admin.site.register(Imagen)

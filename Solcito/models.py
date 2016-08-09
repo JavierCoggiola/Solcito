@@ -19,16 +19,72 @@ sex = (
     ("O", "Other"),
 )
 
+religion = (
+    ("cat", "Catolicismo"),
+    ("mus", "Islamismo"),
+    ("jud", "Judasimo"),
+    ("pro", "Protestantismo"),
+    ("eva", "Evangelismo"),
+    ("ind", "Induismo"),
+    ("bud", "Budismo"),
+    ("agn", "Agnosticismo"),
+    ("otr", "Other")
+)
+
+rol = (
+    ("fat", "Father"),
+    ("mot", "Mother"),
+    ("tut", "Tutor"),
+)
+
 class Student(models.Model):
     idStudent = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Name', max_length=50, blank=False)
     lastName = models.CharField(u'Last Name', max_length=50, blank=False)
     dni = models.IntegerField(u'DNI', blank=False)
     sex = models.CharField(u'Sex', max_length=1, choices=sex, default='M', blank=False)
-    religion = models.CharField(u'Religion', max_length=50, blank=False)
+    religion = models.CharField(u'Religion', max_length=3, choices=religion, default='cat', blank=False)
     birthDate = models.DateField(u'Birth Date', blank=False)
     birthPlace = models.CharField(u'Birth Place', max_length=50, blank=False)
     nacionality = models.CharField(u'Nacionality', max_length=50, blank=False)
+    street = models.CharField(u'Street', max_length=50, blank=False)
+    numberStreet = models.IntegerField(u'Number Street', blank=False)
+    neighborhood = models.CharField(u'Neighborhood', max_length=50, blank=False)
+    tower = models.CharField(u'Tower', max_length=20, blank=True, null=True, default="")
+    floorDepartment = models.IntegerField(u'Department Floor', blank=True, null=True, default="")
+    department = models.CharField(u'Department', max_length=20, blank=True, null=True, default="")
+    PC = models.IntegerField(u'Postal Code', blank=False)
+    nacionality = models.CharField(u'Nacionality', max_length=50, blank=False)
+    email = models.CharField(u'Email', max_length=50, blank=False)
+    landline = models.IntegerField(u'Landline', blank=False)
+    cellphone = models.IntegerField(u'Cellphone', blank=True, null=True, default="")
+
+    def __str__(self):
+        return self.name
+    
+    def get_foto(self):
+        try:
+            name = "photos/{}-{}-{}".format(self.name,self.lastName,self.dni)
+            img = Imagen.objects.filter(photo__startswith = name)
+            if img.count()>0:
+                return img.first()
+        except Exception as e:
+            return None
+    
+    def __str__(self):
+        return self.name
+    
+class Tutor (models.Model):
+
+    idTutor = models.AutoField(primary_key=True, editable=False)
+    name = models.CharField(u'Name', max_length=50, blank=False)
+    lastName = models.CharField(u'Last Name', max_length=50, blank=False)
+    dni = models.IntegerField(u'DNI', blank=False)
+    cuil = models.IntegerField(u'Cuil', blank=False)
+    rol = models.IntegerField(u'Rol', max_length=3, choices=rol, default='fat', blank=False)
+    workPlace = models.CharField(u'Work Place', max_length=50, blank=False)
+    profession = models.CharField(u'Profession', max_length=50, blank=False)
+    locality = models.CharField(u'Locality', max_length=50, default="", blank=False)
     street = models.CharField(u'Street', max_length=50, blank=False)
     numberStreet = models.IntegerField(u'Number Street', blank=False)
     neighborhood = models.CharField(u'Neighborhood', max_length=50, blank=False)
@@ -40,18 +96,16 @@ class Student(models.Model):
     email = models.CharField(u'Email', max_length=50, blank=False)
     landline = models.IntegerField(u'Landline', blank=False)
     cellphone = models.IntegerField(u'Cellphone', blank=True, null=True)
+    workPhone = models.IntegerField(u'Work Phone', blank=True, null=True)
 
-    def __str__(self):
-        return self.name
-    
 class Registration(models.Model):
     idRegistration = models.AutoField(primary_key=True, editable=False)
-    studentFile = models.IntegerField(u'Student File', blank=True , null=True)
-    administrativeFile = models.IntegerField(u'Administrative File', blank=True , null=True)
-    grade = models.IntegerField(u'Grade', blank=True , null=True)
-    division = models.CharField(u'Division', max_length=1, blank=True , null=True)
-    previousSchool = models.CharField(u'Previous School', max_length=50, blank=True, null=True)
-    qDueSubjects = models.IntegerField(u'Due Subjects', blank=True, null=True)
+    studentFile = models.IntegerField(u'Student File', blank=True , null=True, default="")
+    administrativeFile = models.IntegerField(u'Administrative File', blank=True , null=True, default="")
+    grade = models.IntegerField(u'Grade', blank=True , null=True, default="")
+    division = models.CharField(u'Division', max_length=1, blank=True , null=True, default="")
+    previousSchool = models.CharField(u'Previous School', max_length=50, blank=True, null=True, default="")
+    qDueSubjects = models.IntegerField(u'Due Subjects', blank=True, null=True, default="")
     isActive = models.BooleanField(u'Active Registration', default=True, blank=True)
     student = models.ForeignKey('Student', related_name='ownerregistration')
     
@@ -136,17 +190,7 @@ class Registration(models.Model):
     cellphoneTutor = models.IntegerField(u'Cellphone Tutor', blank=True, null=True)
     workPhoneTutor = models.IntegerField(u'Work Phone Tutor', blank=True, null=True)
 
-    def __str__(self):
-        return self.nameStudent
-    
-    def get_foto(self):
-        try:
-            name = "photos/{}-{}-{}".format(self.nameStudent,self.lastNameStudent,self.dniStudent)
-            img = Imagen.objects.filter(photo__startswith = name)
-            if img.count()>0:
-                return img.first()
-        except Exception as e:
-            return None
+
 
 class Imagen (models.Model):
 
@@ -166,35 +210,3 @@ class Imagen (models.Model):
     #    except Exception as e:
     #        return None
 
-class Tutor (models.Model):
-
-    FATHER = 0
-    MOTHER = 1
-    TUTOR = 2
-    TUTOR_ROL = (
-        (FATHER, "Father"),
-        (MOTHER, "Mother"),
-        (TUTOR, "Tutor"),
-    )
-
-    idTutor = models.AutoField(primary_key=True, editable=False)
-    name = models.CharField(u'Name', max_length=50, blank=False)
-    lastName = models.CharField(u'Last Name', max_length=50, blank=False)
-    dni = models.IntegerField(u'DNI', blank=False)
-    cuil = models.IntegerField(u'Cuil', blank=False)
-    rol = models.IntegerField(u'Rol', choices=TUTOR_ROL, default=TUTOR, blank=False)
-    workPlace = models.CharField(u'Work Place', max_length=50, blank=False)
-    profession = models.CharField(u'Profession', max_length=50, blank=False)
-    locality = models.CharField(u'Locality', max_length=50, default="", blank=False)
-    street = models.CharField(u'Street', max_length=50, blank=False)
-    numberStreet = models.IntegerField(u'Number Street', blank=False)
-    neighborhood = models.CharField(u'Neighborhood', max_length=50, blank=False)
-    tower = models.CharField(u'Tower', max_length=20, blank=True, null=True)
-    floorDepartment = models.IntegerField(u'Department Floor', blank=True, null=True)
-    department = models.CharField(u'Department', max_length=20, blank=True, null=True)
-    PC = models.IntegerField(u'Postal Code', blank=False)
-    nacionality = models.CharField(u'Nacionality', max_length=50, blank=False)
-    email = models.CharField(u'Email', max_length=50, blank=False)
-    landline = models.IntegerField(u'Landline', blank=False)
-    cellphone = models.IntegerField(u'Cellphone', blank=True, null=True)
-    workPhone = models.IntegerField(u'Work Phone', blank=True, null=True)

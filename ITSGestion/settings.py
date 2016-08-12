@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Solcito',
-]
+]n
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

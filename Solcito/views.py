@@ -91,7 +91,8 @@ def editMatricula(request):
     else:
         form = EditRegistrationForm(instance=student)
     args['form'] = form
-    return render(request, 'edit_matricula.html', args)
+    #return render(request, 'edit_matricula.html', args)
+    return render(request, 'matricular.html', args)
 
 def getFilter(request):
     context = RequestContext(request)

@@ -83,7 +83,7 @@
                 <div class="col s6" style="border-bottom: black 2px solid;">Colegio de Procedencia:</div>
                 <div class="col s12" style="">Cantidad de Materias Adeudadas:</div>
             </div>-->
-            <h2><small>Datos del Alumno:{{data}}</small></h2>
+            <h2><small>Datos del Alumno:</small></h2>
             <div class="row" style="margin-top:0%;border: black 2px solid;">
 
                 <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Alumno: {{data.name.0}}</div>
@@ -190,94 +190,19 @@
             </div>
             <div class="" align="right" style="margin-bottom:2%;"> <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar e Imprimir Matricula</button></div>
         </div>
+           <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
             <script>
                 
         $('#submit_matricula').click(function submit(){
-                var data = {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    /*Alumno*/
-                    nombre: '{{data.alumnoNombre}}',
-                    apellido:'{{data.alumnoApellido}}',
-                    dni:'{{data.alumnoDni}}',
-                    sexo:'{{data.alumnoSexo}}',
-                    religion:'{{data.alumnoReligion}}',
-                    nacimiento:'{{data.alumnoNacimiento}}',
-                    lugar_nacimiento:'{{data.alumnoLugarNacimiento}}',
-                    nacionalidad:'{{data.alumnoNacionalidad}}',
-                    calle:'{{data.alumnoCalle}}',
-                    altura:'{{data.alumnoAltura}}',
-                    barrio:'{{data.alumnoBarrio}}',
-                    torre:'{{data.alumnoTorre}}',
-                    piso:'{{data.alumnoPiso}}',
-                    departamento:'{{data.alumnoDepartamento}}',
-                    postal:'{{data.alumnoPostal}}',
-                    localidad:'{{data.alumnoLocalidad}}',
-                    mail:'{{data.alumnoMail}}',
-                    celular:'{{data.alumnoCel}}',
-                    fijo:'{{data.alumnoFijo}}',
-                    /*Padre*/
-                    nombrep:'{{data.padreNombre}}',
-                    apellidop:'{{data.padreApellido}}',
-                    dnip:'{{data.padreDni}}',
-                    cuilp:'{{data.padreCuil}}',
-                    lugartrabajop:'{{data.padreTrabajo}}',
-                    nacionalidadp:'{{data.padreNacionalidad}}',
-                    profesionp:'{{data.padreProfesion}}',
-                    callep:'{{data.padreCalle}}',
-                    alturap:'{{data.padreAltura}}',
-                    barriop:'{{data.pareBarrio}}',
-                    torrep:'{{data.padreTorre}}',
-                    pisop:'{{data.padrePiso}}',
-                    departamentop:'{{data.padreDepartamento}}',
-                    postalp:'{{data.padrePostal}}',
-                    localidadp:'{{data.padreLocalidad}}',
-                    mailp:'{{data.padreMail}}',
-                    celularp:'{{data.padreCel}}',
-                    fijop:'{{data.padreFijo}}',
-                    tlaboralp:'{{data.padreLaboral}}',
-                    /*Madre*/
-                    nombrem:'{{data.madreNombre}}',
-                    apellidom:'{{data.madreApellido}}',
-                    dnim:'{{data.madreDni}}',
-                    cuilm:'{{data.madreCuil}}',
-                    lugartrabajom:'{{data.madreTrabajo}}',
-                    nacionalidadm:'{{data.madreNacionalidad}}',
-                    profesionm:'{{data.madreProfesion}}',
-                    callem:'{{data.madreCalle}}',
-                    alturam:'{{data.madreAltura}}',
-                    barriom:'{{data.madreBarrio}}',
-                    torrem:'{{data.madreTorre}}',
-                    pisom:'{{data.madrePiso}}',
-                    departamentom:'{{data.madreDepartamento}}',
-                    postalm:'{{data.madrePostal}}',
-                    localidadm:'{{data.madreLocalidad}}',
-                    mailm:'{{data.madreMail}}',
-                    celularm:'{{data.madreCel}}',
-                    fijom:'{{data.madreFijo}}',
-                    tlaboralm:'{{data.madreLaboral}}',
-                    /*Tutor*/
-                    nombret:'{{data.tutorNombre}}',
-                    apellidot:'{{data.tutorApellido}}',
-                    dnit:'{{data.tutorDni}}',
-                    cuilt:'{{data.tutorCuil}}',
-                    lugartrabajot:'{{data.tutorTrabajo}}',
-                    nacionalidadt:'{{data.tutorNacionalidad}}',
-                    profesiont:'{{data.tutorProfesion}}',
-                    callet:'{{data.tutorCalle}}',
-                    alturat:'{{data.tutorAltura}}',
-                    barriot:'{{data.tutorBarrio}}',
-                    torret:'{{data.tutorTorre}}',
-                    pisot:'{{data.tutorPiso}}',
-                    departamentot:'{{data.tutorDepartamento}}',
-                    postalt:'{{data.tutorPostal}}',
-                    localidadt:'{{data.tutorLocalidad}}',
-                    mailt:'{{data.tutorMail}}',
-                    celulart:'{{data.tutorCel}}',
-                    fijot:'{{data.tutorFijo}}',
-                    tlaboralt:'{{data.tutorLaboral}}',
-
+                var str = '{{data}}';
+                var str2 = str.replace(/&#39;/g, '"');
+                var str2 = str2.replace(/u/g, "");
+                var data = JSON.parse(str2);
+                for (var key in data){
+                    data[key] = data[key][0];
                 }
-                console.log(data);
+                data["csrfmiddlewaretoken"]= "{{csrf_token}}";
+
                 $.ajax({
                     type: "POST",
                     url: "{% url 'Solcito:submit_matricula' %}",
@@ -287,7 +212,7 @@
                         window.location = '/genpdf/'+result;
                     },
                     error: function(){
-                        alert("Error");
+                       // alert("Error");
                     }
                 });
             });

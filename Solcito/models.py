@@ -80,7 +80,7 @@ class Tutor (models.Model):
     cuil = models.IntegerField(u'Cuil', blank=False)
     rol = models.IntegerField(u'Rol', choices=rol, default='fat', blank=False)
     workPlace = models.CharField(u'Lugar de Trabajo', max_length=50, blank=False)
-    profession = models.CharField(u'Profecion', max_length=50, blank=False)
+    profession = models.CharField(u'Profesion', max_length=50, blank=False)
     locality = models.CharField(u'Localidad', max_length=50, default="", blank=False)
     street = models.CharField(u'Calle', max_length=50, blank=False)
     numberStreet = models.IntegerField(u'Altura', blank=False)

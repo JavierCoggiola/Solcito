@@ -10,6 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <title>Solcito</title>
 
         <style>
@@ -82,32 +83,32 @@
                 <div class="col-md-6" style="border-bottom: black 2px solid;">Colegio de Procedencia:</div>
                 <div class="col-md-12" style="">Cantidad de Materias Adeudadas:</div>
             </div>-->
-            <h2><small>Datos del Alumno:</small></h2>
+            <h2><small>Datos del Alumno:{{data}}</small></h2>
             <div class="row" style="margin-top:0%;border: black 2px solid;">
                 <div class="col-md-6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Alumno: {{data.name.0}}</div>
                 <div class="col-md-6" style="border-bottom: black 2px solid;">Apellidos del Alumno:{{data.lastName.0}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.dni.0}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Sexo:{{data.sex.0}}</div>
-                <div class="col-md-4" style="border-bottom: black 2px solid;">Religion:{{data.alumnoReligion}}</div>
+                <div class="col-md-4" style="border-bottom: black 2px solid;">Religion:{{data.religion.0}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Fecha de Nacimiento:{{data.birthDate.0}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Lugar de Nacimiento:{{data.birthPlace.0}}</div>
-                <div class="col-md-4" style="border-bottom: black 2px solid;">Nacionalidad:{{data.alumnoNacionalidad}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.alumnoCalle}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.alumnoAltura}}</div>
-                <div class="col-md-4" style="border-bottom: black 2px solid;">Barrio:{{data.alumnoBarrio}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.alumnoTorre}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.alumnoPiso}}</div>
-                <div class="col-md-4" style="border-bottom: black 2px solid;">Departamento:{{data.alumnoDepartamento}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.alumnoPostal}}</div>
+                <div class="col-md-4" style="border-bottom: black 2px solid;">Nacionalidad:{{data.nacionality.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.street.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.numberStreet.0}}</div>
+                <div class="col-md-4" style="border-bottom: black 2px solid;">Barrio:{{data.neighborhood.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.tower.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.floorDepartment.0}}</div>
+                <div class="col-md-4" style="border-bottom: black 2px solid;">Departamento:{{data.department.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.PC.0}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.alumnoLocalidad}}</div>
-                <div class="col-md-4" style="border-bottom: black 2px solid;">Email:{{data.alumnoMail}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;">Tel.Celular:{{data.alumnoCel}}</div>
-                <div class="col-md-4" style="border-right: black 2px solid;">Tel.Fijo:{{data.alumnoFijo}}</div>
+                <div class="col-md-4" style="border-bottom: black 2px solid;">Email:{{data.email.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;">Tel.Celular:{{data.cellphone.0}}</div>
+                <div class="col-md-4" style="border-right: black 2px solid;">Tel.Fijo:{{data.landline.0}}</div>
                 <div class="col-md-4" style=""></div>
             </div>
             <h2><small>Datos del Padre:</small></h2>
             <div class="row" style="margin-top:0%;border: black 2px solid;">
-                <div class="col-md-6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Padre:{{data.padreNombre}}</div>
+                <div class="col-md-6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Padre:{{data.fname.0}}</div>
                 <div class="col-md-6" style="border-bottom: black 2px solid;">Apellidos del Padre:{{data.padreApellido}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.padreDni}}</div>
                 <div class="col-md-4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.padreCuil}}</div>

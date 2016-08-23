@@ -172,8 +172,16 @@ def getFilter(request):
 @require_POST
 def confirmMatricula(request):
     context = RequestContext(request)
-    print "confirmado"
-    return render_to_response('dismatricula.html',{'data':dict(request.POST)},context)
+    diccionario = dict(request.POST)
+    for element in diccionario:
+        if "father" in element:
+            diccionario[element.replace("father-", "f")] = diccionario.pop(element)
+        if "mother" in element:
+            diccionario[element.replace("mother-", "m")] = diccionario.pop(element)
+        if "guardian" in element:
+            diccionario[element.replace("guardian-", "g")] = diccionario.pop(element)
+        
+    return render_to_response('dismatricula.html',{'data':diccionario},context)
 
 
 

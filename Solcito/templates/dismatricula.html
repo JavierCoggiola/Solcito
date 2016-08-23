@@ -11,6 +11,7 @@
         <meta name="author" content="">
         <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
 
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <title>Solcito</title>
 
         <style>
@@ -68,19 +69,16 @@
 
     </head>
 
-    <body style="background-color:white;">
+    <body style="background-color:white;">  <div class="row">
+        <div class="col s12">
+            <div  class="container-fluid"  style="background:white;">
+                <div class="row" style="border: black 2px solid;">
 
-        <div class="container-fluid" style="margin:20px;">
-            <div class="row">
-                <div class="col s12">
-                    <div  class="container-fluid"  style="background:white;">
-                        <div class="row" style="border: black 2px solid;">
-
-                            <div class="col s1"><p>Logo del colegio</p></div>
-                            <div class="col s10" style="border-left: black 2px solid;border-right: black 2px solid;"><p align="center">Institucion Salesiana Artemides Zatti ARN</p><p align="center">Instituto Tecnico Salesiano Villada</p><p align="center">FICHA INDIVIDUAL DE INSCRIPCION</p></div>
-                            <div class="col s1"  style=""><p>Logo del colegio</p></div>
-                        </div>
-                        <!--<h2><small>Datos Escolares:</small></h2>
+                    <div class="col s1"><p>Logo del colegio</p></div>
+                    <div class="col s10" style="border-left: black 2px solid;border-right: black 2px solid;"><p align="center">Institucion Salesiana Artemides Zatti ARN</p><p align="center">Instituto Tecnico Salesiano Villada</p><p align="center">FICHA INDIVIDUAL DE INSCRIPCION</p></div>
+                    <div class="col s1"  style=""><p>Logo del colegio</p></div>
+                </div>
+                <!--<h2><small>Datos Escolares:</small></h2>
 <div class="row" style="margin-top:0%;border: black 2px solid;">
 <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Legajo:</div>
 <div class="col s6" style="border-bottom: black 2px solid;">Legajo Administrativo:</div>
@@ -88,121 +86,119 @@
 <div class="col s6" style="border-bottom: black 2px solid;">Colegio de Procedencia:</div>
 <div class="col s12" style="">Cantidad de Materias Adeudadas:</div>
 </div>-->
-                        <h5>Datos del Alumno:</h5>
-                        <div class="row" style="margin-top:0%;border: black 2px solid;">
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Alumno: {{data.name.0}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Alumno:{{data.lastName.0}}</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.dni.0}}</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Sexo:{{data.sex.0}}</div>
-                            <div class="col s3" style="border-bottom: black 2px solid;">Religion:{{data.alumnoReligion}}</div>
-                            <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">{{data.photo.0}}.</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Fecha de Nacimiento:{{data.birthDate.0}}</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Lugar de Nacimiento:{{data.birthPlace.0}}</div>
-                            <div class="col s3" style="border-bottom: black 2px solid;">Nacionalidad:{{data.alumnoNacionalidad}}</div>
-                            <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.alumnoCalle}}</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.alumnoAltura}}</div>
-                            <div class="col s3" style="border-bottom: black 2px solid;">Barrio:{{data.alumnoBarrio}}</div>
-                            <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.alumnoTorre}}</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.alumnoPiso}}</div>
-                            <div class="col s3" style="border-bottom: black 2px solid;">Departamento:{{data.alumnoDepartamento}}</div>
-                            <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.alumnoPostal}}</div>
-                            <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.alumnoLocalidad}}</div>
-                            <div class="col s3" style="border-bottom: black 2px solid;">Email:{{data.alumnoMail}}</div>
-                            <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.alumnoCel}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.alumnoFijo}}</div>
-                            <div class="col s4" style=""></div>
-                        </div>
-                        <h5>Datos del Padre:</h5>
-                        <div class="row" style="margin-top:0%;border: black 2px solid;">
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Padre:{{data.padreNombre}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Padre:{{data.padreApellido}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.padreDni}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.padreCuil}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.padreTrabajo}}</div>
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nacionalidad:{{data.padreNacionalidad}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Profesion:{{data.padreProfesion}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.padreCalle}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.padreAltura}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Barrio:{{data.pareBarrio}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.padreTorre}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.padrePiso}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Departamento:{{data.padreDepartamento}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.padrePostal}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.padreLocalidad}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Email:{{data.padreMail}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.padreCel}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.padreFijo}}</div>
-                            <div class="col s4" style="">Tel.Laboral:{{data.padreLaboral}}</div>
-                        </div>
-                        <h5>Datos del Madre:</h5>
-                        <div class="row" style="margin-top:0%;border: black 2px solid;">
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres de la Madre:{{data.madreNombre}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Apellidos de la Madre:{{data.madreApellido}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.madreDni}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.madreCuil}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.madreTrabajo}}</div>
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nacionalidad:{{data.madreNacionalidad}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Profesion:{{data.madreProfesion}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.madreCalle}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.madreAltura}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Barrio:{{data.madreBarrio}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.madreTorre}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.madrePiso}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Departamento:{{data.madreDepartamento}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.madrePostal}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.madreLocalidad}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Email:{{data.madreMail}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.madreCel}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.madreFijo}}</div>
-                            <div class="col s4" style="">Tel.Laboral:{{data.madreLaboral}}</div>
-                        </div>
-                        <h5>Datos del Tutor:</h5>
-                        <div class="row" style="margin-top:0%;margin-bottom:0%;border: black 2px solid;">
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Tutor:{{data.tutorNombre}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Tutor:{{data.tutorApellido}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.tutorDni}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.tutorCuil}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.tutorTrabajo}}</div>
-                            <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nacionalidad:{{data.tutorNacionalidad}}</div>
-                            <div class="col s6" style="border-bottom: black 2px solid;">Profesion:{{data.tutorProfesion}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.tutorCalle}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.tutorAltura}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Barrio:{{data.tutorBarrio}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.tutorTorre}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.tutorPiso}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Departamento:{{data.tutorDepartamento}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.tutorPostal}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.tutorLocalidad}}</div>
-                            <div class="col s4" style="border-bottom: black 2px solid;">Email:{{data.tutorMail}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.tutorCel}}</div>
-                            <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.tutorFijo}}</div>
-                            <div class="col s4" style="">Tel.Laboral:{{data.tutorLaboral}}</div>
-                        </div>
-                        <h6>*Este Formulario se debe Completar, Firmar y entregar en Secretaria. Tiene caracter de Declaracion Jurada</h6>
-                        <div class="row" style="margin-top:2%;">
-                            <div class="col s12">
-                                <h5>Lugar, Fecha y Hora: Cordoba ____ de ____________ de 20____, ___:___Hs.</h5>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:3%;margin-bottom:0%;">
-                            <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Alumno</p></div>
-                            <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Padre</p></div>
-                            <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Madre</p></div>
-                            <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Tutor</p></div>
-                        </div>
-                        <div class="row" style="border: black 2px solid;margin-top:3%;margin-bottom:3%;">
-                            <div class="col s12"><p align="center">ITS Villada: Camino a La Calera Km. 7½, B°Valle Escondido, C.P. X5023AAA, Cordoba Argentina.</p><p align="center">Direccion Web: http://www.itsv.edu.ar Telefonos: 0054-351-4841000 / 4848200</p></div>
-                        </div>
-                        <div class="" align="right" style="margin-bottom:2%;"> <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar e Imprimir Matricula</button></div>
+                <h5>Datos del Alumno:</h5>
+                <div class="row" style="margin-top:0%;border: black 2px solid;">
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Alumno: {{data.name.0}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Alumno:{{data.lastName.0}}</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.dni.0}}</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Sexo:{{data.sex.0}}</div>
+                    <div class="col s3" style="border-bottom: black 2px solid;">Religion:{{data.alumnoReligion}}</div>
+                    <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">{{data.photo.0}}.</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Fecha de Nacimiento:{{data.birthDate.0}}</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Lugar de Nacimiento:{{data.birthPlace.0}}</div>
+                    <div class="col s3" style="border-bottom: black 2px solid;">Nacionalidad:{{data.alumnoNacionalidad}}</div>
+                    <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.alumnoCalle}}</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.alumnoAltura}}</div>
+                    <div class="col s3" style="border-bottom: black 2px solid;">Barrio:{{data.alumnoBarrio}}</div>
+                    <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.alumnoTorre}}</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.alumnoPiso}}</div>
+                    <div class="col s3" style="border-bottom: black 2px solid;">Departamento:{{data.alumnoDepartamento}}</div>
+                    <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.alumnoPostal}}</div>
+                    <div class="col s3" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.alumnoLocalidad}}</div>
+                    <div class="col s3" style="border-bottom: black 2px solid;">Email:{{data.alumnoMail}}</div>
+                    <div class="col s3" style="border-left: black 2px solid;border-bottom: black 2px solid;">.</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.alumnoCel}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.alumnoFijo}}</div>
+                    <div class="col s4" style=""></div>
+                </div>
+                <h5>Datos del Padre:</h5>
+                <div class="row" style="margin-top:0%;border: black 2px solid;">
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Padre:{{data.padreNombre}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Padre:{{data.padreApellido}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.padreDni}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.padreCuil}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.padreTrabajo}}</div>
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nacionalidad:{{data.padreNacionalidad}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Profesion:{{data.padreProfesion}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.padreCalle}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.padreAltura}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Barrio:{{data.pareBarrio}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.padreTorre}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.padrePiso}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Departamento:{{data.padreDepartamento}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.padrePostal}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.padreLocalidad}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Email:{{data.padreMail}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.padreCel}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.padreFijo}}</div>
+                    <div class="col s4" style="">Tel.Laboral:{{data.padreLaboral}}</div>
+                </div>
+                <h5>Datos del Madre:</h5>
+                <div class="row" style="margin-top:0%;border: black 2px solid;">
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres de la Madre:{{data.madreNombre}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos de la Madre:{{data.madreApellido}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.madreDni}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.madreCuil}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.madreTrabajo}}</div>
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nacionalidad:{{data.madreNacionalidad}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Profesion:{{data.madreProfesion}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.madreCalle}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.madreAltura}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Barrio:{{data.madreBarrio}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.madreTorre}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.madrePiso}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Departamento:{{data.madreDepartamento}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.madrePostal}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.madreLocalidad}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Email:{{data.madreMail}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.madreCel}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.madreFijo}}</div>
+                    <div class="col s4" style="">Tel.Laboral:{{data.madreLaboral}}</div>
+                </div>
+                <h5>Datos del Tutor:</h5>
+                <div class="row" style="margin-top:0%;margin-bottom:0%;border: black 2px solid;">
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Tutor:{{data.tutorNombre}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Tutor:{{data.tutorApellido}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.tutorDni}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.tutorCuil}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.tutorTrabajo}}</div>
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nacionalidad:{{data.tutorNacionalidad}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Profesion:{{data.tutorProfesion}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Calle:{{data.tutorCalle}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Numero:{{data.tutorAltura}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Barrio:{{data.tutorBarrio}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Torre:{{data.tutorTorre}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Piso:{{data.tutorPiso}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Departamento:{{data.tutorDepartamento}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Codigo Postal:{{data.tutorPostal}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">Localidad:{{data.tutorLocalidad}}</div>
+                    <div class="col s4" style="border-bottom: black 2px solid;">Email:{{data.tutorMail}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Celular:{{data.tutorCel}}</div>
+                    <div class="col s4" style="border-right: black 2px solid;">Tel.Fijo:{{data.tutorFijo}}</div>
+                    <div class="col s4" style="">Tel.Laboral:{{data.tutorLaboral}}</div>
+                </div>
+                <h6>*Este Formulario se debe Completar, Firmar y entregar en Secretaria. Tiene caracter de Declaracion Jurada</h6>
+                <div class="row" style="margin-top:2%;">
+                    <div class="col s12">
+                        <h5>Lugar, Fecha y Hora: Cordoba ____ de ____________ de 20____, ___:___Hs.</h5>
                     </div>
                 </div>
+                <div class="row" style="margin-top:3%;margin-bottom:0%;">
+                    <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Alumno</p></div>
+                    <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Padre</p></div>
+                    <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Madre</p></div>
+                    <div class="col s3"><p align="center">_________________________</p><p align="center">Firma Tutor</p></div>
+                </div>
+                <div class="row" style="border: black 2px solid;margin-top:3%;margin-bottom:3%;">
+                    <div class="col s12"><p align="center">ITS Villada: Camino a La Calera Km. 7½, B°Valle Escondido, C.P. X5023AAA, Cordoba Argentina.</p><p align="center">Direccion Web: http://www.itsv.edu.ar Telefonos: 0054-351-4841000 / 4848200</p></div>
+                </div>
+                <div class="" align="right" style="margin-bottom:2%;"> <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar e Imprimir Matricula</button></div>
             </div>
         </div>
-
+        </div>
         <script>
 
             $('#submit_matricula').click(function submit(){

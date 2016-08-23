@@ -77,7 +77,7 @@ def editMatricula(request):
     if request.method=='GET':
         matid=request.GET['idMatricula']
         matricula = Registration.objects.get(pk=matid)
-        return render_to_response('edit_matricula.html',{'matricula':matricula},context)
+        return render_to_response('profile.html',{'matricula':matricula},context)
     if request.method=='POST':
         #print "POST"
         matid=request.POST['idmat']
@@ -794,12 +794,20 @@ def html2pdf(template_src, context_dict):
     context = Context(context_dict)
     html  = template.render(context)
     result = StringIO.StringIO()
+    filename = 'somefilename.pdf'
     print "render"
 
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result, filename)
     if not pdf.err:
         return HttpResponse(result.getvalue(),
             content_type='application/pdf')
+
+#CON ESTE CODIGO SE CAMBIA EL ARCHVIO DEL PDF DESCARGADO AUTOMATICAMENTE, PERO SE PIERDE EL PDF PREVIEW.
+        """response = HttpResponse(result.getvalue(), 
+            content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=Client_Summary.pdf'
+        return response"""
+
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
 def genpdf(request,id_matricula):
@@ -814,3 +822,7 @@ def genpdf(request,id_matricula):
         }
     )
     print "return"
+
+def profile(request):
+    context = RequestContext(request)
+    return render_to_response('profile.html',{},context)

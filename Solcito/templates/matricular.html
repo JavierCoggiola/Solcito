@@ -15,15 +15,13 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
-
         <!-- Morris Charts CSS -->
         <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
-
         <!-- Custom Fonts -->
         <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
         <style>
             @media(min-width:768px) {
                 .side-nav {
@@ -100,6 +98,9 @@
                 <ul class="nav navbar-right top-nav">
                     <li class="dropdown">
                         <a href="{% url 'Solcito:login' %}" ><i class="fa fa-user"></i> Iniciar Sesion</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{% url 'Solcito:profile' %}" ><i class="fa fa-user"></i>Perfil</a>
                     </li>
                 </ul>
                 <!-- /.navbar-collapse -->
@@ -189,7 +190,7 @@
                                     <h4>Nacimiento</h4>
                                     <div class="form-group">
                                         <label>Fecha de Nacimiento*</label>
-                                        <input id="inp-nacimiento-alumno" type="date"class="form-control" >
+                                        <input id="inp-nacimiento-alumno" type="date" class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label>Genero*</label>
@@ -546,10 +547,8 @@
         </div>
         <!-- jQuery -->
         <script src="{% static 'js/jquery.js' %}"></script>
-
         <!-- Bootstrap Core JavaScript -->
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
         <!-- Morris Charts JavaScript -->
         <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
         <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
@@ -824,10 +823,6 @@
                 return true;
             }
         }
-    
-
-
-
     </script>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -836,5 +831,3 @@
     </body>
 
 </html>
-
-

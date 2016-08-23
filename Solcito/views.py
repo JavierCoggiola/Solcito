@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from Solcito.forms import EditRegistrationForm
+from django.template.loader import render_to_string
 import logging
 #PDF
 import cStringIO as StringIO
@@ -172,6 +173,26 @@ def getFilter(request):
 @require_POST
 def confirmMatricula(request):
     context = RequestContext(request)
+    context['ninguno'] = True
+
+    '''try:
+        si = Student.objects.get(dni=request.POST['dni'])
+    except:
+        si = Student(preinscipt_status=0)'''
+
+    sf = StudentForm(request.POST)
+    if (sf.is_valid()):
+        sf.save()
+        rendered = render_to_string('gracias_mail.html')
+    else:
+        print ("Errorsito")
+        print (sf.errors)
+
+        context['student_form']=sf
+        return render_to_response('matricular.html',context)
+    return redirect('/')
+
+    #Ulises me dijo que no le de bola chamaco
     diccionario = dict(request.POST)
     for element in diccionario:
         if "father" in element:
@@ -182,8 +203,6 @@ def confirmMatricula(request):
             diccionario[element.replace("guardian-", "g")] = diccionario.pop(element)
         
     return render_to_response('dismatricula.html',{'data':diccionario},context)
-
-
 
 def submitMatricula(request):
     context = RequestContext(request)

@@ -69,7 +69,7 @@ class Student(models.Model):
             if img.count()>0:
                 return img.first()
         except Exception as e:
-            return None
+            return None 
     
 class Tutor (models.Model):
 

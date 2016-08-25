@@ -76,6 +76,7 @@ class GuardianForm(ModelForm):
     layout = Layout(
         Row(Span6('name'), Span6('lastName')),
         Row(Span4('email'), Span4('dni'), Span4('cuil')),
+        Row('locality' , 'nacionality'),
         Row(Span4('landline'), Span4('cellphone'), Span4('workPhone')),
         Row(Span6('profession'), Span6('workPlace')),
         Row(Span5('street'), Span5('neighborhood'), Span2('numberStreet')),

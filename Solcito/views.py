@@ -174,21 +174,26 @@ def getFilter(request):
 @require_POST
 def confirmMatricula(request):
     context = RequestContext(request)
-    context['ninguno'] = True
 
-    '''try:
-        si = Student.objects.get(dni=request.POST['dni'])
-    except:
-        si = Student(preinscipt_status=0)'''
     sf = StudentForm(request.POST)
     ff= GuardianForm(request.POST, prefix='father')
     mf= GuardianForm(request.POST, prefix='mother')
     gf= GuardianForm(request.POST, prefix='tutor')
+
     if (sf.is_valid()):
-        context['valid'] = "true"
+        print "SUCCESS WITH STUDENT"
+        if (ff.is_valid() or mf.is_valid() or gf.is_valid()):
+            print "SUCCESS WITH TUTORS"
+            context['valid'] = "true"
+        else:
+            print "ERRORSS!!!!!"
+            print (ff.errors)
+            print (mf.errors)
+            print (gf.errors)
     else:
         context['valid'] = "false"
         print (sf.errors)
+
     diccionario = dict(request.POST)
     for element in diccionario:
         if "father" in element:

@@ -87,6 +87,7 @@ def index(request):
     context['guardian_form']= GuardianForm(instance = tutor, prefix="guardian")
     return render_to_response('matricular.html',{},context)
 
+
 def editMatricula(request):
     
     student = Student()
@@ -179,20 +180,15 @@ def confirmMatricula(request):
         si = Student.objects.get(dni=request.POST['dni'])
     except:
         si = Student(preinscipt_status=0)'''
-
     sf = StudentForm(request.POST)
+    ff= GuardianForm(request.POST, prefix='father')
+    mf= GuardianForm(request.POST, prefix='mother')
+    gf= GuardianForm(request.POST, prefix='tutor')
     if (sf.is_valid()):
-        sf.save()
-        rendered = render_to_string('gracias_mail.html')
+        context['valid'] = "true"
     else:
-        print ("Errorsito")
+        context['valid'] = "false"
         print (sf.errors)
-
-        context['student_form']=sf
-        return render_to_response('matricular.html',context)
-    return redirect('/')
-
-    #Ulises me dijo que no le de bola chamaco
     diccionario = dict(request.POST)
     for element in diccionario:
         if "father" in element:
@@ -201,17 +197,68 @@ def confirmMatricula(request):
             diccionario[element.replace("mother-", "m")] = diccionario.pop(element)
         if "guardian" in element:
             diccionario[element.replace("guardian-", "g")] = diccionario.pop(element)
-        
-    return render_to_response('dismatricula.html',{'data':diccionario},context)
+
+
+    context['student_form']= sf
+    context['father_form']= ff
+    context['mother_form']= mf
+    context['guardian_form']= gf
+    return render_to_response('matricular.html',{'data':diccionario},context)
+
 
 def submitMatricula(request):
     context = RequestContext(request)
     if request.method=='POST':
-        #print "POST"
+        try:
+            si = Student.objects.get(dni=request.POST['dni'])
+        except:
+            si = Student()
+        try:
+            fi = Tutor.objects.get(dni=request.POST['father-dni'])
+        except:
+            fi = Tutor(rol='fat')
+        try:
+            mi = Tutor.objects.get(dni=request.POST['mother-dni'])
+        except:
+            mi = Tutor(rol='mot')
+        try:
+            ti = Tutor.objects.get(dni=request.POST['tutor-dni'])
+        except:
+            ti = Tutor(rol='tut')
+        sf = StudentForm(request.POST, instance=si)
+        ff= GuardianForm(request.POST, instance=fi, prefix='father')
+        mf= GuardianForm(request.POST, instance=mi, prefix='mother')
+        gf= GuardianForm(request.POST, instance=ti, prefix='tutor')
+        if (sf.is_valid() ):
+            sf.save()
+            ''''if ff.is_valid():
+                ff.save()
+                ff.instance.students.add(sf.instance)
+                ff.instance.save()
+                mails.append(ff.instance.email)
+            if mf.is_valid():                              and (ff.is_valid() or mf.is_valid() or gf.is_valid())
+                mf.save()
+                mf.instance.students.add(sf.instance)
+                mf.instance.save()
+                mails.append(mf.instance.email)
+            if gf.is_valid():
+                gf.save()
+                gf.instance.students.add(sf.instance)
+                gf.instance.save()
+                mails.append(gf.instance.email)'''
 
-        matricula.save()
-        idMat = matricula.idRegistration
-        return HttpResponse( idMat)
+            return render_to_response('matricula_success.html',{},context)
+
+        else:
+            print ("ERRORES!!!")
+            print (sf.errors)
+
+            context['student_form']= sf
+            context['father_form']= ff
+            context['mother_form']= mf
+            context['tutor_form']= gf
+            return render_to_response('matricular.html',{},context)
+
         #return render_to_response('matricula_success.html',{},context)
     return render_to_response('matricular_bug.html',{},context)
 

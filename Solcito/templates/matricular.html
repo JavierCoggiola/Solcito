@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Solcito</title>
+    <title>Solcito{{valid}}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
@@ -101,7 +101,7 @@
                 <div class="row">
                     <div class="col s12">
 
-                        <form action="{% url 'Solcito:confirm_matricula' %}" method="POST">
+                        <form action="{% url 'Solcito:confirm_matricula' %}" id="matForms" method="POST">
                             {% csrf_token %}
                             <div class="col s6">
                                 <h4 align="center">Datos del Alumno</h4>
@@ -156,6 +156,9 @@
             </div>
         </div>
     </div>
+    <div id="dismatricula">
+        {% include "dismatricula.html" %}
+    </div>
 </body>
 
 <!-- jQuery -->
@@ -175,6 +178,12 @@
         $('.collapsible').collapsible({
             accordion : false 
         });
+        if("{{valid}}"=="true"){
+            $('#formulario').hide();
+        }
+        else{
+            $('#dismatricula').hide();
+        }
     });
     
     $(document).ready(function() {

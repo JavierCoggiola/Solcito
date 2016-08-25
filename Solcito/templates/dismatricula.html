@@ -196,35 +196,19 @@
                 <div class="row" style="border: black 2px solid;margin-top:3%;margin-bottom:3%;">
                     <div class="col s12"><p align="center">ITS Villada: Camino a La Calera Km. 7½, B°Valle Escondido, C.P. X5023AAA, Cordoba Argentina.</p><p align="center">Direccion Web: http://www.itsv.edu.ar Telefonos: 0054-351-4841000 / 4848200</p></div>
                 </div>
-                <div class="" align="right" style="margin-bottom:2%;"> <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar e Imprimir Matricula</button></div>
+                <div class="" align="right" style="margin-bottom:2%;"><button id="edit_form" class="btn btn-primary btn-lg">Volver a editar formulario</button>
+                    <button id="submit_matricula" class="btn btn-primary btn-lg">Guardar e Imprimir Matricula</button></div>
             </div>
         </div>
            <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
             <script>
                 
-        $('#submit_matricula').click(function submit(){
-                var str = '{{data}}';
-                var str2 = str.replace(/&#39;/g, '"');
-                var str2 = str2.replace(/u/g, "");
-                var data = JSON.parse(str2);
-                for (var key in data){
-                    data[key] = data[key][0];
-
-                }
-                data["csrfmiddlewaretoken"]= "{{csrf_token}}";
-
-                $.ajax({
-                    type: "POST",
-                    url: "{% url 'Solcito:submit_matricula' %}",
-                    data:data,
-                    success: function(result){
-
-                        window.location = '/genpdf/'+result;
-                    },
-                    error: function(){
-                       // alert("Error");
-                    }
-                });
+            $('#submit_matricula').click(function submit(){
+                $('#matForms').attr('action', "{% url 'Solcito:submit_matricula' %}").submit();
+            });
+            $('#edit_form').click(function submit(){
+                $('#dismatricula').hide();
+                $('#formulario').show();
             });
 
         </script>

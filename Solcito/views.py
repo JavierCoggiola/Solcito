@@ -171,6 +171,7 @@ def getFilter(request):
 #        return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
 #
 #
+#https://github.com/eliluminado/esCUITValida/blob/master/esCUITValida.py
 @require_POST
 def confirmMatricula(request):
     context = RequestContext(request)
@@ -221,36 +222,28 @@ def submitMatricula(request):
         try:
             fi = Tutor.objects.get(dni=request.POST['father-dni'])
         except:
-            fi = Tutor(rol='fat')
+            fi = Tutor(rol=1)
         try:
             mi = Tutor.objects.get(dni=request.POST['mother-dni'])
         except:
-            mi = Tutor(rol='mot')
+            mi = Tutor(rol=2)
         try:
             ti = Tutor.objects.get(dni=request.POST['tutor-dni'])
         except:
-            ti = Tutor(rol='tut')
+            ti = Tutor(rol=3)
         sf = StudentForm(request.POST, instance=si)
         ff= GuardianForm(request.POST, instance=fi, prefix='father')
         mf= GuardianForm(request.POST, instance=mi, prefix='mother')
         gf= GuardianForm(request.POST, instance=ti, prefix='tutor')
         if (sf.is_valid() ):
             sf.save()
-            ''''if ff.is_valid():
+            if ff.is_valid():
                 ff.save()
-                ff.instance.students.add(sf.instance)
-                ff.instance.save()
-                mails.append(ff.instance.email)
-            if mf.is_valid():                              and (ff.is_valid() or mf.is_valid() or gf.is_valid())
+                
+            if mf.is_valid():
                 mf.save()
-                mf.instance.students.add(sf.instance)
-                mf.instance.save()
-                mails.append(mf.instance.email)
             if gf.is_valid():
                 gf.save()
-                gf.instance.students.add(sf.instance)
-                gf.instance.save()
-                mails.append(gf.instance.email)'''
 
             return render_to_response('matricula_success.html',{},context)
 

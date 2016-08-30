@@ -95,6 +95,9 @@ class Tutor (models.Model):
     cellphone = models.IntegerField(u'Celular', blank=True, null=True)
     workPhone = models.IntegerField(u'Telefono Laboral', blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 class Registration(models.Model):
     idRegistration = models.AutoField(primary_key=True, editable=False)
     studentFile = models.IntegerField(u'Student File', blank=True , null=True, default="")

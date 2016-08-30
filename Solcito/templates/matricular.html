@@ -4,240 +4,224 @@
 
 <html lang="es">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>Solcito{{valid}}</title>
+        <title>Solcito</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <!-- Bootstrap Core CSS -->
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-    <!-- Custom CSS -->
-    <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            @media(min-width:768px) {
+                .side-nav {
+                    position: fixed;
+                    top: 51px;
+                    left: 225px;
+                    width: 0px;
+                    margin-left: -225px;
+                    border: none;
+                    border-radius: 0;
+                    overflow-y: auto;
+                    background-color: #222;
+                    bottom: 0;
+                    overflow-x: hidden;
+                    padding-bottom: 40px;
+                }
 
-    <!-- Morris Charts CSS -->
-    <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
+                .side-nav>li>ul {
+                    padding: 0;
+                }
 
-    <!-- Custom Fonts -->
-    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        @media(min-width:768px) {
-            .side-nav {
-                position: fixed;
-                top: 51px;
-                left: 225px;
-                width: 0px;
-                margin-left: -225px;
-                border: none;
-                border-radius: 0;
-                overflow-y: auto;
-                background-color: #222;
-                bottom: 0;
-                overflow-x: hidden;
-                padding-bottom: 40px;
-            }
+                .side-nav>li>ul>li>a {
+                    display: block;
+                    padding: 10px 15px 10px 38px;
+                    text-decoration: none;
+                    color: #999;
+                }
 
-            .side-nav>li>a {
-                width: 225px;
-            }
+                .side-nav>li>ul>li>a:hover {
+                    color: #fff;
+                }
+                @media(min-width:768px) {
+                    #wrapper {
+                        padding-left: 0px;
+                    }
 
-            .side-nav li a:hover,
-            .side-nav li a:focus {
-                outline: none;
-                background-color: #000 !important;
-            }
-        }
-
-        .side-nav>li>ul {
-            padding: 0;
-        }
-
-        .side-nav>li>ul>li>a {
-            display: block;
-            padding: 10px 15px 10px 38px;
-            text-decoration: none;
-            color: #999;
-        }
-
-        .side-nav>li>ul>li>a:hover {
-            color: #fff;
-        }
-        @media(min-width:768px) {
-            #wrapper {
-                padding-left: 0px;
-            }
-
-            #page-wrapper {
-                padding: 0px;
-            }
-        }
+                    #page-wrapper {
+                        padding: 0px;
+                    }
+                }
 
 
-    </style>
-</head>
+        </style>
+    </head>
 
-<body>
-    <nav class="light-blue">
-        <div class="nav-wrapper" style="margin-left:10px;">
-            <a class="brand-logo" href="#"><i class="fa fa-sun-o">  Solcito - Gestion de Administracion</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="{% url 'Solcito:login' %}" ><i class="fa fa-user">  Iniciar Sesión</i></a></li>
-            </ul>
-        </div>
-    </nav>
+    <body>
+        <nav class="light-blue">
+            <div class="nav-wrapper" style="margin-left:10px;">
+                <a class="brand-logo" href="#"><i class="fa fa-sun-o">  Solcito - Gestion de Administracion</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% url 'Solcito:login' %}" ><i class="fa fa-user">  Iniciar Sesión</i></a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <div class="valign-wrapper" id="formulario">
+        <div class="valign-wrapper" id="formulario">
 
-        <!--Aca va lo nuestro-->
-        <div class="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col s12">
+            <!--Aca va lo nuestro-->
+            <div class="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col s12">
 
-                        <form action="{% url 'Solcito:confirm_matricula' %}" id="matForms" method="POST">
-                            {% csrf_token %}
-                            <div class="col s6">
-                                <h4 align="center">Datos del Alumno</h4>
-                                <br>
-                                {% form form=student_form %}{% endform %}
-                            </div>
-                            <div class="col s6">
-                                <h4 align="center">Datos de los Padres</h4>
-                                <br>
+                            <form action="{% url 'Solcito:confirm_matricula' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="col s6">
+                                    <h4 align="center">Datos del Alumno</h4>
+                                    <br>
+                                    {% form form=student_form %}{% endform %}
+                                </div>
+                                <div class="col s6">
+                                    <h4 align="center">Datos de los Padres</h4>
+                                    <br>
 
-                                <ul class="collapsible" data-collapsible="accordion">
-                                    <li>
-                                        <div class="collapsible-header active">Folmulario Padre</div>
-                                        <div class="collapsible-body">
+                                    <ul class="collapsible" data-collapsible="accordion">
+                                        <li>
+                                            <div class="collapsible-header active">Folmulario Padre</div>
+                                            <div class="collapsible-body">
 
-                                            <div class="panel-body">
-                                                {% form form=father_form %}{% endform %}
+                                                <div class="panel-body">
+                                                    {% form form=father_form %}{% endform %}
+                                                </div>
+
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="collapsible-header">Formulario Madre</div>
-                                        <div class="collapsible-body">
+                                        </li>
+                                        <li>
+                                            <div class="collapsible-header">Formulario Madre</div>
+                                            <div class="collapsible-body">
 
-                                            <div class="panel-body">
-                                                {% form form=mother_form %}{% endform %}
+                                                <div class="panel-body">
+                                                    {% form form=mother_form %}{% endform %}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="collapsible-header">Formulario Tutor</div>
-                                        <div class="collapsible-body">
-                                            <div class="panel-body">
-                                                {% form form=guardian_form %}{% endform %}
+                                        </li>
+                                        <li>
+                                            <div class="collapsible-header">Formulario Tutor</div>
+                                            <div class="collapsible-body">
+                                                <div class="panel-body">
+                                                    {% form form=guardian_form %}{% endform %}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col s12" align="right">
-                                <div class="panel-heading">
-                                    <div class="col s12" align="right">
-                                        <div class="panel-heading">
-                                            <input id="confirm_matricula" type="submit" value="Confirmar" class="btn btn-primary btn-lg">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col s12" align="right">
+                                    <div class="panel-heading">
+                                        <div class="col s12" align="right">
+                                            <div class="panel-heading">
+                                                <input id="confirm_matricula" type="submit" value="Confirmar" class="btn btn-primary btn-lg">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+
+                            <form action="{% url 'Solcito:confirm_matricula' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="col s6">
+                                    {% form form=photo_form %}{% endform %}
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="dismatricula">
-        {% include "dismatricula.html" %}
-    </div>
-</body>
+        <div id="dismatricula">
+            {% include "dismatricula.html" %}
+        </div>
+    </body>
 
-<!-- jQuery -->
-<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="{% static 'js/materialize.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/materialize.min.js' %}"></script>
 
-<!-- Morris Charts JavaScript -->
-<script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
-<script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
-<script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
+    <!-- Morris Charts JavaScript -->
+    <script>
 
-<script>
-
-    $(document).ready(function(){
-        $('.collapsible').collapsible({
-            accordion : false 
-        });
-        if("{{valid}}"=="true"){
-            $('#formulario').hide();
-        }
-        else{
-            $('#dismatricula').hide();
-        }
-    });
-    
-    $(document).ready(function() {
-        $('select').material_select();
-    });
-
-    /*previsualisacion de foto*/
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#alum').attr('src', e.target.result);
+        $(document).ready(function(){
+            if("{{valid}}"=="true"){
+                $('#formulario').hide();
+            }else{
+                $('#dismatricula').hide();
             }
-            reader.readAsDataURL(input.files[0]);
+
+            $('select').material_select();
+
+
+            $('.collapsible').collapsible({
+                accordion : false
+            });
+        });
+
+        /*previsualisacion de foto*/
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#alum').attr('src', e.target.result);
+                }
+            }
         }
-    }
+        
+        $('#photo').change(function(){
+            readURL(this);
+        });
 
-    $('#photo').change(function(){
-        readURL(this);
-    });
+        $("input[data-form-control='date']").pickadate({
+            // Strings and translations
+            monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Dicembre'],
+            monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
+            showMonthsShort: undefined,
+            showWeekdaysFull: undefined,
 
-    $('select').material_select();
-    $("input[data-form-control='date']").pickadate({
-        // Strings and translations
-        monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Dicembre'],
-        monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-        weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-        weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
-        showMonthsShort: undefined,
-        showWeekdaysFull: undefined,
+            // Buttons
+            today: 'Hoy',
+            clear: 'Borrar',
+            close: 'Cerrar',
 
-        // Buttons
-        today: 'Hoy',
-        clear: 'Borrar',
-        close: 'Cerrar',
+            // Accessibility labels
+            labelMonthNext: 'Mes siguiente',
+            labelMonthPrev: 'Mes anterior',
+            labelMonthSelect: 'Seleccione mes',
+            labelYearSelect: 'Selecciones año',
 
-        // Accessibility labels
-        labelMonthNext: 'Mes siguiente',
-        labelMonthPrev: 'Mes anterior',
-        labelMonthSelect: 'Seleccione mes',
-        labelYearSelect: 'Selecciones año',
+            formatSubmit: 'dd/mm/yyyy',
+            format: 'dd/mm/yyyy',
+            selectMonths: true,
+            selectYears: 100,
+            closeOnSelect: true,
+            max: true,
+            onSet: function(context) {
+                $('#id_birth_date').close();
+            }
+        });
 
-        formatSubmit: 'dd/mm/yyyy',
-        format: 'dd/mm/yyyy',
-        selectMonths: true,
-        selectYears: 100,
-        closeOnSelect: true,
-        max: true,
-        onSet: function(context) {
-            $('#id_birth_date').close();
-        }
-    });
 
-</script>
+    </script>
 </html>
-
-

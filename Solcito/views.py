@@ -245,7 +245,7 @@ def submitMatricula(request):
             if gf.is_valid():
                 gf.save()
 
-            return render_to_response('matricula_success.html',{},context)
+            return render_to_response('pdf.html',{},context)
 
         else:
             print ("ERRORES!!!")
@@ -273,15 +273,15 @@ def html2pdf(template_src, context_dict):
             content_type='application/pdf')
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
-def genpdf(request,id_matricula):
-    print id_matricula
-    registration = Registration.objects.get(pk=id_matricula)
+def genpdf(request,id_student):
+    print id_student
+    student = Student.objects.get(pk=id_student )
     #Retrieve data or whatever you need
     return html2pdf(
         'pdf.html',
         {
             'pagesize':'A4',
-            'matricula':registration
+            'matricula':student
         }
     )
     print "return"

@@ -235,7 +235,7 @@ def submitMatricula(request):
         ff= GuardianForm(request.POST, instance=fi, prefix='father')
         mf= GuardianForm(request.POST, instance=mi, prefix='mother')
         gf= GuardianForm(request.POST, instance=ti, prefix='tutor')
-        if (sf.is_valid() ):
+        if (sf.is_valid()):
             sf.save()
             if ff.is_valid():
                 ff.save()
@@ -243,8 +243,8 @@ def submitMatricula(request):
                 mf.save()
             if gf.is_valid():
                 gf.save()
-
-            return render_to_response('matricula_success.html',{},context)
+            student = Student.objects.get(dni=request.POST['dni'])
+            return redirect('/genpdf/'+str(student.pk))
 
         else:
             print ("ERRORES!!!")
@@ -272,15 +272,16 @@ def html2pdf(template_src, context_dict):
             content_type='application/pdf')
     return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
-def genpdf(request,id_matricula):
-    print id_matricula
-    registration = Registration.objects.get(pk=id_matricula)
+def genpdf(request,id_student):
+    print "ARG"
+    print id_student
+    student = Student.objects.get(pk=id_student)
     #Retrieve data or whatever you need
     return html2pdf(
         'pdf.html',
         {
             'pagesize':'A4',
-            'matricula':registration
+            'student':student
         }
     )
     print "return"

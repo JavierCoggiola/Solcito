@@ -139,8 +139,8 @@
                 </div>
                 <h5>Datos del Madre:</h5>
                 <div class="row" style="margin-top:0%;border: black 2px solid;">
-                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Padre:{{data.mname.0}}</div>
-                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Padre:{{data.mlastName.0}}</div>
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Madre:{{data.mname.0}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Madre:{{data.mlastName.0}}</div>
                     <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.mdni.0}}</div>
                     <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.mcuil.0}}</div>
                     <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.fworkPlace.0}}</div>
@@ -161,8 +161,8 @@
                 </div>
                 <h5>Datos del Tutor:</h5>
                 <div class="row" style="margin-top:0%;border: black 2px solid;">
-                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Padre:{{data.gname.0}}</div>
-                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Padre:{{data.glastName.0}}</div>
+                    <div class="col s6" style="border-right: black 2px solid;border-bottom: black 2px solid;">Nombres del Tutor:{{data.gname.0}}</div>
+                    <div class="col s6" style="border-bottom: black 2px solid;">Apellidos del Tutor:{{data.glastName.0}}</div>
                     <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">DNI:{{data.gdni.0}}</div>
                     <div class="col s4" style="border-right: black 2px solid;border-bottom: black 2px solid;">CUIL:{{data.gcuil.0}}</div>
                     <div class="col s4" style="border-bottom: black 2px solid;">Lugar de Trabajo:{{data.gworkPlace.0}}</div>
@@ -202,7 +202,7 @@
         </div>
            <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
             <script>
-                
+
             $('#submit_matricula').click(function submit(){
                 $('#matForms').attr('action', "{% url 'Solcito:submit_matricula' %}").submit();
             });

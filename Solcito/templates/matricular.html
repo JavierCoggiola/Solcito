@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Solcito{{valid}}</title>
+    <title>Solcito</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
@@ -176,7 +176,7 @@
 
     $(document).ready(function(){
         $('.collapsible').collapsible({
-            accordion : false 
+            accordion : false
         });
         if("{{valid}}"=="true"){
             $('#formulario').hide();
@@ -185,7 +185,7 @@
             $('#dismatricula').hide();
         }
     });
-    
+
     $(document).ready(function() {
         $('select').material_select();
     });
@@ -239,5 +239,3 @@
 
 </script>
 </html>
-
-

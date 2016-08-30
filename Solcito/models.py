@@ -58,6 +58,8 @@ class Student(models.Model):
     email = models.CharField(u'Email', max_length=50, blank=False)
     landline = models.IntegerField(u'Telefono', blank=False)
     cellphone = models.IntegerField(u'Celular', blank=True, null=True, default="")
+    photo = models.FileField(u'Photo', upload_to="photos/", default='null')
+
 
     def __str__(self):
         return self.name

@@ -1,7 +1,7 @@
  # -*- coding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
-from Solcito.models import Registration, Student, Tutor
+from Solcito.models import Registration, Student, Tutor, Imagen
 from django.forms.utils import ErrorList
 from material import *
 
@@ -111,3 +111,9 @@ class GuardianForm(ModelForm):
     class Meta:
         model = Tutor
         exclude = ('students','rol')
+        
+class PhotoForm(ModelForm):
+    
+    class Meta:
+        model = Imagen
+        fields = ('photo',)

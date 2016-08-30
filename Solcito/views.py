@@ -21,7 +21,7 @@ from django.template import Context
 from django.http import HttpResponse
 from cgi import escape
 
-from .forms import StudentForm, GuardianForm
+from .forms import StudentForm, GuardianForm, PhotoForm
 
 logger = logging.getLogger('django')
 
@@ -81,10 +81,12 @@ def index(request):
     father = Tutor()
     mother = Tutor()
     tutor = Tutor()
+    photo = Imagen()
     context['student_form']= StudentForm(instance = student)
     context['father_form']= GuardianForm(instance = father, prefix="father")
     context['mother_form']= GuardianForm(instance = mother, prefix="mother")
     context['guardian_form']= GuardianForm(instance = tutor, prefix="guardian")
+    context['photo_form']= PhotoForm(instance = photo, prefix="photo")
     return render_to_response('matricular.html',{},context)
 
 def editMatricula(request):
@@ -189,6 +191,18 @@ def confirmMatricula(request):
         print (sf.errors)
 
         context['student_form']=sf
+        return render_to_response('matricular.html',context)
+    return redirect('/')
+
+    pf = PhotoForm(request.POST)
+    if (pf.is_valid()):
+        pf.save()
+        rendered = render_to_string('gracias_mail.html')
+    else:
+        print ("Error al cargar foto")
+        print (pf.errors)
+
+        context['photo_form']=pf
         return render_to_response('matricular.html',context)
     return redirect('/')
 

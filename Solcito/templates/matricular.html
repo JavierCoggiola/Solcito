@@ -18,12 +18,6 @@
         <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-        <!-- Custom CSS -->
-        <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="{% static 'css/plugins/morris.css' %}" rel="stylesheet">
-
         <!-- Custom Fonts -->
         <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -44,40 +38,29 @@
                     padding-bottom: 40px;
                 }
 
-                .side-nav>li>a {
-                    width: 225px;
+                .side-nav>li>ul {
+                    padding: 0;
                 }
 
-                .side-nav li a:hover,
-                .side-nav li a:focus {
-                    outline: none;
-                    background-color: #000 !important;
-                }
-            }
-
-            .side-nav>li>ul {
-                padding: 0;
-            }
-
-            .side-nav>li>ul>li>a {
-                display: block;
-                padding: 10px 15px 10px 38px;
-                text-decoration: none;
-                color: #999;
-            }
-
-            .side-nav>li>ul>li>a:hover {
-                color: #fff;
-            }
-            @media(min-width:768px) {
-                #wrapper {
-                    padding-left: 0px;
+                .side-nav>li>ul>li>a {
+                    display: block;
+                    padding: 10px 15px 10px 38px;
+                    text-decoration: none;
+                    color: #999;
                 }
 
-                #page-wrapper {
-                    padding: 0px;
+                .side-nav>li>ul>li>a:hover {
+                    color: #fff;
                 }
-            }
+                @media(min-width:768px) {
+                    #wrapper {
+                        padding-left: 0px;
+                    }
+
+                    #page-wrapper {
+                        padding: 0px;
+                    }
+                }
 
 
         </style>
@@ -177,30 +160,23 @@
     <script src="{% static 'js/materialize.min.js' %}"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="{% static 'js/plugins/morris/raphael.min.js' %}"></script>
-    <script src="{% static 'js/plugins/morris/morris.min.js' %}"></script>
-    <script src="{% static 'js/plugins/morris/morris-data.js' %}"></script>
-
     <script>
 
-
         $(document).ready(function(){
-            $('.collapsible').collapsible({
-                accordion : false 
-            });
-
             if("{{valid}}"=="true"){
                 $('#formulario').hide();
-            }
-            else{
+            }else{
                 $('#dismatricula').hide();
             }
-            
+
+            $('select').material_select();
+
+
+            $('.collapsible').collapsible({
+                accordion : false
+            });
         });
 
-        $(document).ready(function() {
-            $('select').material_select();
-        });
         /*previsualisacion de foto*/
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -208,9 +184,9 @@
                 reader.onload = function (e) {
                     $('#alum').attr('src', e.target.result);
                 }
-                reader.readAsDataURL(input.files[0]);
             }
         }
+        
         $('#photo').change(function(){
             readURL(this);
         });
@@ -246,7 +222,6 @@
             }
         });
 
+
     </script>
 </html>
-
-

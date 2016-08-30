@@ -21,7 +21,7 @@ from django.template import Context
 from django.http import HttpResponse
 from cgi import escape
 
-from .forms import StudentForm, GuardianForm, PhotoForm
+from .forms import StudentForm, GuardianForm
 
 logger = logging.getLogger('django')
 
@@ -81,21 +81,19 @@ def index(request):
     father = Tutor()
     mother = Tutor()
     tutor = Tutor()
-    photo = Imagen()
     context['student_form']= StudentForm(instance = student)
     context['father_form']= GuardianForm(instance = father, prefix="father")
     context['mother_form']= GuardianForm(instance = mother, prefix="mother")
-    context['guardian_form']= GuardianForm(instance = tutor, prefix="guardian")
-    context['photo_form']= PhotoForm(instance = photo, prefix="photo")
+    context['guardian_form']= GuardianForm(instance = tutor, prefix="tutor")
     return render_to_response('matricular.html',{},context)
 
 
 def editMatricula(request):
-    
+
     student = Student()
     args = {}
     context = RequestContext(request)
-        
+
     if request.method == 'POST':
         print "SI ES UN METODO POST"
         form = EditRegistrationForm(request.POST, request.FILES,
@@ -119,7 +117,7 @@ def getFilter(request):
 #@login_required(login_url='/login/')
 #def search(request):
 #    context = RequestContext(request)
-#    if request.method=='GET':
+#    if request.method=='GET'
 #        nombreA=request.GET['nombre']
 #        apellidoA=request.GET['apellido']
 #        dniA=request.GET['dni']
@@ -189,6 +187,7 @@ def confirmMatricula(request):
             print "SUCCESS WITH TUTORS"
             context['valid'] = "true"
         else:
+            context['valid'] = "false"
             print "ERRORSS!!!!!"
             print (ff.errors)
             print (mf.errors)
@@ -203,8 +202,8 @@ def confirmMatricula(request):
             diccionario[element.replace("father-", "f")] = diccionario.pop(element)
         if "mother" in element:
             diccionario[element.replace("mother-", "m")] = diccionario.pop(element)
-        if "guardian" in element:
-            diccionario[element.replace("guardian-", "g")] = diccionario.pop(element)
+        if "tutor" in element:
+            diccionario[element.replace("tutor-", "g")] = diccionario.pop(element)
 
 
     context['student_form']= sf

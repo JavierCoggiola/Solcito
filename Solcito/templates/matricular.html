@@ -120,6 +120,7 @@
                                                 <div class="panel-body">
                                                     {% form form=father_form %}{% endform %}
                                                 </div>
+
                                             </div>
                                         </li>
                                         <li>
@@ -151,7 +152,7 @@
                                     </div>
                                 </div>
                             </form>
-                            
+
                             <form action="{% url 'Solcito:confirm_matricula' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="col s6">
@@ -163,6 +164,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="dismatricula">
+            {% include "dismatricula.html" %}
         </div>
     </body>
 
@@ -179,16 +183,24 @@
 
     <script>
 
+
         $(document).ready(function(){
             $('.collapsible').collapsible({
                 accordion : false 
             });
+
+            if("{{valid}}"=="true"){
+                $('#formulario').hide();
+            }
+            else{
+                $('#dismatricula').hide();
+            }
+            
         });
 
         $(document).ready(function() {
             $('select').material_select();
         });
-
         /*previsualisacion de foto*/
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -199,12 +211,10 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         $('#photo').change(function(){
             readURL(this);
         });
 
-        $('select').material_select();
         $("input[data-form-control='date']").pickadate({
             // Strings and translations
             monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Dicembre'],

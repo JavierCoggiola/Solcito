@@ -89,6 +89,7 @@ def index(request):
     context['photo_form']= PhotoForm(instance = photo, prefix="photo")
     return render_to_response('matricular.html',{},context)
 
+
 def editMatricula(request):
     
     student = Student()
@@ -172,41 +173,30 @@ def getFilter(request):
 #        return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
 #
 #
+#https://github.com/eliluminado/esCUITValida/blob/master/esCUITValida.py
 @require_POST
 def confirmMatricula(request):
     context = RequestContext(request)
-    context['ninguno'] = True
-
-    '''try:
-        si = Student.objects.get(dni=request.POST['dni'])
-    except:
-        si = Student(preinscipt_status=0)'''
 
     sf = StudentForm(request.POST)
+    ff= GuardianForm(request.POST, prefix='father')
+    mf= GuardianForm(request.POST, prefix='mother')
+    gf= GuardianForm(request.POST, prefix='tutor')
+
     if (sf.is_valid()):
-        sf.save()
-        rendered = render_to_string('gracias_mail.html')
+        print "SUCCESS WITH STUDENT"
+        if (ff.is_valid() or mf.is_valid() or gf.is_valid()):
+            print "SUCCESS WITH TUTORS"
+            context['valid'] = "true"
+        else:
+            print "ERRORSS!!!!!"
+            print (ff.errors)
+            print (mf.errors)
+            print (gf.errors)
     else:
-        print ("Errorsito")
+        context['valid'] = "false"
         print (sf.errors)
 
-        context['student_form']=sf
-        return render_to_response('matricular.html',context)
-    return redirect('/')
-
-    pf = PhotoForm(request.POST)
-    if (pf.is_valid()):
-        pf.save()
-        rendered = render_to_string('gracias_mail.html')
-    else:
-        print ("Error al cargar foto")
-        print (pf.errors)
-
-        context['photo_form']=pf
-        return render_to_response('matricular.html',context)
-    return redirect('/')
-
-    #Ulises me dijo que no le de bola chamaco
     diccionario = dict(request.POST)
     for element in diccionario:
         if "father" in element:
@@ -215,17 +205,58 @@ def confirmMatricula(request):
             diccionario[element.replace("mother-", "m")] = diccionario.pop(element)
         if "guardian" in element:
             diccionario[element.replace("guardian-", "g")] = diccionario.pop(element)
-        
-    return render_to_response('dismatricula.html',{'data':diccionario},context)
+
+
+    context['student_form']= sf
+    context['father_form']= ff
+    context['mother_form']= mf
+    context['guardian_form']= gf
+    return render_to_response('matricular.html',{'data':diccionario},context)
 
 def submitMatricula(request):
     context = RequestContext(request)
     if request.method=='POST':
-        #print "POST"
+        try:
+            si = Student.objects.get(dni=request.POST['dni'])
+        except:
+            si = Student()
+        try:
+            fi = Tutor.objects.get(dni=request.POST['father-dni'])
+        except:
+            fi = Tutor(rol=1)
+        try:
+            mi = Tutor.objects.get(dni=request.POST['mother-dni'])
+        except:
+            mi = Tutor(rol=2)
+        try:
+            ti = Tutor.objects.get(dni=request.POST['tutor-dni'])
+        except:
+            ti = Tutor(rol=3)
+        sf = StudentForm(request.POST, instance=si)
+        ff= GuardianForm(request.POST, instance=fi, prefix='father')
+        mf= GuardianForm(request.POST, instance=mi, prefix='mother')
+        gf= GuardianForm(request.POST, instance=ti, prefix='tutor')
+        if (sf.is_valid() ):
+            sf.save()
+            if ff.is_valid():
+                ff.save()
+            if mf.is_valid():
+                mf.save()
+            if gf.is_valid():
+                gf.save()
 
-        matricula.save()
-        idMat = matricula.idRegistration
-        return HttpResponse( idMat)
+            return render_to_response('matricula_success.html',{},context)
+
+        else:
+            print ("ERRORES!!!")
+            print (sf.errors)
+
+            context['student_form']= sf
+            context['father_form']= ff
+            context['mother_form']= mf
+            context['tutor_form']= gf
+            return render_to_response('matricular.html',{},context)
+
         #return render_to_response('matricula_success.html',{},context)
     return render_to_response('matricular_bug.html',{},context)
 

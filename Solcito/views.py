@@ -212,6 +212,7 @@ def confirmMatricula(request):
     return render_to_response('matricular.html',{'data':diccionario},context)
 
 def submitMatricula(request):
+    print "HOALLALGALALALLALL"
     context = RequestContext(request)
     if request.method=='POST':
         try:

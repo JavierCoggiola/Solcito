@@ -110,6 +110,10 @@ def getFilter(request):
     context = RequestContext(request)
     return render_to_response('buscador.html',{},context)
 
+def perfil(request):
+    context = RequestContext(request)
+    return render_to_response('profile.html',{},context)
+
 @login_required(login_url='/login/')
 def search(request):
     context = RequestContext(request)

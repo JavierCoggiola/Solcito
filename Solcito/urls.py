@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^subirphoto/$', views.subirPhoto, name='subirPhoto'),
     url(r'^genpdf/(?P<id_student>[0-9]+)/$', views.genpdf, name="genpdf"),
     url(r'^confirm_matricula/$', views.confirmMatricula, name='confirm_matricula'),
+    url(r'^perfil/$', views.perfil, name='perfil'),
 ]#(?P<id_student>[0-9]+)/$

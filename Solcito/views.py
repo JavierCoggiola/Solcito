@@ -119,6 +119,7 @@ def filterPers (request):
 def search(request):
     context = RequestContext(request)
     if request.method=='GET':
+        print 'aca'
         nombreA=request.GET['nombre']
         apellidoA=request.GET['apellido']
         dniA=request.GET['dni']
@@ -132,6 +133,7 @@ def search(request):
         apellidoP=request.GET['apellidoPadre']
         active=request.GET['activo']
         matriculas = Registration.objects.all()
+        print "mat"
         # Vamos filtrando por cada campo que el usuario completo
         if nombreA != "":
             matriculas = matriculas.filter(nameStudent__iexact=nombreA)
@@ -166,6 +168,7 @@ def search(request):
         if apellidoP != "":
             matriculas = matriculas.filter(lastNameFather__iexact=apellidoP)
             #print matriculas
+        print 'asa'
         #De todas las matriculas del alumno muestra la activa
         if active == "true":
             matriculas = matriculas.filter(isActive=active)

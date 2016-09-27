@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col s12">
 
-                            <form action="{% url 'Solcito:confirm_matricula' %}" method="POST">
+                            <form action="{% url 'Solcito:confirm_matricula' %}" method="POST" id="matForms">
                                 {% csrf_token %}
                                 <div class="col s6">
                                     <h4 align="center">Datos del Alumno</h4>

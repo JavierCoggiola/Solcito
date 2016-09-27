@@ -116,16 +116,5 @@ class Imagen (models.Model):
     photo = models.FileField(u'Photo', upload_to="photos/", default='null')
 
     def __str__(self):
-        #return "<a href='/photos/{}'>{}</a>".format(self.photo, self.photo)
         return  "<img src='/photos/{}' style='width:100px; height:100px;'/>".format(self.photo)
-        #<img id='alum' src="{% static 'images/up.jpg' %}" alt='Foto alumno' style='width:200px; height:240px;margin-left:3%;'/>
-
-    #def get_nombre(self):
-    #   try:
-    #        name = "photos/{}-{}-{}".format(self.nameStudent,self.lastNameStudent,self.dniStudent)
-    #        alum = Registration.objects.filter(nameStudent = name)
-    #        if img.count()>0:
-    #            return img.first()
-    #    except Exception as e:
-    #        return None
 

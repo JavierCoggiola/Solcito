@@ -110,11 +110,18 @@ def getFilter(request):
     context = RequestContext(request)
     return render_to_response('buscador.html',{},context)
 
+<<<<<<< HEAD
 def perfil(request):
     context = RequestContext(request)
     return render_to_response('profile.html',{},context)
 
 @login_required(login_url='/login/')
+=======
+def filterPers (request):
+    context = RequestContext(request)
+    return render_to_response('filterPers.html', context)
+
+>>>>>>> 585bcd901a9c54f35b900158a698673c83617068
 def search(request):
     context = RequestContext(request)
     if request.method=='GET':
@@ -169,6 +176,11 @@ def search(request):
         if active == "true":
             matriculas = matriculas.filter(isActive=active)
         return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 585bcd901a9c54f35b900158a698673c83617068
 #https://github.com/eliluminado/esCUITValida/blob/master/esCUITValida.py
 
 @require_POST

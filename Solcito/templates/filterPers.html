@@ -1,0 +1,141 @@
+{% load static %}
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Solcito - Búsqueda</title>
+
+        <!-- Materialize Core CSS -->
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div class="navbar-fixed row">
+                <nav class="nav-wrapper light-blue">
+                    <div class="col s1">
+                        <img alt="" class="responsive-img" src="../static/img/sunlogo.png">
+                    </div>
+                    <div class="col s11" align="right">
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="{% url 'Solcito:solcito' %}"><i class="fa fa-fw fa-group"></i> Alumnos</a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-reorder"></i> Reporte Personalizada</a></li>
+                            <li><a href="{% url 'Solcito:logout' %}" ><i class="fa fa-sign-out"></i> Salir</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            
+            <div id="wrapper">
+                <div class="row">
+                    <div class="col s12">
+                        <h4 class="page-header">
+                            Búsqueda:
+                        </h4>
+                    </div>
+                    
+                    <div class="col s12">
+                        <div class="col s2">
+                            <label>Curso</label>
+                            <select id="sCurso">
+                                <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
+                                    <option> <a></a></option>
+                                    <option> <a>1</a></option>
+                                    <option> <a>2</a></option>
+                                    <option> <a>3</a></option>
+                                    <option> <a>4</a></option>
+                                    <option> <a>5</a></option>
+                                    <option> <a>6</a></option>
+                                    <option> <a>7</a></option>
+                                </ul>
+                            </select>
+                        </div>
+                        <div class="col s2">
+                            <label>Division</label>
+                            <select id="sDivision">
+                                <ul style="font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;">
+                                    <option> <a></a></option>
+                                    <option> <a>A</a></option>
+                                    <option> <a>B</a></option>
+                                    <option> <a>C</a></option>
+                                </ul>
+                            </select>
+                        </div>
+                        <div class="col s2">
+                            <button id="search" class="btn btn-default">Buscar Alumno</button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="list">
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+
+        <!-- Materialize Core JavaScript -->
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+
+        <script>
+            $('#search').click(function search(){
+                var data = {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    nombre : $('#sNombre').val(),
+                    apellido : $('#sApellido').val(),
+                    dni : $('#sDNI').val(),
+                    curso : $('#sCurso').val(),
+                    especialidad : $('#sEspecialidad').val(),
+                    matricula : $('#sMatricula').val(),
+                    legajo : $('#sLegajo').val(),
+                    nombreMadre : $('#sNombreMadre').val(),
+                    apellidoMadre : $('#sApellidoMadre').val(),
+                    nombrePadre : $('#sNombrePadre').val(),
+                    apellidoPadre : $('#sApellidoPadre').val(),
+                    activo : $('#isActive').is(':checked'),
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'Solcito:search_student' %}",
+                    data:data,
+                    success: function(result){
+                        $('#list').html(result);
+                    },
+                    error: function(){
+                        alert("Error");
+                    }
+                });
+            });
+
+            function getMatricula(idMatricula){
+                var data = {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    idMatricula : idMatricula,
+                }
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'Solcito:edit_matricula' %}",
+                    data:data,
+                    success: function(result){
+                        $('#wrapper').html(result);
+                    },
+                    error: function(){
+                        alert("Error");
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

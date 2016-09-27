@@ -14,11 +14,10 @@ from ITSGestion.settings import MEDIA_ROOT
 # Create your models here.
 
 sex = (
-    ("M", "Male"),
-    ("F", "Female"),
-    ("O", "Other"),
+    ("M", "Masculino"),
+    ("F", "Femenino"),
+    ("O", "Otro")
 )
-
 religion = (
     ("cat", "Catolicismo"),
     ("mus", "Islamismo"),
@@ -30,13 +29,56 @@ religion = (
     ("agn", "Agnosticismo"),
     ("otr", "Other")
 )
-
 rol = (
     ("fat", "Father"),
     ("mot", "Mother"),
-    ("tut", "Tutor"),
+    ("tut", "Tutor")
 )
-
+curso = (
+    ('1',"Primero"),
+    ('2',"Segundo"),
+    ('3',"Tercero"),
+    ('4',"Cuarto"),
+    ('5',"Quinto"),
+    ('6',"Secxtoo"),
+    ('7',"Septimo")
+)
+division = (
+    ('A',"A"),
+    ('B',"B"),
+    ('C',"C")
+)
+nota = (
+    ('1',"1"),
+    ('2',"2"),
+    ('3',"3"),
+    ('4',"4"),
+    ('5',"5"),
+    ('6',"6"),
+    ('7',"7"),
+    ('8',"8"),
+    ('9',"9"),
+    ('10',"10")
+)
+trim = (
+    ('1',"Primer Trimestre"),
+    ('2',"Segundo Trimestre"),
+    ('3',"Tercer Trimestre")
+)   
+falta = (
+    ("1", 1),
+    ("1/2", 0.5),
+    ("1/4", 0.25)
+)
+sancion = (
+    ("obser","Observacion"),
+    ("amone","Amonestacion")
+)   
+teacher = (
+    ("teacher","Profesor"),
+    ("celador","Preceptor")
+)
+    
 class Student(models.Model):
     idStudent = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
@@ -58,21 +100,74 @@ class Student(models.Model):
     email = models.CharField(u'Email', max_length=50, blank=False)
     landline = models.IntegerField(u'Telefono', blank=False)
     cellphone = models.IntegerField(u'Celular', blank=True, null=True, default="")
-    photo = models.FileField(u'Photo', upload_to="photos/", default='null')
+    
+    studentId = models.IntegerField(u'Legajo de Alumno', blank=True , null=True, default="")
+    administrativeId = models.IntegerField(u'Legajo Administrativo', blank=True , null=True, default="")
+    previousSchool = models.CharField(u'Previous School', max_length=50, blank=True, null=True, default="")
+    qDueSubjects = models.IntegerField(u'Due Subjects', blank=True, null=True, default="")
 
 
     def __str__(self):
         return self.name
+
+class RegistrationS(models.Model):
+    idRegistrationS = models.AutoField(primary_key=True, editable=False)
+    activeDate = models.DateField(u'Fecha de Alta', blank=False)
+    desactiveDate = models.DateField(u'Fecha de Baja', blank=False)
+    student = models.ForeignKey('Student', related_name='ownerregistration')
+    curso = models.ForeignKey('Curso', related_name='curso')
+    marks = models.ForeignKey('Marks', related_name='marks')
+
+class Assistance(models.Model):
+    idAssistance = models.AutoField(primary_key=True, editable=False)
+    date = models.DateField(u'Fecha', blank=False)
+    tipo = models.FloatField(u'Tipo de Falta', choices=falta, blank=False)
+    justify = models.BooleanField(u'Justificada', default=False)
+    reg = models.ForeignKey('RegistrationS', related_name='ofReg')
     
-    def get_foto(self):
-        try:
-            name = "photos/{}-{}-{}".format(self.name,self.lastName,self.dni)
-            img = Imagen.objects.filter(photo__startswith = name)
-            if img.count()>0:
-                return img.first()
-        except Exception as e:
-            return None 
+class Discipline(models.Model):
+    idDiscipline = models.AutoField(primary_key=True, editable=False)
+    sancion = model.CharField(u'Sancion', choices=sancion, blank=False)
+    cant = model.IntegerField(u'Cantidad', default='1', blank False)
+    reg = models.ForeignKey('RegistrationS', related_name='ofReg')
+
     
+class Curso(models.Model):
+    idCurso = models.AutoField(primary_key=True, editable=False)
+    curso = models.CharField(u'Curso', max_length=1, choices=curso, default='1', blank=False)
+    division = models.CharField(u'Division', max_length=1, choices=division, default='A', blank=False)
+    cycle = models.IntegerField(u'Ciclo Lectivo', max_length=4, default='2016', blank=False)
+        
+class Marks(models.Model):
+    idMark = models.AutoField(primary_key=True, editable=False)
+    nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)
+    trim = models.CharField(u'Trim', max_length=1, choices=trim, blank=False)
+    student = models.ForeignKey('Student', related_name='ownermark')
+    subject = models.ForeignKey('Subject', related_name='insubject')
+        
+class Subject(model.Model):
+    idSubject = models.AutoField(primary_key=True, editable=False)
+    isRedondeable = models.BooleanField(u'Se redondea', default=False)
+    name = models.CharField(u'Nombre', max_length=50, blank=False)
+    curso = models.ForeignKey('Curso', related_name='curso')
+        
+class RegistrationD(models.Model):
+    idRegistrationD = models.AutoField(primary_key=True, editable=False)        
+    activeDate = models.DateField(u'Fecha de Alta', blank=False)
+    desactiveDate = models.DateField(u'Fecha de Baja', blank=False)
+    isSustitute = models.BooleanField(u'Titular/Suplente', default=False)
+    subject = models.ForeignKey('Subject', related_name='insubject')
+    teacher = models.ForeignKey('Teacher', related_name='ownerregistration')
+        
+class Teacher(models.Model):
+    idteacher = models.AutoField(primary_key=True, editable=False)
+    name = models.CharField(u'Nombre', max_length=50, blank=False)
+    lastName = models.CharField(u'Apellido', max_length=50, blank=False)
+    dni = models.IntegerField(u'DNI', blank=False)
+    email = models.CharField(u'Email', max_length=50, blank=False)
+    cellphone = models.IntegerField(u'Celular', blank=True, null=True, default="")
+    tipo = models.CharField(u'Rol', choices=teacher, default='teacher', blank=False)
+
 class Tutor (models.Model):
 
     idTutor = models.AutoField(primary_key=True, editable=False)
@@ -98,23 +193,4 @@ class Tutor (models.Model):
     workPhone = models.IntegerField(u'Telefono Laboral', blank=True, null=True)
 
     def __str__(self):
-        return self.name
-
-class Registration(models.Model):
-    idRegistration = models.AutoField(primary_key=True, editable=False)
-    studentFile = models.IntegerField(u'Student File', blank=True , null=True, default="")
-    administrativeFile = models.IntegerField(u'Administrative File', blank=True , null=True, default="")
-    grade = models.IntegerField(u'Grade', blank=True , null=True, default="")
-    division = models.CharField(u'Division', max_length=1, blank=True , null=True, default="")
-    previousSchool = models.CharField(u'Previous School', max_length=50, blank=True, null=True, default="")
-    qDueSubjects = models.IntegerField(u'Due Subjects', blank=True, null=True, default="")
-    isActive = models.BooleanField(u'Active Registration', default=True, blank=True)
-    student = models.ForeignKey('Student', related_name='ownerregistration')
-
-class Imagen (models.Model):
-
-    photo = models.FileField(u'Photo', upload_to="photos/", default='null')
-
-    def __str__(self):
-        return  "<img src='/photos/{}' style='width:100px; height:100px;'/>".format(self.photo)
-
+        return self.name 

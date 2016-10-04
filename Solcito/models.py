@@ -100,7 +100,8 @@ class Student(models.Model):
     email = models.CharField(u'Email', max_length=50, blank=False)
     landline = models.IntegerField(u'Telefono', blank=False)
     cellphone = models.IntegerField(u'Celular', blank=True, null=True, default="")
-    
+    curso = models.CharField(u'Curso a Matricular', max_length=1, choices=curso, default='1', blank=False)
+
     studentId = models.IntegerField(u'Legajo de Alumno', blank=True , null=True, default="")
     administrativeId = models.IntegerField(u'Legajo Administrativo', blank=True , null=True, default="")
     previousSchool = models.CharField(u'Previous School', max_length=50, blank=True, null=True, default="")
@@ -116,7 +117,7 @@ class RegistrationS(models.Model):
     desactiveDate = models.DateField(u'Fecha de Baja', blank=False)
     student = models.ForeignKey('Student', related_name='ownerregistration')
     curso = models.ForeignKey('Curso', related_name='regincurso')
-    marks = models.ForeignKey('Marks', related_name='marks')
+    student = models.ForeignKey('Student', related_name='ownermark')
 
 class Assistance(models.Model):
     idAssistance = models.AutoField(primary_key=True, editable=False)
@@ -131,7 +132,6 @@ class Discipline(models.Model):
     cant = models.IntegerField(u'Cantidad', default='1', blank=False)
     reg = models.ForeignKey('RegistrationS', related_name='dofReg')
 
-    
 class Curso(models.Model):
     idCurso = models.AutoField(primary_key=True, editable=False)
     curso = models.CharField(u'Curso', max_length=1, choices=curso, default='1', blank=False)
@@ -142,8 +142,8 @@ class Marks(models.Model):
     idMark = models.AutoField(primary_key=True, editable=False)
     nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)
     trim = models.CharField(u'Trim', max_length=1, choices=trim, blank=False)
-    student = models.ForeignKey('Student', related_name='ownermark')
     subject = models.ForeignKey('Subject', related_name='minsubject')
+    reg = models.ForeignKey('RegistrationS', related_name='mofReg')
         
 class Subject(models.Model):
     idSubject = models.AutoField(primary_key=True, editable=False)

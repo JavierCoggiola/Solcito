@@ -33,6 +33,7 @@ class StudentForm(ModelForm):
         Row('religion', 'birthPlace', 'nacionality'),
         Row(Span5('street'), Span5('neighborhood'), Span2('numberStreet')),
         Row(Span3('PC'), Span3('tower'), Span3('floorDepartment'), Span3('department')),
+        Row(Span5("asdasdasdasdasdasdasdas"))
     )
     
     class Meta: 

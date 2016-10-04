@@ -61,20 +61,22 @@
                         padding: 0px;
                     }
                 }
-
-
         </style>
     </head>
 
     <body>
-        <nav class="light-blue">
-            <div class="nav-wrapper" style="margin-left:10px;">
-                <a class="brand-logo" href="#"><i class="fa fa-sun-o">  Solcito - Gestion de Administracion</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="{% url 'Solcito:login' %}" ><i class="fa fa-user">  Iniciar Sesión</i></a></li>
-                </ul>
-            </div>
-        </nav>
+        <div class="navbar-fixed row">
+            <nav class="nav-wrapper light-blue">
+                <div class="col s1">
+                    <img alt="" class="responsive-img" src="../static/img/sunlogo.png" style="height:65px;">
+                </div>
+                <div class="col s11" align="right">
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="{% url 'Solcito:login' %}" ><i class="fa fa-fw fa-user"></i> Iniciar Sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
         <div class="valign-wrapper" id="formulario">
 
@@ -186,7 +188,7 @@
                 }
             }
         }
-        
+
         $('#photo').change(function(){
             readURL(this);
         });

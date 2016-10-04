@@ -115,7 +115,7 @@ class RegistrationS(models.Model):
     activeDate = models.DateField(u'Fecha de Alta', blank=False)
     desactiveDate = models.DateField(u'Fecha de Baja', blank=False)
     student = models.ForeignKey('Student', related_name='ownerregistration')
-    curso = models.ForeignKey('Curso', related_name='curso')
+    curso = models.ForeignKey('Curso', related_name='regincurso')
     marks = models.ForeignKey('Marks', related_name='marks')
 
 class Assistance(models.Model):
@@ -123,33 +123,33 @@ class Assistance(models.Model):
     date = models.DateField(u'Fecha', blank=False)
     tipo = models.FloatField(u'Tipo de Falta', choices=falta, blank=False)
     justify = models.BooleanField(u'Justificada', default=False)
-    reg = models.ForeignKey('RegistrationS', related_name='ofReg')
+    reg = models.ForeignKey('RegistrationS', related_name='aofReg')
     
 class Discipline(models.Model):
     idDiscipline = models.AutoField(primary_key=True, editable=False)
-    sancion = model.CharField(u'Sancion', choices=sancion, blank=False)
-    cant = model.IntegerField(u'Cantidad', default='1', blank False)
-    reg = models.ForeignKey('RegistrationS', related_name='ofReg')
+    sancion = models.CharField(u'Sancion', choices=sancion, max_length=5, blank=False)
+    cant = models.IntegerField(u'Cantidad', default='1', blank=False)
+    reg = models.ForeignKey('RegistrationS', related_name='dofReg')
 
     
 class Curso(models.Model):
     idCurso = models.AutoField(primary_key=True, editable=False)
     curso = models.CharField(u'Curso', max_length=1, choices=curso, default='1', blank=False)
     division = models.CharField(u'Division', max_length=1, choices=division, default='A', blank=False)
-    cycle = models.IntegerField(u'Ciclo Lectivo', max_length=4, default='2016', blank=False)
+    cycle = models.IntegerField(u'Ciclo Lectivo', default='2016', blank=False)
         
 class Marks(models.Model):
     idMark = models.AutoField(primary_key=True, editable=False)
     nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)
     trim = models.CharField(u'Trim', max_length=1, choices=trim, blank=False)
     student = models.ForeignKey('Student', related_name='ownermark')
-    subject = models.ForeignKey('Subject', related_name='insubject')
+    subject = models.ForeignKey('Subject', related_name='minsubject')
         
-class Subject(model.Model):
+class Subject(models.Model):
     idSubject = models.AutoField(primary_key=True, editable=False)
     isRedondeable = models.BooleanField(u'Se redondea', default=False)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
-    curso = models.ForeignKey('Curso', related_name='curso')
+    curso = models.ForeignKey('Curso', related_name='ofcurso')
         
 class RegistrationD(models.Model):
     idRegistrationD = models.AutoField(primary_key=True, editable=False)        
@@ -166,7 +166,7 @@ class Teacher(models.Model):
     dni = models.IntegerField(u'DNI', blank=False)
     email = models.CharField(u'Email', max_length=50, blank=False)
     cellphone = models.IntegerField(u'Celular', blank=True, null=True, default="")
-    tipo = models.CharField(u'Rol', choices=teacher, default='teacher', blank=False)
+    tipo = models.CharField(u'Rol', choices=teacher, default='teacher', max_length=7, blank=False)
 
 class Tutor (models.Model):
 

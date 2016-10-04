@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Solcito.models import Student, Registration, Imagen, Tutor
+from Solcito.models import Student, RegistrationS, Tutor, Assistance, Discipline, Curso, Marks, Subject, RegistrationD, Teacher
 # Register your models here.
 
 class RegistrationAdmin(admin.ModelAdmin):
@@ -21,5 +21,11 @@ class RegistrationAdminFoto(admin.ModelAdmin):
 
 admin.site.register(Student)
 admin.site.register(Tutor)
-admin.site.register(Registration)
-admin.site.register(Imagen)
+admin.site.register(RegistrationS)
+admin.site.register(Assistance)
+admin.site.register(Discipline)
+admin.site.register(Curso)
+admin.site.register(Marks)
+admin.site.register(Subject)
+admin.site.register(RegistrationD)
+admin.site.register(Teacher)

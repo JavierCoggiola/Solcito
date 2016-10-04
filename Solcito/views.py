@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
-from Solcito.models import Imagen, Student, Registration, Tutor
+from Solcito.models import Student, RegistrationS, Tutor
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
@@ -41,33 +41,6 @@ def logMeIn(request): #Logueo
     return render_to_response('login.html',
                               {'errors':errors},
                               context)
-
-def subirPhoto(request):
-    context = RequestContext(request)
-    max_upload_size = 5242880
-
-    if request.method=='POST':
-        student=Imagen()
-        student.photo=request.FILES['photo']
-
-        nombre=request.POST.get("nombre")
-        apellido=request.POST.get("apellido")
-        dni=request.POST.get('dni')
-
-        spliting = student.photo.name.split(".")
-        extension = spliting[len(spliting)-1]
-        student.photo.name = nombre+"-"+apellido+"-"+dni+"."+extension
-
-        if student.photo.size > max_upload_size:
-            print ("archivo pesado")
-            return render_to_response('matricular_foto.html',{},context)
-        else:
-            print ("guardado de alumno correcto")
-            student.save()
-
-        return HttpResponse(status=200)
-    return render_to_response('matricular.html',
-context)
 
 def logMeOut(request):
     logout(request) #Logout de django

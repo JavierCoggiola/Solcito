@@ -1,7 +1,7 @@
  # -*- coding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
-from Solcito.models import Registration, Student, Tutor
+from Solcito.models import RegistrationS, Student, Tutor
 from django.forms.utils import ErrorList
 from material import *
 

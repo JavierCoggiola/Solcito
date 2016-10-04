@@ -8,14 +8,16 @@ admin.site.register(Student)
 admin.site.register(Tutor)
 
 class RegistrationSAdmin(admin.ModelAdmin):
-
-    list_filter = ('activeDate', 'curso')
-
+    list_filter = (['activeDate','curso__curso','curso__division','curso__cycle'])
 
 admin.site.register(RegistrationS,RegistrationSAdmin)
 admin.site.register(Assistance)
 admin.site.register(Discipline)
-admin.site.register(Curso)
+
+class CursoAdmin(admin.ModelAdmin):
+    list_filter = (['curso','division','cycle'])
+
+admin.site.register(Curso, CursoAdmin)
 admin.site.register(Marks)
 admin.site.register(Subject)
 admin.site.register(RegistrationD)

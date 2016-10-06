@@ -27,13 +27,12 @@ class EditRegistrationForm(forms.ModelForm):
 class StudentForm(ModelForm):
     
     layout = Layout(        
-        Row(Span6('name'), Span6('lastName')),
+        Row(Span5('name'), Span4('lastName'), Span3('curso')),
         Row(Span6('email'),Span3('dni'), Span3('sex')),
         Row(Span4('landline'), Span4('cellphone'),Span4('birthDate')),
         Row('religion', 'birthPlace', 'nacionality'),
         Row(Span5('street'), Span5('neighborhood'), Span2('numberStreet')),
         Row(Span3('PC'), Span3('tower'), Span3('floorDepartment'), Span3('department')),
-        Row(Span5("asdasdasdasdasdasdasdas"))
     )
     
     class Meta: 

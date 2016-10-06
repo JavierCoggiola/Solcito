@@ -15,6 +15,13 @@ class RegistrationSAdmin(admin.ModelAdmin):
     form = RegistrationSForm
     list_filter = (['activeDate', 'desactiveDate','curso__curso','curso__division','curso__cycle'])
 
+    # Aca filtro solamente los alumnos que no tienen una matricula activa
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "student":
+            kwargs["queryset"] = Student.objects.filter(active=False)
+        return super(RegistrationSAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 admin.site.register(RegistrationS,RegistrationSAdmin)
 
 class AssistanceAdmin(admin.ModelAdmin):

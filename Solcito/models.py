@@ -8,6 +8,9 @@ from django.conf import settings
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 from django.db.models import ImageField
 from django.db.models.fields.files import FileField
 from ITSGestion.settings import MEDIA_ROOT
@@ -111,6 +114,7 @@ class Student(models.Model):
     previousSchool = models.CharField(u'Previous School', max_length=50, blank=True, null=True, default="")
     qDueSubjects = models.IntegerField(u'Due Subjects', blank=True, null=True, default="")
 
+    active = models.BooleanField(u'Matriculado', default=False)
 
     def __str__(self):
         return self.name
@@ -128,7 +132,11 @@ class RegistrationS(models.Model):
     student = models.ForeignKey('Student', related_name='ownerregistration')
     curso = models.ForeignKey('Curso', related_name='regincurso')
 
-
+@receiver(pre_save, sender=RegistrationS)
+def create_personal_account(sender, instance, **kwargs):
+    if instance._state.adding:
+        instance.student.active = True
+        instance.student.save()
 
 class Assistance(models.Model):
     class Meta:

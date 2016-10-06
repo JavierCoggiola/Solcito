@@ -5,6 +5,21 @@ from Solcito.models import RegistrationS, Student, Tutor
 from django.forms.utils import ErrorList
 from material import *
 
+
+
+class RegistrationSForm(ModelForm):
+
+    layout = Layout(
+        Row(Span6('activeDate')),Span6('desactiveDate'),
+        Row(Span12('student')),
+        Row(Span12('curso')),
+    )
+
+    class Meta:
+        model = RegistrationS
+        exclude = ('idRegistrationS',)
+
+
 class EditRegistrationForm(forms.ModelForm):
 
     error_css_class = 'alert alert-danger'
@@ -24,19 +39,19 @@ class EditRegistrationForm(forms.ModelForm):
                 field.label = '* ' + field.label
 
 
+
 class StudentForm(ModelForm):
-    
-    layout = Layout(        
+
+    layout = Layout(
         Row(Span6('name'), Span6('lastName')),
         Row(Span6('email'),Span3('dni'), Span3('sex')),
         Row(Span4('landline'), Span4('cellphone'),Span4('birthDate')),
         Row('religion', 'birthPlace', 'nacionality'),
         Row(Span5('street'), Span5('neighborhood'), Span2('numberStreet')),
         Row(Span3('PC'), Span3('tower'), Span3('floorDepartment'), Span3('department')),
-        Row(Span5("asdasdasdasdasdasdasdas"))
     )
-    
-    class Meta: 
+
+    class Meta:
         model = Student
         exclude = ('idStudent', 'photo')
 
@@ -72,7 +87,7 @@ class StudentForm(ModelForm):
             self.add_error('landline', msg)
             self.add_error('cellphone', msg)
 
-            
+
 class GuardianForm(ModelForm):
     layout = Layout(
         Row(Span6('name'), Span6('lastName')),
@@ -83,7 +98,7 @@ class GuardianForm(ModelForm):
         Row(Span5('street'), Span5('neighborhood'), Span2('numberStreet')),
         Row(Span3('PC'), Span3('tower'), Span3('floorDepartment'), Span3('department')),
     )
-    
+
     def clean(self):
         cleaned_data = self.cleaned_data
         print (cleaned_data)
@@ -113,4 +128,3 @@ class GuardianForm(ModelForm):
     class Meta:
         model = Tutor
         exclude = ('students','rol')
-

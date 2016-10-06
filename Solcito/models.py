@@ -80,6 +80,10 @@ teacher = (
 )
     
 class Student(models.Model):
+    class Meta:
+        verbose_name="Alumno"
+        verbose_name_plural="Alumnos"
+
     idStudent = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
     lastName = models.CharField(u'Apellido', max_length=50, blank=False)
@@ -112,12 +116,19 @@ class Student(models.Model):
         return self.name
 
 class RegistrationS(models.Model):
+    class Meta:
+        verbose_name="Matricula"
+        verbose_name_plural="Matriculas"
+
+    def __str__(self):
+        return self.student.name + " " + str(self.idRegistrationS)
     idRegistrationS = models.AutoField(primary_key=True, editable=False)
     activeDate = models.DateField(u'Fecha de Alta', blank=False)
     desactiveDate = models.DateField(u'Fecha de Baja', blank=False)
     student = models.ForeignKey('Student', related_name='ownerregistration')
     curso = models.ForeignKey('Curso', related_name='regincurso')
-    student = models.ForeignKey('Student', related_name='ownermark')
+
+
 
 class Assistance(models.Model):
     idAssistance = models.AutoField(primary_key=True, editable=False)
@@ -137,7 +148,10 @@ class Curso(models.Model):
     curso = models.CharField(u'Curso', max_length=1, choices=curso, default='1', blank=False)
     division = models.CharField(u'Division', max_length=1, choices=division, default='A', blank=False)
     cycle = models.IntegerField(u'Ciclo Lectivo', default='2016', blank=False)
-        
+
+    def __str__(self):
+        return self.curso + " " + self.division + " " + str(self.cycle)
+
 class Marks(models.Model):
     idMark = models.AutoField(primary_key=True, editable=False)
     nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)

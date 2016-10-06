@@ -14,7 +14,6 @@ class RegistrationSForm(ModelForm):
         Row(Span12('student')),
         Row(Span12('curso')),
     )
-
     class Meta:
         model = RegistrationS
         exclude = ('idRegistrationS',)
@@ -43,7 +42,7 @@ class EditRegistrationForm(forms.ModelForm):
 class StudentForm(ModelForm):
 
     layout = Layout(
-        Row(Span5('name'), Span4('lastName'), Span3('curso')),
+        Row(Span6('name'), Span6('lastName')),
         Row(Span6('email'),Span3('dni'), Span3('sex')),
         Row(Span4('landline'), Span4('cellphone'),Span4('birthDate')),
         Row('religion', 'birthPlace', 'nacionality'),

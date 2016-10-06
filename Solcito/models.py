@@ -21,7 +21,7 @@ sex = (
 religion = (
     ("cat", "Catolicismo"),
     ("mus", "Islamismo"),
-    ("jud", "Judasimo"),
+    ("jud", "Judaismo"),
     ("pro", "Protestantismo"),
     ("eva", "Evangelismo"),
     ("ind", "Induismo"),
@@ -40,7 +40,7 @@ curso = (
     ('3',"Tercero"),
     ('4',"Cuarto"),
     ('5',"Quinto"),
-    ('6',"Secxtoo"),
+    ('6',"Sexto"),
     ('7',"Septimo")
 )
 division = (

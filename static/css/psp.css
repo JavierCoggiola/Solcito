@@ -1,0 +1,88 @@
+
+.container {
+  width: 80%;
+}
+
+.login-page {
+  margin-top: 100px;
+}
+
+.menu-button{
+  position: absolute;
+  top: 5px;
+  left: 25px;
+}
+
+.center-font{
+  text-align: center;
+  font-size: 15;
+}
+
+card-buttons{
+  height: 80px;
+  vertical-align: middle;
+  padding-left: 30px;
+}
+
+
+.card .card-action a {
+  color: white;
+}
+
+.card .card-action a:hover {
+  color: #CCCCCC;
+}
+
+
+.btn-medium {
+  width: 50px;
+  height: 50px;
+}
+
+.logo-top-nav{
+  padding-top: 5px !important;
+}
+
+.dashboard_table{
+  /*height: 430px;
+  overflow-y: auto;*/
+
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.scrollbary {
+  overflow-y: auto;
+
+}
+
+.scrollbary::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+.scrollbary::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+.scrollbary::-webkit-scrollbar-thumb
+{
+  background-color: #AAAAAA;
+  border: 2px solid #BBBBBB;
+}
+
+@media only screen and (max-width : 600px) {
+  .centered-on-small{
+    float: inherit !important;
+  }
+}
+
+.invisibleObject{
+  display: block;
+  visibility: hidden;
+}

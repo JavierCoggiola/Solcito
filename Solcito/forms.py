@@ -196,3 +196,10 @@ class GuardianForm(ModelForm):
     class Meta:
         model = Tutor
         exclude = ('students','rol')
+
+
+
+class UploadForm(forms.Form):
+    docfile = forms.FileField(
+        label='Selecciona un archivo'
+    )

@@ -64,7 +64,12 @@ class CursoAdmin(admin.ModelAdmin):
     exclude = ('idCurso',)
 
 admin.site.register(Curso, CursoAdmin)
-admin.site.register(Marks)
+
+class MarksAdmin(admin.ModelAdmin):
+    list_filter = (['subject__name','subject__curso__curso','subject__curso__division','subject__curso__cycle'])
+    default_filters = ('subject__curso__cycle=' + str(datetime.datetime.now().year),)
+    exclude = ('idMark',)
+admin.site.register(Marks, MarksAdmin)
 admin.site.register(Subject)
 admin.site.register(RegistrationD)
 

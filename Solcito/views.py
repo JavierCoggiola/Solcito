@@ -264,10 +264,3 @@ def genpdf(request,id_student):
 
 
 
-@login_required(login_url='/login/')
-def docentes(request):
-    context = RequestContext(request)
-    if request.user.groups.filter(name='Docente').exists():
-        return render_to_response('docentes.html', {}, context)
-    else:
-        return redirect('/admin')

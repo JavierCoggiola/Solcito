@@ -187,6 +187,9 @@ class Marks(models.Model):
     subject = models.ForeignKey('Subject', related_name='minsubject')
     reg = models.ForeignKey('RegistrationS', related_name='mofReg')
 
+    def __str__(self):
+        return self.nota + " " + self.reg.student.name
+
 class Subject(models.Model):
     class Meta:
         verbose_name="Materia"
@@ -196,6 +199,11 @@ class Subject(models.Model):
     isRedondeable = models.BooleanField(u'Se redondea', default=False)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
     curso = models.ForeignKey('Curso', related_name='ofcurso')
+
+
+    def __str__(self):
+        return self.name + " " + self.curso.curso + " " + self.curso.division
+
 
 class RegistrationD(models.Model):
     class Meta:
@@ -208,6 +216,10 @@ class RegistrationD(models.Model):
     isSustitute = models.BooleanField(u'Titular/Suplente', default=False)
     subject = models.ForeignKey('Subject', related_name='insubject')
     teacher = models.ForeignKey('Teacher', related_name='ownerregistration')
+
+    def __str__(self):
+        return self.teacher.name+ " " + self.teacher.lastName + " " + self.subject.name + " " + self.subject.curso.curso + " " + self.subject.curso.division
+
 
 class Teacher(models.Model):
     class Meta:

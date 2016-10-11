@@ -60,6 +60,7 @@ admin.site.register(Discipline, DisciplineAdmin)
 
 class CursoAdmin(admin.ModelAdmin):
     list_filter = (['curso','division','cycle'])
+    default_filters = ('cycle='+str(datetime.datetime.now().year),)
     exclude = ('idCurso',)
 
 admin.site.register(Curso, CursoAdmin)

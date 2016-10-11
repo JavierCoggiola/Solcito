@@ -82,8 +82,14 @@
 
                     {% endblock %}
                 <li>
-                    <a href="#">JEJE</a>
-
+                    {% if user.teacher.tipo == "teacher" %}
+                    <a href="{% url 'Solcito:docentes' %}">Añadir notas</a>
+                    {% endif %}
+                    {% for group in user.groups.all %}
+                        {% if group.name == 'Administrador' %}
+                            <a href="#">Seleccion de especialidad</a>
+                        {% endif %}
+                    {% endfor %}
                 </li>
                 </ul>
             </nav>

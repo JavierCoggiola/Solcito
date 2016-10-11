@@ -66,9 +66,22 @@ class CursoAdmin(admin.ModelAdmin):
 admin.site.register(Curso, CursoAdmin)
 
 class MarksAdmin(admin.ModelAdmin):
+    search_fields = ['reg__student__lastName', 'reg__student__name', ]
     list_filter = (['subject__name','subject__curso__curso','subject__curso__division','subject__curso__cycle'])
     default_filters = ('subject__curso__cycle=' + str(datetime.datetime.now().year),)
     exclude = ('idMark',)
+
+    def get_queryset(self, request):
+        '''
+        Devuelve solo las notas de las materias que el docente esta matriculado
+        '''
+        qs = super(MarksAdmin, self).get_queryset(request)
+        if request.user.teacher:
+            materias = Subject.objects.filter(insubject__teacher=request.user.teacher)
+            return qs.filter(subject__in=materias)
+        else:
+            return qs
+
 admin.site.register(Marks, MarksAdmin)
 admin.site.register(Subject)
 admin.site.register(RegistrationD)

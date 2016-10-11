@@ -188,7 +188,7 @@ class Marks(models.Model):
     reg = models.ForeignKey('RegistrationS', related_name='mofReg')
 
     def __str__(self):
-        return self.nota + " " + self.reg.student.name
+        return  self.reg.student.name + " " + self.reg.student.lastName +  " tiene un " +  self.nota + " en " + self.subject.name
 
 class Subject(models.Model):
     class Meta:

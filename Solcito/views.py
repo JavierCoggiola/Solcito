@@ -37,7 +37,7 @@ def logMeIn(request): #Logueo
         if user is not None:
             if user.is_active:
                 login(request, user) #logueo de usuario por defecto de django
-                return redirect('/solcito')
+                return redirect('/')
         else:
             errors.append(u"El usuario o la contrasena son incorrectos")
     return render_to_response('login.html',

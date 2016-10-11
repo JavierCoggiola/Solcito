@@ -215,12 +215,16 @@ class Teacher(models.Model):
         verbose_name_plural="Docente"
 
     idteacher = models.AutoField(primary_key=True, editable=False)
+    authuser = models.OneToOneField(User)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
     lastName = models.CharField(u'Apellido', max_length=50, blank=False)
     dni = models.IntegerField(u'DNI', blank=False)
     email = models.CharField(u'Email', max_length=50, blank=False)
     cellphone = models.IntegerField(u'Celular', blank=True, null=True, default="")
     tipo = models.CharField(u'Rol', choices=teacher, default='teacher', max_length=7, blank=False)
+    def __str__(self):
+        return self.name + " " + self.lastName
+
 
 class Tutor (models.Model):
     class Meta:

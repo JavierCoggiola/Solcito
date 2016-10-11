@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^genpdf/(?P<id_student>[0-9]+)/$', views.genpdf, name="genpdf"),
     url(r'^confirm_matricula/$', views.confirmMatricula, name='confirm_matricula'),
     url(r'^busqueda_pers/$', views.filterPers, name="busqueda_pers"),
+    url(r'^docentes/$', views.docentes, name="docentes"),
 ]

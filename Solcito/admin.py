@@ -1,7 +1,7 @@
 from django.contrib import admin
 from Solcito.models import Student, RegistrationS, Tutor, Assistance, Discipline, Curso, Marks, Subject, RegistrationD, Teacher
 # Register your models here.
-from Solcito.forms import RegistrationSForm
+from Solcito.forms import RegistrationSForm, TeacherForm
 import datetime
 
 
@@ -67,4 +67,10 @@ admin.site.register(Curso, CursoAdmin)
 admin.site.register(Marks)
 admin.site.register(Subject)
 admin.site.register(RegistrationD)
-admin.site.register(Teacher)
+
+class TeacherAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+    form = TeacherForm
+    exclude = ('authuser',)
+
+admin.site.register(Teacher,TeacherAdmin)

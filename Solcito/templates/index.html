@@ -1,0 +1,87 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title> SUN - ITS Gestión </title>
+        <link href="Ingresar%20ITSV_files/estetica.css" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+
+    <body background="{% static 'img/cole.jpg' %}" style="background-size: cover; background-repeat: no-repeat;">
+
+        <div class="navbar row" style="margin-top:3%;height:150px;">
+            <nav class="nav-wrapper container" style="background:rgba(64,224,208,0.8); height:150px;">
+                <div class="col s12 m4 l2" align="right" style="margin-top:45px;">
+                    <img class="responsive-img" src="../static/img/cole.png" style="height:65px;">
+                </div>
+                <div class="col s12 m4 l8" align="center" style="margin-top:10px;">
+                    <h4 class="thin">INSTITUTO TÉCNICO SALESIANO</h4>
+                    <h4 class="thin">VILLADA</h4>
+                </div>
+                <div class="col s12 m4 l2" align="left" style="margin-top:25px;">
+                    <img alt="" class="responsive-img" src="../static/img/sunlogo.png" style="height:100px;">
+                </div>
+            </nav>
+        </div>
+
+        <div class="row container z-depth-2" style="background:rgba(255, 255, 255, 0.5);">
+            <div class="col s8 offset-s2">
+
+                <h1 class="thin" align="center">Selecciona una opción</h1>
+                    
+                    <div class="card medium" style="margin-top:5%;">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="{% static 'img/stu.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">Matriculación<i class="material-icons right">more_vert</i></span>
+                            <p><a href="{% url 'Solcito:index' %}">Matricular alumno</a></p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">Matriculación<i class="material-icons right">close</i></span>
+                            <p>Complete el formulario con los datos del alumno y al menos un tutor legal. El formulario se cargará automáticamente a la página y el alumno ya estara registrado en nuestra base de datos.</p>
+                        </div>
+                    </div>
+
+                    <div class="card medium" style="margin-top:5%;">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="{% static 'img/prof.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">Ingreso para Personal<i class="material-icons right">more_vert</i></span>
+                            <p><a href="{% url 'Solcito:docentes' %}">Ingresar</a></p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">Ingreso para Personal<i class="material-icons right">close</i></span>
+                            <p>Por este medio los profesores/preceptores pueden cargar las notas de los alumnos y registrar sus inasistencias o sanciones.  </p>
+                        </div>
+                    </div>
+
+
+                    <div class="card medium" style="margin-top:5%;" style="margin:1%;">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="{% static 'img/av.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                            <p><a href="edu.itsvillada.com.ar">This is a link</a></p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </body>
+
+    <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+
+</html>

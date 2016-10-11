@@ -47,6 +47,10 @@ def logMeOut(request):
     context = RequestContext(request)
     return redirect('/')
 
+def home(request):
+    context = RequestContext(request)
+    return render_to_response('index.html',context)
+
 @require_GET
 def index(request):
     context = RequestContext(request)
@@ -59,90 +63,6 @@ def index(request):
     context['mother_form']= GuardianForm(instance = mother, prefix="mother")
     context['guardian_form']= GuardianForm(instance = tutor, prefix="tutor")
     return render_to_response('matricular.html',{},context)
-
-
-def editMatricula(request):
-
-    student = Student()
-    args = {}
-    context = RequestContext(request)
-
-    if request.method == 'POST':
-        print "SI ES UN METODO POST"
-        form = EditRegistrationForm(request.POST, request.FILES,
-                instance=student)
-
-        if form.is_valid():
-            logger.info(form.instance)
-            form.save()
-    else:
-        form = EditRegistrationForm(instance=student)
-    args['form'] = form
-    #return render(request, 'edit_matricula.html', args)
-    return render(request, 'matricular.html', args)
-
-def getFilter(request):
-    context = RequestContext(request)
-    return render_to_response('buscador.html',{},context)
-
-def filterPers (request):
-    context = RequestContext(request)
-    return render_to_response('filterPers.html', context)
-
-def search(request):
-    context = RequestContext(request)
-    if request.method=='GET':
-        nombreA=request.GET['nombre']
-        apellidoA=request.GET['apellido']
-        dniA=request.GET['dni']
-        especialidadA=request.GET['especialidad']
-        cursoA=request.GET['curso']
-        matriculaA=request.GET['matricula']
-        legajoA = request.GET['legajo']
-        nombreM=request.GET['nombreMadre']
-        apellidoM=request.GET['apellidoMadre']
-        nombreP=request.GET['nombrePadre']
-        apellidoP=request.GET['apellidoPadre']
-        active=request.GET['activo']
-        matriculas = Registration.objects.all()
-        # Vamos filtrando por cada campo que el usuario completo
-        if nombreA != "":
-            matriculas = matriculas.filter(nameStudent__iexact=nombreA)
-            #print matriculas
-        if apellidoA != "":
-            matriculas = matriculas.filter(lastNameStudent__iexact=apellidoA)
-            #print matriculas
-        if dniA != "":
-            matriculas = matriculas.filter(dniStudent__iexact=dniA)
-            #print matriculas
-        if especialidadA != "":
-            matriculas = matriculas.filter(division__iexact=especialidadA)
-            #print matriculas
-        if cursoA != "":
-            matriculas = matriculas.filter(grade__iexact=cursoA)
-            #print matriculas
-        if matriculaA != "":
-            matriculas = matriculas.filter(administrativeFile__iexact=matriculaA)
-            #print matriculas
-        if legajoA != "":
-            matriculas = matriculas.filter(studentFile__iexact=legajoA)
-            #print matriculas
-        if nombreM != "":
-            matriculas = matriculas.filter(nameMother__iexact=nombreM)
-            #print matriculas
-        if apellidoM != "":
-            matriculas = matriculas.filter(lastNameMother__iexact=apellidoM)
-            #print matriculas
-        if nombreP != "":
-            matriculas = matriculas.filter(nameFather__iexact=nombreP)
-            #print matriculas
-        if apellidoP != "":
-            matriculas = matriculas.filter(lastNameFather__iexact=apellidoP)
-            #print matriculas
-        #De todas las matriculas del alumno muestra la activa
-        if active == "true":
-            matriculas = matriculas.filter(isActive=active)
-        return render_to_response('lista_buscador.html',{'matriculas':matriculas},context)
 
 
 #https://github.com/eliluminado/esCUITValida/blob/master/esCUITValida.py

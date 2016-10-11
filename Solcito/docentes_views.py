@@ -29,14 +29,16 @@ def excel(request):
     # leer hoja 1
     sh = book.sheet_by_index(0)
     print trimestre
+    offset = 7
     if trimestre == '1':
-        offset = 7
+        columna = 7
     elif trimestre == '2':
-        offset = 11
+        print "segundoooo"
+        columna = 12
     elif trimestre == '3':
-        offset = 16
+        columna = 18
     else:
-        offset = 7
+        columna = 7
     # fortuna row 15 col 2
     breaking = False
     print materia
@@ -45,7 +47,7 @@ def excel(request):
             continue
         r = []
         for j, col in enumerate(range(sh.ncols)):
-            if (sh.cell_value(i, 2)) != "":
+            if (sh.cell_value(i, columna)) != "":
                 r.append(sh.cell_value(i, j))
             else:
                 breaking = True
@@ -57,12 +59,14 @@ def excel(request):
     # Guardar los datos del excel en la base de datos
     for i in rows:
         newMark = Marks()
+
         try:
             newMark.reg = RegistrationS.objects.filter(student__lastName__icontains=i[2].split(", ")[0],
                                                        student__name__icontains=i[2].split(", ")[1],)[0]
             newMark.subject = Subject.objects.get(pk=materia)
             newMark.trim = trimestre
-            newMark.nota = i[offset]
+            print i[columna]
+            newMark.nota = int(i[columna])
             newMark.save()
         except IndexError:
             pass

@@ -13,6 +13,8 @@ Sistema de gestion de secretaria para el ITS Villada
 * six (1.10.0)
 * webencodings (0.5)
 * xhtml2pdf (0.0.6)
+* openpyxl (2.4.0)
+* xlrd (0.9.4)
 
 ##Cosas a tener en cuenta:
 En caso de tener que reiniciar la DB o borrarla por algun motivo, lo primero que se debe hacer es crear los grupos de :

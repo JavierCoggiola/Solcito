@@ -10,6 +10,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
+
 from Solcito.forms import EditRegistrationForm
 from django.template.loader import render_to_string
 import logging
@@ -179,3 +181,6 @@ def genpdf(request,id_student):
         }
     )
     print "return"
+
+
+

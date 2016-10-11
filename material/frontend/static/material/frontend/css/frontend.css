@@ -44,8 +44,8 @@ th {
 #user-menu {
   min-width: 157px; }
 
-/* 
-   Sidebar menu 
+/*
+   Sidebar menu
 */
 .no-padding {
   padding: 0 !important; }
@@ -73,20 +73,20 @@ ul.side-nav.module-menu .collapsible-body .collapsible-body .collapsible-body li
   padding-left: 5rem; }
 
 ul.side-nav.module-menu .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
-  background: #4CAF50; }
+  background: #35678D; }
 
 ul.side-nav.module-menu li.active > a > span.badge {
   color: #fff; }
 
 .side-nav.fixed .collapsible-body li.active.header {
-  background-color: #388E3C;
+  background-color: #7BA4C3;
   border-bottom: 1px solid #eee; }
 
 .side-nav.fixed .collapsible-body .collapsible-body li.active.header {
   background-color: #DDD; }
 
 .side-nav.fixed .collapsible-body .collapsible-body .collapsible-body li.active {
-  background-color: #4CAF50; }
+  background-color: #35678D; }
 
 .side-nav.fixed .collapsible-body li.active a {
   color: #424242; }
@@ -144,7 +144,7 @@ ul.side-nav.module-menu li.active > a > span.badge {
   color: #444;
   cursor: pointer; }
   .frontend-list .paginate_button.current {
-    background-color: #4caf50;
+    background-color: #1E5178;
     color: white; }
   .frontend-list .paginate_button.disabled {
     cursor: default;
@@ -171,7 +171,7 @@ ul.side-nav.module-menu li.active > a > span.badge {
   margin-bottom: 10px; }
 
 /*
-  Responsible layout 
+  Responsible layout
 */
 @media only screen and (min-width: 992px) {
   .nav-top {

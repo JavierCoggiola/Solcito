@@ -121,7 +121,7 @@ class StudentForm(ModelForm):
 
     class Meta:
         model = Student
-        exclude = ('idStudent', 'photo')
+        exclude = ('idStudent', 'photo','curso')
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -195,7 +195,7 @@ class GuardianForm(ModelForm):
 
     class Meta:
         model = Tutor
-        exclude = ('students','rol')
+        exclude = ('students','rol','children')
 
 
 

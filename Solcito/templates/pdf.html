@@ -93,8 +93,9 @@
             <table style="width:100%">
                 <tr>
                     <td>DNI:<b> {{student.dni}}</b></td>
-                    <td>Sexo:<b> {{student.sex}}</b></td>
-                    <td>Religion:<b> {{student.religion}}</b></td>
+                    <td>Sexo:<b> {% if student.sex == "M" %}Masculino{% elif student.sex == "F" %}Femenino{% elif student.sex == "O" %}Otro{% endif %}
+                    </b></td>
+                    <td>Religion:<b> {% if student.religion == "cat" %}Catolico{% elif student.religion == "mus" %}Islamico{% elif student.religion == "jud" %}Judio{% elif student.religion == "pro" %}Protestante{% elif student.religion == "eva" %}Evangelico{% elif student.religion == "ind" %}Indu{% elif student.religion == "bud" %}Budista{% elif student.religion == "agn" %}Agnostico{% elif student.religion == "otr" %}Otro{% endif %}</b></td>
                 </tr>
                 <tr>
                     <td>Fecha de Nacimiento:<b> {{student.birthDate}}</b></td>

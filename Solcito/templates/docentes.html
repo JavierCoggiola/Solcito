@@ -1,17 +1,14 @@
-<html>
-<head>
- <title>Azucar</title>
-</head>
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify material_form material_admin %}
 
-<style>
-    .contac div{
-     float:left;
-    }
-</style>
 
-<body>
 
-    <form action="{% url 'Solcito:excel' %}" method="post" enctype="multipart/form-data">
+
+
+
+
+{% block content %}
+<form action="{% url 'Solcito:excel' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="FILE" name="docfile">
         <select name="materia">
@@ -47,4 +44,4 @@
     </div>
 
 </body>
-</html>
+{% endblock %}

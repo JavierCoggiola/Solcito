@@ -52,13 +52,14 @@ class DisciplineAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "reg":
             kwargs["queryset"] = RegistrationS.objects.filter(curso__cycle=datetime.datetime.now().year)
-        return super(AssistanceAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        return super(DisciplineAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 
 admin.site.register(Discipline, DisciplineAdmin)
 
 class CursoAdmin(admin.ModelAdmin):
+
     list_filter = (['curso','division','cycle'])
     default_filters = ('cycle='+str(datetime.datetime.now().year),)
     exclude = ('idCurso',)
@@ -70,16 +71,31 @@ class MarksAdmin(admin.ModelAdmin):
     list_filter = (['subject__name','subject__curso__curso','subject__curso__division','subject__curso__cycle'])
     default_filters = ('subject__curso__cycle=' + str(datetime.datetime.now().year),)
     exclude = ('idMark',)
+    list_display = ('reg','subject','nota','trim')
+    # Filtro para que el docente solo pueda anadir notas a sus materias
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "subject":
+            try:
+                kwargs["queryset"] = Subject.objects.filter(insubject__teacher=request.user.teacher)
+            except:
+                pass
+        if db_field.name == "reg":
+            try:
+                materias = Subject.objects.filter(insubject__teacher=request.user.teacher)
+                kwargs["queryset"] = RegistrationS.objects.filter(curso__ofcurso__idSubject=materias)
+            except:
+                pass
+        return super(MarksAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_queryset(self, request):
         '''
         Devuelve solo las notas de las materias que el docente esta matriculado
         '''
         qs = super(MarksAdmin, self).get_queryset(request)
-        if request.user.teacher:
+        try:
             materias = Subject.objects.filter(insubject__teacher=request.user.teacher)
             return qs.filter(subject__in=materias)
-        else:
+        except:
             return qs
 
 admin.site.register(Marks, MarksAdmin)

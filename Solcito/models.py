@@ -248,7 +248,7 @@ class Tutor (models.Model):
     lastName = models.CharField(u'Apellido', max_length=50, blank=False)
     dni = models.IntegerField(u'DNI', blank=False)
     cuil = models.IntegerField(u'Cuil', blank=False)
-    rol = models.CharField(u'Rol', choices=rol, default='Tutor', blank=False, max_length=10,)
+    rol = models.CharField(u'Rol', choices=rol,  default='Tutor', blank=False, max_length=10,)
     workPlace = models.CharField(u'Lugar de Trabajo', max_length=50, blank=False)
     profession = models.CharField(u'Profesion', max_length=50, blank=False)
     locality = models.CharField(u'Localidad', max_length=50, default="", blank=False)
@@ -270,8 +270,6 @@ class Tutor (models.Model):
         for i in self.children.all:
             nombre = nombre + self.children.name+  ", "
         return nombre
-
-
 
 
 class OrdenDeMerito (models.Model):

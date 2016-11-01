@@ -1,0 +1,27 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify material_form material_admin %}
+
+
+
+
+
+
+
+{% block content %}
+    <div style="margin-left: 10px;margin-right: 10px;  ">
+        <p >Ordenar usando : </p>
+        <select name="orden" class="col s12 m12 l9">
+            {% for orden in ordenes %}
+                <option value="{{ orden.pk }}">{{ orden.name }}</option>
+            {% endfor %}
+        </select>
+        <p >El Curso : </p>
+        <select name="orden" class="col s12 m12 l9">
+            {% for curso in cursos %}
+                <option value="{{ curso.pk }}">{{ curso }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" >Show Me what you Got</button>
+    </div>
+
+{% endblock %}

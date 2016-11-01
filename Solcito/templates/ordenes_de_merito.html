@@ -16,12 +16,24 @@
             {% endfor %}
         </select>
         <p >El Curso : </p>
-        <select name="orden" class="col s12 m12 l9">
-            {% for curso in cursos %}
-                <option value="{{ curso.pk }}">{{ curso }}</option>
-            {% endfor %}
-        </select>
+        <div class="col s12 m12 l9">
+            <select name="orden" id="cursos" multiple>
+                {% for curso in cursos %}
+                    <option value="{{ curso.pk }}">{{ curso }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button class="btn btn-primary" >Show Me what you Got</button>
+
+    <table style="width:100%;background-color: white;" class="card">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Puntaje</th>
+      </tr>
+        <div id="results_list"></div>
+
+    </table>
     </div>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Solcito.models import Student, RegistrationS, Tutor, Assistance, Discipline, Curso, Marks, Subject, RegistrationD, Teacher
+from Solcito.models import Student, RegistrationS, Tutor, Assistance, Discipline, Curso, Marks, Subject, RegistrationD, Teacher, Parametro, OrdenDeMerito
 # Register your models here.
 from Solcito.forms import RegistrationSForm, TeacherForm
 import datetime
@@ -108,3 +108,26 @@ class TeacherAdmin(admin.ModelAdmin):
     exclude = ('authuser',)
 
 admin.site.register(Teacher,TeacherAdmin)
+
+
+
+
+
+
+
+########### Ordenes de Merito
+
+class InlineParametro(admin.TabularInline):
+    model = Parametro
+    exclude = ('',)
+    verbose_name = "Parametro"
+    verbose_name_plural = "Parametros"
+    extra = 1
+
+class OrdenDeMeritoAdmin(admin.ModelAdmin):
+    exclude = ()
+
+    inlines = [InlineParametro]
+
+admin.site.register(OrdenDeMerito, OrdenDeMeritoAdmin)
+

@@ -69,9 +69,9 @@ trim = (
     ('3',"Tercer Trimestre")
 )
 falta = (
-    (1,"1"),
-    (0.5,"1/2"),
-    (0.25,"1/4")
+    ("1","Falta"),
+    ("0.5","Media Falta"),
+    ("0.25","Cuarto de Falta")
 )
 sancion = (
     ("Observacion","Observacion"),
@@ -270,3 +270,38 @@ class Tutor (models.Model):
         for i in self.children.all:
             nombre = nombre + self.children.name+  ", "
         return nombre
+
+
+
+
+class OrdenDeMerito (models.Model):
+    class Meta:
+        verbose_name="Orden De Merito"
+        verbose_name_plural="Ordenes de Merito"
+
+    name = models.CharField(u'Nombre', max_length=50, blank=False)
+    def set_parametros(self, parametros):
+        """
+        Atencion, esto va a borrar las viejas y guardar solamente las nuevas
+        """
+        self.parametros.all().delete()
+        for parametro in parametros:
+            new_parametro = Parametro()
+            new_parametro.type_of_parameter = parametro['type_of_parameter']
+            new_parametro.valor = parametro['valor']
+            new_parametro.orden_de_merito = self
+            new_parametro.save()
+    def __str__(self):
+        return self.name
+
+
+class Parametro(models.Model):
+    '''
+    Parametros para las ordenes de Merito
+    '''
+    type_of_parameter = models.CharField("A juzgar",
+        choices=nota+falta+sancion,
+        max_length=20)
+    valor = models.IntegerField("Va a sumar")
+    upload_date = models.DateTimeField('Last change', auto_now=True)
+    orden_de_merito = models.ForeignKey(OrdenDeMerito, related_name='parametros', null=True, blank=True)

@@ -73,9 +73,10 @@ falta = (
     ("0.5","Media Falta"),
     ("0.25","Cuarto de Falta")
 )
-sancion = (
+tipoDeSancion = (
     ("Observacion","Observacion"),
     ("Amonestacion","Amonestacion"),
+    ("Suspencion","Suspencion")
 
 )
 teacher = (
@@ -158,11 +159,11 @@ class Discipline(models.Model):
         verbose_name_plural="Conducta"
 
     idDiscipline = models.AutoField(primary_key=True, editable=False)
-    sancion = models.CharField(u'Sancion', choices=sancion, max_length=15, blank=False)
+    tipoDeSancion = models.CharField(u'Tipo de Sancion', choices=tipoDeSancion, max_length=15, blank=False)
     cant = models.IntegerField(u'Cantidad', default='1', blank=False)
     reg = models.ForeignKey('RegistrationS', related_name='dofReg')
     def __str__(self):
-        return self.sancion + " a " + self.reg.student.name
+        return self.tipoDeSancion + " a " + self.reg.student.name
 
 class Curso(models.Model):
     class Meta:
@@ -182,11 +183,11 @@ class Marks(models.Model):
         verbose_name="Nota"
         verbose_name_plural="Notas"
 
-    idMark = models.AutoField(primary_key=True, editable=False)
+    reg = models.ForeignKey('RegistrationS', related_name='mofReg', verbose_name=u'Alumno')
+    subject = models.ForeignKey('Subject', related_name='minsubject', verbose_name=u'Materia')
+    trim = models.CharField(u'Trimestre', max_length=1, choices=trim, blank=False)
     nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)
-    trim = models.CharField(u'Trim', max_length=1, choices=trim, blank=False)
-    subject = models.ForeignKey('Subject', related_name='minsubject')
-    reg = models.ForeignKey('RegistrationS', related_name='mofReg')
+    idMark = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return  self.reg.student.name + " " + self.reg.student.lastName +  " tiene un " +  self.nota + " en " + self.subject.name
@@ -299,8 +300,7 @@ class Parametro(models.Model):
     Parametros para las ordenes de Merito
     '''
     type_of_parameter = models.CharField("A juzgar",
-        choices=nota+falta+sancion,
-        max_length=20)
+        choices=nota+falta+tipoDeSancion,max_length=20)
     valor = models.IntegerField("Va a sumar")
     upload_date = models.DateTimeField('Last change', auto_now=True)
     orden_de_merito = models.ForeignKey(OrdenDeMerito, related_name='parametros', null=True, blank=True)

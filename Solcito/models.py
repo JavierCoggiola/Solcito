@@ -83,6 +83,14 @@ teacher = (
     ("teacher","Profesor"),
     ("celador","Preceptor")
 )
+materias = (
+    ("ciencias_sociales","Ciencias Sociales"),
+    ("ciencias_naturales", "Ciencias Naturales"),
+    ("ciencias_exactas", "Ciencias Exactas"),
+    ("taller", "Taller"),
+    ("humanistica", "Humanistica"),
+    ("educacion_fisica","Educacion Fisica")
+)
 
 class Student(models.Model):
     class Meta:
@@ -201,7 +209,7 @@ class Subject(models.Model):
     isRedondeable = models.BooleanField(u'Se redondea', default=False)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
     curso = models.ForeignKey('Curso', related_name='ofcurso')
-
+    categoria = models.CharField(u'Tipo de Materia:',choices=materias, max_length=50, default=materias[0])
 
     def __str__(self):
         return self.name + " " + self.curso.curso + " " + self.curso.division
@@ -300,7 +308,8 @@ class Parametro(models.Model):
     Parametros para las ordenes de Merito
     '''
     type_of_parameter = models.CharField("A juzgar",
-        choices=nota+falta+tipoDeSancion,max_length=20)
+        choices=materias+falta+tipoDeSancion,
+        max_length=20)
     valor = models.IntegerField("Va a sumar")
     upload_date = models.DateTimeField('Last change', auto_now=True)
     orden_de_merito = models.ForeignKey(OrdenDeMerito, related_name='parametros', null=True, blank=True)

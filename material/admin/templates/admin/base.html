@@ -87,7 +87,7 @@
                     {% endif %}
                     {% for group in user.groups.all %}
                         {% if group.name == 'Administrador' %}
-                            <a href="#">Seleccion de especialidad</a>
+                            <a href="{% url 'Solcito:oredenes_de_merito' %}">Ordenes de Merito</a>
                         {% endif %}
                     {% endfor %}
                 </li>

@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify material_form material_admin %}
+
+
+
+
+
+
+
+{% block content %}
+    <div style="margin-left: 10px;margin-right: 10px;  ">
+        <p >Ordenar usando : </p>
+        <select name="orden" class="col s12 m12 l9">
+            {% for orden in ordenes %}
+                <option value="{{ orden.pk }}">{{ orden.name }}</option>
+            {% endfor %}
+        </select>
+        <p >El Curso : </p>
+        <div class="col s12 m12 l9">
+            <select name="orden" id="cursos" multiple>
+                {% for curso in cursos %}
+                    <option value="{{ curso.pk }}">{{ curso }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-primary" >Show Me what you Got</button>
+
+    <table style="width:100%;background-color: white;" class="card">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Puntaje</th>
+      </tr>
+        <div id="results_list"></div>
+
+    </table>
+    </div>
+
+{% endblock %}

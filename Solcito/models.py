@@ -75,7 +75,8 @@ falta = (
 )
 sancion = (
     ("Observacion","Observacion"),
-    ("Amonestacion","Amonestacion")
+    ("Amonestacion","Amonestacion"),
+
 )
 teacher = (
     ("teacher","Profesor"),

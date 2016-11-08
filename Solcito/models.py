@@ -274,7 +274,7 @@ class Tutor (models.Model):
     landline = models.IntegerField(u'Telefono Fijo', blank=False)
     cellphone = models.IntegerField(u'Celular', blank=True, null=True)
     workPhone = models.IntegerField(u'Telefono Laboral', blank=True, null=True)
-    children = models.ManyToManyField(Student)
+    children = models.ManyToManyField(Student, related_name='tutor')
     def __str__(self):
         return self.name + " " + self.lastName
 

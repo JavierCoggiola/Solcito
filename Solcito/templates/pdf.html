@@ -71,7 +71,7 @@
                     <td>Legajo Administrativo:</td>
                 </tr>
                 <tr>
-                    <td>Curso a Matricular:</td>
+                    <td>Curso a tutorr:</td>
                     <td>Colegio de Procedencia:</td>
                 </tr>
             </table>
@@ -127,137 +127,149 @@
         <br>
         <div class="lindo" id="datos tutores">
             <caption ><b>Datos de Padre/Madre/Tutor</b></caption>
+        {% for tutor in student.tutor.all %}
+            {% if tutor.rol == "Father" %}
             <div id="padre">
                 <table style="width:100%">
                     <tr>
-                        <td>Nombres del Padre:<b> {{matricula.nameFather}}</b></td>
-                        <td>Apellidos del Padre:<b> {{matricula.lastNameFather}}</b></td>
+                        <td>Nombres del Padre:<b> {{tutor.name}} </b></td>
+                        <td>Apellidos del Padre:<b> {{tutor.lastName}}</b></td>
                     </tr>
                 </table>
                 <table style="width:100%">
                     <tr>
-                        <td>DNI:<b> {{matricula.dniFather}}</b></td>
-                        <td>Cuil:<b> {{matricula.cuilFather}}</b></td>
-                        <td>Lugar de Trabajo:<b> {{matricula.workPlaceFather}}</b></td>
+                        <td>DNI:<b> {{tutor.dni}}</b></td>
+                        <td>Cuil:<b> {{tutor.cuil}}</b></td>
+                        <td>Lugar de Trabajo:<b> {{tutor.workPlace}}</b></td>
                     </tr>
                 </table>
                 <table style="width:100%">
                     <tr>
-                        <td>Nacionalidad:<b> {{matricula.nacionalityFather}}</b></td>
-                        <td>Profesion:<b> {{matricula.professionFather}}</b></td>
+                        <td>Nacionalidad:<b> {{tutor.nacionality}}</b></td>
+                        <td>Profesion:<b> {{tutor.profession}}</b></td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td>Calle:<b> {{matricula.streetFather}}</b></td>
-                        <td>Numero:<b> {{matricula.numberStreetFather}}</b></td>
-                        <td>Barrio:<b> {{matricula.neighborhoodFather}}</b></td>
+                        <td>Calle:<b> {{tutor.street}}</b></td>
+                        <td>Numero:<b> {{tutor.numberStreet}}</b></td>
+                        <td>Barrio:<b> {{tutor.neighborhood}}</b></td>
                     </tr>
                     <tr>
-                        <td>Torre:<b> {{matricula.towerFather}}</b></td>
-                        <td>Piso:<b> {{matricula.floorDepartmentFather}}</b></td>
-                        <td>Departamento:<b> {{matricula.departmentFather}}</b></td>
+                        <td>Torre:<b> {{tutor.tower}}</b></td>
+                        <td>Piso:<b> {{tutor.floorDepartment}}</b></td>
+                        <td>Departamento:<b> {{tutor.department}}</b></td>
                     </tr>
                     <tr>
-                        <td>Codigo Postal:<b> {{matricula.PCFather}}</b></td>
-                        <td>Localidad:<b> {{matricula.localityFather}}</b></td>
-                        <td>Email:<b> {{matricula.emailFather}}</b></td>
+                        <td>Codigo Postal:<b> {{tutor.PC}}</b></td>
+                        <td>Localidad:<b> {{tutor.locality}}</b></td>
+                        <td>Email:<b> {{tutor.email}}</b></td>
                     </tr>
                     <tr>
-                        <td>Tel.Fijo:<b> {{matricula.landlineFather}}</b></td>
-                        <td>Tel.Celular:<b> {{matricula.cellphoneFather}}</b></td>
-                        <td>Tel.Laboral<b> {{matricula.workPhoneFather}}</b></td>
+                        <td>Tel.Fijo:<b> {{tutor.landline}}</b></td>
+                        <td>Tel.Celular:<b> {{tutor.cellphone}}</b></td>
+                        <td>Tel.Laboral<b> {{tutor.workPhone}}</b></td>
                     </tr>
                 </table>
             </div>
             <br>
+             {% endif %}
+        {% endfor %}
+        {% for tutor in student.tutor.all %}
+            {% if tutor.rol == "Mother" %}
             <div id="madre">
                 <table style="width:100%">
                     <tr>
-                        <td>Nombres de la Madre:<b> {{matricula.nameMother}}</b></td>
-                        <td>Apellidos de la Madre:<b> {{matricula.lastNameMother}}</b></td>
+                        <td>Nombres de la Madre:<b> {{tutor.name}}</b></td>
+                        <td>Apellidos de la Madre:<b> {{tutor.lastName}}</b></td>
                     </tr>
                 </table>
                 <table style="width:100%">
                     <tr>
-                        <td>DNI:<b> {{matricula.dniMother}}</b></td>
-                        <td>Cuil:<b> {{matricula.cuilMother}}</b></td>
-                        <td>Lugar de Trabajo:<b> {{matricula.workPlaceMother}}</b></td>
+                        <td>DNI:<b> {{tutor.dni}}</b></td>
+                        <td>Cuil:<b> {{tutor.cuil}}</b></td>
+                        <td>Lugar de Trabajo:<b> {{tutor.workPlace}}</b></td>
                     </tr>
                 </table>
                 <table style="width:100%">
                     <tr>
-                        <td>Nacionalidad:<b> {{matricula.nacionalityMother}}</b></td>
-                        <td>Profesion:<b> {{matricula.professionMother}}</b></td>
+                        <td>Nacionalidad:<b> {{tutor.nacionality}}</b></td>
+                        <td>Profesion:<b> {{tutor.profession}}</b></td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td>Calle:<b> {{matricula.streetMother}}</b></td>
-                        <td>Numero:<b> {{matricula.numberStreetMother}}</b></td>
-                        <td>Barrio:<b> {{matricula.neighborhoodMother}}</b></td>
+                        <td>Calle:<b> {{tutor.street}}</b></td>
+                        <td>Numero:<b> {{tutor.numberStreet}}</b></td>
+                        <td>Barrio:<b> {{tutor.neighborhood}}</b></td>
                     </tr>
                     <tr>
-                        <td>Torre:<b> {{matricula.towerMother}}</b></td>
-                        <td>Piso:<b> {{matricula.floorDepartmentMother}}</b></td>
-                        <td>Departamento:<b> {{matricula.departmentMother}}</b></td>
+                        <td>Torre:<b> {{tutor.tower}}</b></td>
+                        <td>Piso:<b> {{tutor.floorDepartment}}</b></td>
+                        <td>Departamento:<b> {{tutor.department}}</b></td>
                     </tr>
                     <tr>
-                        <td>Codigo Postal:<b> {{matricula.PCMother}}</b></td>
-                        <td>Localidad:<b> {{matricula.localityMother}}</b></td>
-                        <td>Email:<b> {{matricula.emailMother}}</b></td>
+                        <td>Codigo Postal:<b> {{tutor.PC}}</b></td>
+                        <td>Localidad:<b> {{tutor.locality}}</b></td>
+                        <td>Email:<b> {{tutor.email}}</b></td>
                     </tr>
                     <tr>
-                        <td>Tel.Fijo:<b> {{matricula.landlineMother}}</b></td>
-                        <td>Tel.Celular:<b> {{matricula.cellphoneMother}}</b></td>
-                        <td>Tel.Laboral:<b> {{matricula.workPhoneMother}}</b></td>
+                        <td>Tel.Fijo:<b> {{tutor.landline}}</b></td>
+                        <td>Tel.Celular:<b> {{tutor.cellphone}}</b></td>
+                        <td>Tel.Laboral:<b> {{tutor.workPhone}}</b></td>
                     </tr>
                 </table>
             </div>
             <br>
+            {% endif %}
+        {% endfor %}
+        {% for tutor in student.tutor.all %}
+            {% if tutor.rol == "Tutor" %}
             <div id="tutor">
                 <table style="width:100%">
                     <tr>
-                        <td>Nombres del Tutor:<b> {{matricula.nameTutor}}</b></td>
-                        <td>Apellidos del Tutor:<b> {{matricula.lastNameTutor}}</b></td>
+                        <td>Nombres del Tutor:<b> {{tutor.name}}</b></td>
+                        <td>Apellidos del Tutor:<b> {{tutor.lastName}}</b></td>
                     </tr>
                 </table>
                 <table style="width:100%">
                     <tr>
-                        <td>DNI:<b> {{matricula.dniTutor}}</b></td>
-                        <td>Cuil:<b> {{matricula.cuilTutor}}</b></td>
-                        <td>Lugar de Trabajo:<b> {{matricula.workPlaceTutor}}</b></td>
+                        <td>DNI:<b> {{tutor.dni}}</b></td>
+                        <td>Cuil:<b> {{tutor.cuil}}</b></td>
+                        <td>Lugar de Trabajo:<b> {{tutor.workPlace}}</b></td>
                     </tr>
                 </table>
                 <table style="width:100%">
                     <tr>
-                        <td>Nacionalidad:<b> {{matricula.nacionalityTutor}}</b></td>
-                        <td>Profesion:<b> {{matricula.professionTutor}}</b></td>
+                        <td>Nacionalidad:<b> {{tutor.nacionality}}</b></td>
+                        <td>Profesion:<b> {{tutor.profession}}</b></td>
                     </tr>
                 </table>
                 <table>
                     <tr>
-                        <td>Calle:<b> {{matricula.streetTutor}}</b></td>
-                        <td>Numero:<b> {{matricula.numberStreetTutor}}</b></td>
-                        <td>Barrio:<b> {{matricula.neighborhoodTutor}}</b></td>
+                        <td>Calle:<b> {{tutor.street}}</b></td>
+                        <td>Numero:<b> {{tutor.numberStreet}}</b></td>
+                        <td>Barrio:<b> {{tutor.neighborhood}}</b></td>
                     </tr>
                     <tr>
-                        <td>Torre:<b> {{matricula.towerTutor}}</b></td>
-                        <td>Piso:<b> {{matricula.floorDepartmentTutor}}</b></td>
-                        <td>Departamento:<b> {{matricula.departmentTutor}}</b></td>
+                        <td>Torre:<b> {{tutor.tower}}</b></td>
+                        <td>Piso:<b> {{tutor.floorDepartment}}</b></td>
+                        <td>Departamento:<b> {{tutor.department}}</b></td>
                     </tr>
                     <tr>
-                        <td>Codigo Postal:<b> {{matricula.PCTutor}}</b></td>
-                        <td>Localidad:<b> {{matricula.localityTutor}}</b></td>
-                        <td>Email:<b> {{matricula.emailTutor}}</b></td>
+                        <td>Codigo Postal:<b> {{tutor.PC}}</b></td>
+                        <td>Localidad:<b> {{tutor.locality}}</b></td>
+                        <td>Email:<b> {{tutor.email}}</b></td>
                     </tr>
                     <tr>
-                        <td>Tel.Fijo:<b> {{matricula.landlineTutor}}</b></td>
-                        <td>Tel.Celular:<b> {{matricula.cellphoneTutor}}</b></td>
-                        <td>Tel.Laboral:<b> {{matricula.workPhoneTutor}}</b></td>
+                        <td>Tel.Fijo:<b> {{tutor.landline}}</b></td>
+                        <td>Tel.Celular:<b> {{tutor.cellphone}}</b></td>
+                        <td>Tel.Laboral:<b> {{tutor.workPhone}}</b></td>
                     </tr>
                 </table>
             </div>
+            {% endif %}
+        {% endfor %}
         </div>
         <h6>*Este Formulario se debe Completar, Firmar y entregar en Secretaria. Tiene caracter de Declaracion Jurada</h6>
     </div>

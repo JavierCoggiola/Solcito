@@ -276,10 +276,7 @@ class Tutor (models.Model):
     workPhone = models.IntegerField(u'Telefono Laboral', blank=True, null=True)
     children = models.ManyToManyField(Student)
     def __str__(self):
-        nombre = self.name + " padre de : "
-        for i in self.children.all:
-            nombre = nombre + self.children.name+  ", "
-        return nombre
+        return self.name + " " + self.lastName
 
 
 class OrdenDeMerito (models.Model):

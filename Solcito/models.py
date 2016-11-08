@@ -73,13 +73,23 @@ falta = (
     ("0.5","Media Falta"),
     ("0.25","Cuarto de Falta")
 )
-sancion = (
+tipoDeSancion = (
     ("Observacion","Observacion"),
-    ("Amonestacion","Amonestacion")
+    ("Amonestacion","Amonestacion"),
+    ("Suspencion","Suspencion")
+
 )
 teacher = (
     ("teacher","Profesor"),
     ("celador","Preceptor")
+)
+materias = (
+    ("ciencias_sociales","Ciencias Sociales"),
+    ("ciencias_naturales", "Ciencias Naturales"),
+    ("ciencias_exactas", "Ciencias Exactas"),
+    ("taller", "Taller"),
+    ("humanistica", "Humanistica"),
+    ("educacion_fisica","Educacion Fisica")
 )
 
 class Student(models.Model):
@@ -157,11 +167,11 @@ class Discipline(models.Model):
         verbose_name_plural="Conducta"
 
     idDiscipline = models.AutoField(primary_key=True, editable=False)
-    sancion = models.CharField(u'Sancion', choices=sancion, max_length=15, blank=False)
+    tipoDeSancion = models.CharField(u'Tipo de Sancion', choices=tipoDeSancion, max_length=15, blank=False)
     cant = models.IntegerField(u'Cantidad', default='1', blank=False)
     reg = models.ForeignKey('RegistrationS', related_name='dofReg')
     def __str__(self):
-        return self.sancion + " a " + self.reg.student.name
+        return self.tipoDeSancion + " a " + self.reg.student.name
 
 class Curso(models.Model):
     class Meta:
@@ -181,11 +191,11 @@ class Marks(models.Model):
         verbose_name="Nota"
         verbose_name_plural="Notas"
 
-    idMark = models.AutoField(primary_key=True, editable=False)
+    reg = models.ForeignKey('RegistrationS', related_name='mofReg', verbose_name=u'Alumno')
+    subject = models.ForeignKey('Subject', related_name='minsubject', verbose_name=u'Materia')
+    trim = models.CharField(u'Trimestre', max_length=1, choices=trim, blank=False)
     nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)
-    trim = models.CharField(u'Trim', max_length=1, choices=trim, blank=False)
-    subject = models.ForeignKey('Subject', related_name='minsubject')
-    reg = models.ForeignKey('RegistrationS', related_name='mofReg')
+    idMark = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return  self.reg.student.name + " " + self.reg.student.lastName +  " tiene un " +  self.nota + " en " + self.subject.name
@@ -199,7 +209,7 @@ class Subject(models.Model):
     isRedondeable = models.BooleanField(u'Se redondea', default=False)
     name = models.CharField(u'Nombre', max_length=50, blank=False)
     curso = models.ForeignKey('Curso', related_name='ofcurso')
-
+    categoria = models.CharField(u'Tipo de Materia:',choices=materias, max_length=50, default=materias[0])
 
     def __str__(self):
         return self.name + " " + self.curso.curso + " " + self.curso.division
@@ -266,10 +276,7 @@ class Tutor (models.Model):
     workPhone = models.IntegerField(u'Telefono Laboral', blank=True, null=True)
     children = models.ManyToManyField(Student)
     def __str__(self):
-        nombre = self.name + " padre de : "
-        for i in self.children.all:
-            nombre = nombre + self.children.name+  ", "
-        return nombre
+        return self.name + " " + self.lastName
 
 
 class OrdenDeMerito (models.Model):
@@ -298,7 +305,7 @@ class Parametro(models.Model):
     Parametros para las ordenes de Merito
     '''
     type_of_parameter = models.CharField("A juzgar",
-        choices=nota+falta+sancion,
+        choices=materias+falta+tipoDeSancion,
         max_length=20)
     valor = models.IntegerField("Va a sumar")
     upload_date = models.DateTimeField('Last change', auto_now=True)

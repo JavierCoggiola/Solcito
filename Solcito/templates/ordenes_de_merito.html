@@ -10,7 +10,7 @@
 {% block content %}
     <div style="margin-left: 10px;margin-right: 10px;  ">
         <p >Ordenar usando : </p>
-        <select name="orden" class="col s12 m12 l9">
+        <select name="orden" id="orden" class="col s12 m12 l9">
             {% for orden in ordenes %}
                 <option value="{{ orden.pk }}">{{ orden.name }}</option>
             {% endfor %}
@@ -23,7 +23,7 @@
                 {% endfor %}
             </select>
         </div>
-        <button class="btn btn-primary" >Show Me what you Got</button>
+        <button class="btn btn-primary" id="order">Show Me what you Got</button>
 
     <table style="width:100%;background-color: white;" class="card">
       <tr>
@@ -36,4 +36,20 @@
     </table>
     </div>
 
+    <scrip>
+        $('#order').click(function(){
+            $.ajax(
+                {
+                    url: "{% url 'Solcito:ordenar' %}",
+                    data : {
+                                orden:$('#orden').val(),
+                                cursos:$('#cursos').val(),
+                            },
+                    success: function(result){
+                        $("#results_list").html(result);
+                    }
+                }
+            );
+        });
+    </scrip>
 {% endblock %}

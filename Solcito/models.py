@@ -69,9 +69,9 @@ trim = (
     ('3',"Tercer Trimestre")
 )
 falta = (
-    ("1","Falta"),
-    ("0.5","Media Falta"),
-    ("0.25","Cuarto de Falta")
+    (1,"Falta"),
+    (0.5,"Media Falta"),
+    (0.25,"Cuarto de Falta")
 )
 tipoDeSancion = (
     ("Observacion","Observacion"),
@@ -171,7 +171,7 @@ class Discipline(models.Model):
     cant = models.IntegerField(u'Cantidad', default='1', blank=False)
     reg = models.ForeignKey('RegistrationS', related_name='dofReg')
     def __str__(self):
-        return self.tipoDeSancion + " a " + self.reg.student.name
+        return self.sancion + " a " + self.reg.student.name
 
 class Curso(models.Model):
     class Meta:

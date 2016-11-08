@@ -129,6 +129,7 @@
             <caption ><b>Datos de Padre/Madre/Tutor</b></caption>
         {% for tutor in student.tutor.all %}
             {% if tutor.rol == "Father" %}
+            <br>
             <div id="padre">
                 <table style="width:100%">
                     <tr>
@@ -174,6 +175,7 @@
             </div>
             <br>
              {% endif %}
+
             {% if tutor.rol == "Mother" %}
             <div id="madre">
                 <table style="width:100%">
@@ -220,6 +222,7 @@
             </div>
             <br>
             {% endif %}
+
             {% if tutor.rol == "Tutor" %}
             <div id="tutor">
                 <table style="width:100%">

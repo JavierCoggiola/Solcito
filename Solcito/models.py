@@ -213,7 +213,7 @@ class RegistrationD(models.Model):
     idRegistrationD = models.AutoField(primary_key=True, editable=False)
     activeDate = models.DateField(u'Fecha de Alta', blank=False)
     desactiveDate = models.DateField(u'Fecha de Baja', blank=False)
-    isSustitute = models.BooleanField(u'Titular/Suplente', default=False)
+    isSustitute = models.BooleanField(u'Suplente', default=False)
     subject = models.ForeignKey('Subject', related_name='insubject')
     teacher = models.ForeignKey('Teacher', related_name='ownerregistration')
 

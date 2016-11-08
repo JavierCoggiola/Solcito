@@ -167,7 +167,7 @@ class Discipline(models.Model):
         verbose_name_plural="Conducta"
 
     idDiscipline = models.AutoField(primary_key=True, editable=False)
-    tipoDeSancion = models.CharField(u'Tipo de Sancion', choices=tipoDeSancion, max_length=15, blank=False)
+    sancion = models.CharField(u'Tipo de Sancion', choices=tipoDeSancion, max_length=15, blank=False)
     cant = models.IntegerField(u'Cantidad', default='1', blank=False)
     reg = models.ForeignKey('RegistrationS', related_name='dofReg')
     def __str__(self):

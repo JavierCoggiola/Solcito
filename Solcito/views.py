@@ -127,18 +127,23 @@ def submitMatricula(request):
             ti = Tutor.objects.get(dni=request.POST['tutor-dni'])
         except:
             ti = Tutor(rol=3)
+
         sf = StudentForm(request.POST, instance=si)
         ff= GuardianForm(request.POST, instance=fi, prefix='father')
         mf= GuardianForm(request.POST, instance=mi, prefix='mother')
         gf= GuardianForm(request.POST, instance=ti, prefix='tutor')
+
         if (sf.is_valid()):
             sf.save()
             if ff.is_valid():
                 ff.save()
+                ff.instance.children.add(si)
             if mf.is_valid():
                 mf.save()
+                mf.instance.children.add(si)
             if gf.is_valid():
                 gf.save()
+                gf.instance.children.add(si)
             student = Student.objects.get(dni=request.POST['dni'])
             return redirect('/genpdf/'+str(student.pk))
 

@@ -7,10 +7,12 @@ import datetime
 
 class StudentAdmin(admin.ModelAdmin):
     search_fields = ['name','dni']
+    list_display = ('name', 'lastName', 'dni')
 
 admin.site.register(Student, StudentAdmin)
 class TutorAdmin(admin.ModelAdmin):
     search_fields = ['children__name','name']
+    list_display = ('name', 'lastName', 'dni')
 
 admin.site.register(Tutor,TutorAdmin)
 
@@ -18,7 +20,6 @@ class RegistrationSAdmin(admin.ModelAdmin):
     search_fields = ['student__name']
     form = RegistrationSForm
     list_filter = (['activeDate', 'desactiveDate','curso__curso','curso__division','curso__cycle'])
-
     # Aca filtro solamente los alumnos que no tienen una matricula activa
     # Aca filtro el cursos para que solo pueda elegir entre cursos de este ano
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -34,7 +35,7 @@ admin.site.register(RegistrationS,RegistrationSAdmin)
 class AssistanceAdmin(admin.ModelAdmin):
     search_fields = ['reg__student__name']
     list_filter = (['reg__student__name','reg__curso__curso','reg__curso__division'])
-
+    list_display = ('reg', 'tipo', 'justify')
     # Aca filtro el campo matriculas para que solo pueda elegir entre las matriculas de este ano
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "reg":
@@ -47,7 +48,7 @@ admin.site.register(Assistance,AssistanceAdmin)
 class DisciplineAdmin(admin.ModelAdmin):
     search_fields = ['reg__student__name']
     list_filter = (['reg__student__name','reg__curso__curso','reg__curso__division'])
-
+    list_display = ('reg', 'sancion')
     # Aca filtro el campo matriculas para que solo pueda elegir entre las matriculas de este ano
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "reg":
@@ -61,6 +62,7 @@ admin.site.register(Discipline, DisciplineAdmin)
 class CursoAdmin(admin.ModelAdmin):
 
     list_filter = (['curso','division','cycle'])
+    list_display = ('curso', 'division', 'cycle')
     default_filters = ('cycle='+str(datetime.datetime.now().year),)
     exclude = ('idCurso',)
 
@@ -102,8 +104,10 @@ admin.site.register(Marks, MarksAdmin)
 admin.site.register(Subject)
 admin.site.register(RegistrationD)
 
+
 class TeacherAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    list_display = ('name', 'lastName', 'tipo')
     form = TeacherForm
     exclude = ('authuser',)
 

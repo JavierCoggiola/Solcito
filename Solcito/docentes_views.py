@@ -139,7 +139,7 @@ def getSubjectExcel(request):
     ws['A2'] = materiaName
     ws.row_dimensions[2].height = 40
     ws['A2'].alignment = Alignment(horizontal='center', vertical='center')
-    ws['A3'] = "Subtitulo pal ulise"
+    ws['A3'] = materia.curso.cycle
     ws['A3'].alignment = Alignment(horizontal='center', vertical='center')
     ws['A5'].font = subtitle12
     ws['A5'] = "Curso: {}".format("7mo D")
@@ -255,23 +255,23 @@ def getSubjectExcel(request):
         promter.alignment = Alignment(horizontal='center', vertical='center')
 
         ws['A{}'.format(number + count)] = "{}".format(count).zfill(2)
-        ws['B{}'.format(number + count)] = "{}, {}".format(alumno.student.name + " " + alumno.student.lastName, "apellido").upper()
+        ws['B{}'.format(number + count)] = "{}, {}".format(alumno.student.name, alumno.student.lastName).upper()
         ws['C{}'.format(number + count)] = "{:,}".format(alumno.student.dni).replace(',', '.')
-        ws['D{}'.format(number + count)] = "{}".format(int(5))
-        ws['I{}'.format(number + count)] = "{}".format(int(5))
-        ws['N{}'.format(number + count)] = "{}".format(int(5))
+        ws['D{}'.format(number + count)] = "{}".format("")
+        ws['I{}'.format(number + count)] = "{}".format("")
+        ws['N{}'.format(number + count)] = "{}".format("")
 
-        ws['E{}'.format(number + count)] = "{}".format(int(5))
-        ws['J{}'.format(number + count)] = "{}".format(int(5))
-        ws['O{}'.format(number + count)] = "{}".format(int(5))
+        ws['E{}'.format(number + count)] = "{}".format("")
+        ws['J{}'.format(number + count)] = "{}".format("")
+        ws['O{}'.format(number + count)] = "{}".format("")
 
-        ws['F{}'.format(number + count)] = "{}".format(int(5))
-        ws['K{}'.format(number + count)] = "{}".format(int(5))
-        ws['P{}'.format(number + count)] = "{}".format(int(5))
+        ws['F{}'.format(number + count)] = "{}".format("")
+        ws['K{}'.format(number + count)] = "{}".format("")
+        ws['P{}'.format(number + count)] = "{}".format("")
 
-        ws['H{}'.format(number + count)] = "{}".format(int(5))
-        ws['M{}'.format(number + count)] = "{}".format(int(5))
-        ws['R{}'.format(number + count)] = "{}".format(int(5))
+        ws['H{}'.format(number + count)] = "{}".format("")
+        ws['M{}'.format(number + count)] = "{}".format("")
+        ws['R{}'.format(number + count)] = "{}".format("")
 
     workbook.save(response)
     return response

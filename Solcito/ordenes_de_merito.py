@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from Solcito.models import OrdenDeMerito, Curso, Student
+
+from Solcito.models import OrdenDeMerito, Curso, RegistrationS, Student
 
 def oredenes_de_merito(request):
     context = RequestContext(request)
@@ -30,3 +31,4 @@ def ordenar(request):
         result.append(stud)
     result.sort(key=lambda k: k['puntaje'],reverse=True)
     return render_to_response('resultados_orden.html', {'students': result}, context)
+

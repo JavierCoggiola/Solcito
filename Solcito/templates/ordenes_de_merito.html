@@ -25,19 +25,18 @@
         </div>
         <button class="btn btn-primary" id="order">Show Me what you Got</button>
 
-    <table style="width:100%;background-color: white;" class="card">
-      <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Puntaje</th>
-      </tr>
-        <div id="results_list"></div>
 
-    </table>
+        <div id="results_list">
+        </div>
+
     </div>
 
-    <scrip>
+    <script>
         $('#order').click(function(){
+            data = {};
+            data.orden = $('#orden').val();
+            data.cursos = $('#cursos').val();
+            console.log(data);
             $.ajax(
                 {
                     url: "{% url 'Solcito:ordenar' %}",
@@ -51,5 +50,5 @@
                 }
             );
         });
-    </scrip>
+    </script>
 {% endblock %}

@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^docentes/$', docentes_views.docentes, name="docentes"),
     url(r'^excel/$', docentes_views.excel, name="excel"),
     url(r'^oredenes_de_merito/$', ordenes_de_merito.oredenes_de_merito, name="oredenes_de_merito"),
+    url(r'^ordenar/$', ordenes_de_merito.ordenar, name="ordenar"),
 ]

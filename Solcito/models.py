@@ -69,9 +69,9 @@ trim = (
     ('3',"Tercer Trimestre")
 )
 falta = (
-    (1,"Falta"),
-    (0.5,"Media Falta"),
-    (0.25,"Cuarto de Falta")
+    ("1","Falta"),
+    ("0.5","Media Falta"),
+    ("0.25","Cuarto de Falta")
 )
 tipoDeSancion = (
     ("Observacion","Observacion"),
@@ -129,6 +129,41 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
+    def by_parameter(self, reg, parametro):
+        for m in materias:
+            if m[0] == parametro.type_of_parameter:
+                notas = Marks.objects.filter(reg=reg, subject__in=list(
+                    Subject.objects.filter(categoria=parametro.type_of_parameter)))
+                score = 0
+                for nota in notas:
+                    score += int(nota.nota) * int(parametro.valor)
+                return score
+        for s in tipoDeSancion:
+            if s[0] == parametro.type_of_parameter:
+                sanciones = Discipline.objects.filter(reg=reg, sancion=parametro.type_of_parameter)
+                score = 0
+                for sancion in sanciones:
+                    score += parametro.valor
+                return score
+        for f in falta:
+            if f[0] == parametro.type_of_parameter:
+                faltas = Assistance.objects.filter(reg=reg, justify=False, tipo=parametro.type_of_parameter)
+                score = 0
+                for falt in faltas:
+                    score += parametro.valor
+                return score
+
+    def get_score(self, ord, cursos):
+        score = 0
+        parametros = Parametro.objects.filter(orden_de_merito=ord)
+        for curso in cursos:
+            # Consigo la matricula del alumno por cada curso
+            reg = RegistrationS.objects.get(student=self, curso=curso)
+            # Y por cada parametro de la orden seleccionada depende si es de materias, falta, o sancion sumo el score
+            for parametro in list(parametros):
+                score += self.by_parameter(reg, parametro)
+        return score
+
 class RegistrationS(models.Model):
     class Meta:
         verbose_name="Matricula"
@@ -155,7 +190,7 @@ class Assistance(models.Model):
 
     idAssistance = models.AutoField(primary_key=True, editable=False)
     date = models.DateField(u'Fecha', blank=False)
-    tipo = models.FloatField(u'Tipo de Falta', choices=falta, blank=False)
+    tipo = models.CharField(u'Tipo de Falta', max_length=5,choices=falta, blank=False)
     justify = models.BooleanField(u'Justificada', default=False)
     reg = models.ForeignKey('RegistrationS', related_name='aofReg')
     def __str__(self):
@@ -194,7 +229,7 @@ class Marks(models.Model):
     reg = models.ForeignKey('RegistrationS', related_name='mofReg', verbose_name=u'Alumno')
     subject = models.ForeignKey('Subject', related_name='minsubject', verbose_name=u'Materia')
     trim = models.CharField(u'Trimestre', max_length=1, choices=trim, blank=False)
-    nota = models.CharField(u'Nota', max_length=1, choices=nota, blank=False)
+    nota = models.CharField(u'Nota', max_length=2, choices=nota, blank=False)
     idMark = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):

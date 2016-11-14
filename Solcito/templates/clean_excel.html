@@ -1,0 +1,42 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify material_form material_admin %}
+
+
+
+
+
+
+
+{% block content %}
+<form action="{% url 'Solcito:get_excel' %}" method="get" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="FILE" name="docfile">
+        <select name="materia">
+            {% for subject in subjects %}
+                <option value="{{ subject.pk }}">{{ subject.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+
+</div>
+    <div class="contac" id="lista">
+        <div>
+            <ul class="list">
+            {% for i in rows %}
+                <li>{{ i.2 }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <ul class="list">
+            {% for i in rows %}
+                <li>{{ i.7 }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

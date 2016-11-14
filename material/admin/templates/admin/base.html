@@ -83,7 +83,8 @@
                     {% endblock %}
                 <li>
                     {% if user.teacher.tipo == "teacher" %}
-                    <a href="{% url 'Solcito:docentes' %}">Añadir notas</a>
+                        <a href="{% url 'Solcito:docentes' %}">Añadir notas</a>
+                        <a href="{% url 'Solcito:clean_excel' %}">Imprimir Excel por Materia</a>
                     {% endif %}
                     {% for group in user.groups.all %}
                         {% if group.name == 'Administrador' %}

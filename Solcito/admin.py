@@ -102,7 +102,14 @@ class MarksAdmin(admin.ModelAdmin):
 
 admin.site.register(Marks, MarksAdmin)
 admin.site.register(Subject)
-admin.site.register(RegistrationD)
+
+class RegistrationDAdmin(admin.ModelAdmin):
+    search_fields = ['teacher__name']
+    form = RegistrationSForm
+    list_display = (['teacher', 'subject'])
+
+
+admin.site.register(RegistrationD, RegistrationDAdmin)
 
 
 class TeacherAdmin(admin.ModelAdmin):

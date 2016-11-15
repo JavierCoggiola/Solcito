@@ -70,7 +70,7 @@ admin.site.register(Curso, CursoAdmin)
 
 class MarksAdmin(admin.ModelAdmin):
     search_fields = ['reg__student__lastName', 'reg__student__name', ]
-    list_filter = (['subject__name','subject__curso__curso','subject__curso__division','subject__curso__cycle'])
+    list_filter = (['subject__name','subject__curso__curso','subject__curso__division','subject__curso__cycle', 'trim'])
     default_filters = ('subject__curso__cycle=' + str(datetime.datetime.now().year),)
     exclude = ('idMark',)
     list_display = ('reg','subject','nota','trim')

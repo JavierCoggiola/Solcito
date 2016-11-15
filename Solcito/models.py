@@ -170,7 +170,7 @@ class RegistrationS(models.Model):
         verbose_name_plural="Matriculas"
 
     def __str__(self):
-        return self.student.name + " " + str(self.curso.cycle)
+        return self.student.name + " " + self.student.lastName
     idRegistrationS = models.AutoField(primary_key=True, editable=False)
     activeDate = models.DateField(u'Fecha de Alta', blank=False)
     desactiveDate = models.DateField(u'Fecha de Baja', blank=False)

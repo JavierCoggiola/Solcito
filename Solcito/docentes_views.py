@@ -8,6 +8,8 @@ from Solcito.models import Student, Teacher, Marks, RegistrationD, trim, Registr
 import openpyxl
 import xlrd
 
+import datetime
+
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
@@ -38,10 +40,9 @@ def excel(request):
     if trimestre == '1':
         columna = 7
     elif trimestre == '2':
-        print "segundoooo"
         columna = 12
     elif trimestre == '3':
-        columna = 18
+        columna = 17
     else:
         columna = 7
     # fortuna row 15 col 2
@@ -60,20 +61,24 @@ def excel(request):
         if breaking:
             break
         rows.append(r)
-
+    print rows
     # Guardar los datos del excel en la base de datos
+    this_year = int(datetime.datetime.now().year)
     for i in rows:
         newMark = Marks()
 
         try:
-            newMark.reg = RegistrationS.objects.filter(student__lastName__icontains=i[2].split(", ")[0],
-                                                       student__name__icontains=i[2].split(", ")[1],)[0]
+            print i[1].split(", ")[0]
+            print i[1].split(", ")[1]
+            print this_year
+            newMark.reg = RegistrationS.objects.get(student__dni=i[2], curso__cycle=this_year)
             newMark.subject = Subject.objects.get(pk=materia)
             newMark.trim = trimestre
             print i[columna]
             newMark.nota = int(i[columna])
             newMark.save()
         except IndexError:
+            print "error"
             pass
 
     return render_to_response('docentes.html', {'rows': rows}, context)
@@ -256,7 +261,7 @@ def getSubjectExcel(request):
 
         ws['A{}'.format(number + count)] = "{}".format(count).zfill(2)
         ws['B{}'.format(number + count)] = "{}, {}".format(alumno.student.name, alumno.student.lastName).upper()
-        ws['C{}'.format(number + count)] = "{:,}".format(alumno.student.dni).replace(',', '.')
+        ws['C{}'.format(number + count)] = "{:,}".format(alumno.student.dni).replace(',', '')
         ws['D{}'.format(number + count)] = "{}".format("")
         ws['I{}'.format(number + count)] = "{}".format("")
         ws['N{}'.format(number + count)] = "{}".format("")

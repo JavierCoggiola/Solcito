@@ -143,7 +143,7 @@ class Student(models.Model):
                 sanciones = Discipline.objects.filter(reg=reg, sancion=parametro.type_of_parameter)
                 score = 0
                 for sancion in sanciones:
-                    score += parametro.valor
+                    score += sancion.cant * parametro.valor
                 return score
         for f in falta:
             if f[0] == parametro.type_of_parameter:
@@ -342,6 +342,6 @@ class Parametro(models.Model):
     type_of_parameter = models.CharField("A juzgar",
         choices=materias+falta+tipoDeSancion,
         max_length=20)
-    valor = models.IntegerField("Va a sumar")
+    valor = models.FloatField("Va a sumar")
     upload_date = models.DateTimeField('Last change', auto_now=True)
     orden_de_merito = models.ForeignKey(OrdenDeMerito, related_name='parametros', null=True, blank=True)

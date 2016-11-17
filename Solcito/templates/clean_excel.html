@@ -10,7 +10,6 @@
 {% block content %}
 <form action="{% url 'Solcito:get_excel' %}" method="get" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="FILE" name="docfile">
         <select name="materia">
             {% for subject in subjects %}
                 <option value="{{ subject.pk }}">{{ subject.name }}</option>

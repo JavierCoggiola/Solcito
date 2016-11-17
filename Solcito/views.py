@@ -118,15 +118,15 @@ def submitMatricula(request):
         try:
             fi = Tutor.objects.get(dni=request.POST['father-dni'])
         except:
-            fi = Tutor(rol=1)
+            fi = Tutor(rol="Father")
         try:
             mi = Tutor.objects.get(dni=request.POST['mother-dni'])
         except:
-            mi = Tutor(rol=2)
+            mi = Tutor(rol="Mother")
         try:
             ti = Tutor.objects.get(dni=request.POST['tutor-dni'])
         except:
-            ti = Tutor(rol=3)
+            ti = Tutor(rol="Tutor")
 
         sf = StudentForm(request.POST, instance=si)
         ff= GuardianForm(request.POST, instance=fi, prefix='father')
@@ -185,7 +185,6 @@ def genpdf(request,id_student):
             'student':student
         }
     )
-    print "return"
 
 
 

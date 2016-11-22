@@ -11,7 +11,7 @@
     <td>{{ student.student.name }} {{ student.student.lastName }}</td>
       {% for trim in student.trimestres %}
           <td>{% for nota in trim.notas %}
-            <input type="text" value="{{ nota.nota }}" style="width: 10px !important; "> |
+            {{ nota.nota }} |
           {% endfor %}
                = {{ trim.final }}</td>
       {% endfor %}

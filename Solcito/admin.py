@@ -22,6 +22,7 @@ class RegistrationSAdmin(admin.ModelAdmin):
     list_filter = (['activeDate', 'desactiveDate','curso__curso','curso__division','curso__cycle'])
     # Aca filtro solamente los alumnos que no tienen una matricula activa
     # Aca filtro el cursos para que solo pueda elegir entre cursos de este ano
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "student":
             kwargs["queryset"] = Student.objects.filter(active=False)
@@ -32,11 +33,13 @@ class RegistrationSAdmin(admin.ModelAdmin):
 
 admin.site.register(RegistrationS,RegistrationSAdmin)
 
+
 class AssistanceAdmin(admin.ModelAdmin):
     search_fields = ['reg__student__name']
     list_filter = (['reg__student__name','reg__curso__curso','reg__curso__division'])
     list_display = ('reg', 'tipo', 'justify')
     # Aca filtro el campo matriculas para que solo pueda elegir entre las matriculas de este ano
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "reg":
             kwargs["queryset"] = RegistrationS.objects.filter(curso__cycle=datetime.datetime.now().year)
@@ -101,7 +104,32 @@ class MarksAdmin(admin.ModelAdmin):
             return qs
 
 admin.site.register(Marks, MarksAdmin)
-admin.site.register(Subject)
+
+
+class InlineMarks(admin.TabularInline):
+    model = Marks
+    exclude = ('',)
+    verbose_name = "Nota"
+    verbose_name_plural = "Notas"
+    extra = 1
+    def get_queryset(self, request):
+        '''
+        Devuelve solo las notas de las materias que el docente esta matriculado
+        '''
+        qs = super(InlineMarks, self).get_queryset(request)
+        try:
+            materias = Subject.objects.filter(insubject__teacher=request.user.teacher)
+            return qs.filter(subject__in=materias)
+        except:
+            return qs
+
+
+class SubjectAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+    list_display = (['name', 'curso'])
+    inlines = [InlineMarks]
+
+admin.site.register(Subject, SubjectAdmin)
 
 class RegistrationDAdmin(admin.ModelAdmin):
     search_fields = ['teacher__name']

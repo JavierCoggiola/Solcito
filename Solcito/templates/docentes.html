@@ -13,7 +13,7 @@
         <input type="FILE" name="docfile">
         <select name="materia">
             {% for matricula in matriculas %}
-                <option value="{{ matricula.pk }}">{{ matricula.subject.name }}</option>
+                <option value="{{ matricula.subject.pk }}">{{ matricula.subject.name }}</option>
             {% endfor %}
         </select>
         <select name="trimestre">

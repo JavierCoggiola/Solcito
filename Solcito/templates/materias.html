@@ -1,0 +1,36 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify material_form material_admin %}
+
+
+
+
+
+
+
+{% block content %}
+
+        <select name="materia" id="materia">
+            {% for materia in materias %}
+                <option value="{{ materia.pk }}">{{ materia.name }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" id="students">Show Me what you Got</button>
+
+    <div id="results_list">
+        </div>
+    <script>
+        $('#students').click(function(){
+            data = {};
+            data.materia = $('#materia').val();
+            $.ajax(
+                {
+                    url: "{% url 'Solcito:get_by_materia' %}",
+                    data : data,
+                    success: function(result){
+                        $("#results_list").html(result);
+                    }
+                }
+            );
+        });
+    </script>
+{% endblock %}

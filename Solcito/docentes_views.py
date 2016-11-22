@@ -25,6 +25,35 @@ def docentes(request):
         return redirect('/admin')
 
 
+def materias(request):
+    context = RequestContext(request)
+    if request.user.groups.filter(name='Docente').exists():
+        materias = Subject.objects.filter(teachs__teacher=request.user.teacher)
+        return render_to_response('materias.html', {'materias': materias}, context)
+    else:
+        return redirect('/admin')
+
+
+def get_by_materia(request):
+    context = RequestContext(request)
+    if request.user.groups.filter(name='Docente').exists():
+        materia = request.GET['materia']
+        students = RegistrationS.objects.filter(curso__ofcurso= materia)
+        for student in students:
+            student.trimestres = []
+            # por cada trimestre seteado filtramos las notas de los alumnos y se las vamos agregando
+            for t in trim:
+                trimestre = {}
+                trimestre['notas'] = Marks.objects.filter(subject=materia, trim=t[0], reg=student)
+                if len(trimestre['notas'])>0:
+                    notas = [int(mark.nota) for mark in trimestre['notas']]
+                    trimestre['final'] = sum(notas)/len(notas)
+                student.trimestres.append(trimestre)
+        return render_to_response('by_materia.html', {'students': students, 'trimestres':trim}, context)
+    else:
+        return redirect('/admin')
+
+
 
 def excel(request):
     context = RequestContext(request)
@@ -38,48 +67,58 @@ def excel(request):
     print trimestre
     offset = 7
     if trimestre == '1':
+        desde = 3
+        hasta = 6
         columna = 7
     elif trimestre == '2':
+        desde = 8
+        hasta = 11
         columna = 12
     elif trimestre == '3':
+        desde = 13
+        hasta = 16
         columna = 17
     else:
+        desde = 3
+        hasta = 6
         columna = 7
     # fortuna row 15 col 2
     breaking = False
-    print materia
     for i, row in enumerate(range(sh.nrows)):
         if i <= offset:  # (Optionally) skip headers
             continue
         r = []
         for j, col in enumerate(range(sh.ncols)):
-            if (sh.cell_value(i, columna)) != "":
+            #if (sh.cell_value(i, columna)) != "":
+            if j<17:
                 r.append(sh.cell_value(i, j))
             else:
-                breaking = True
                 break
-        if breaking:
+        if (sh.cell_value(i, columna)) == "":
             break
         rows.append(r)
     print rows
     # Guardar los datos del excel en la base de datos
     this_year = int(datetime.datetime.now().year)
     for i in rows:
-        newMark = Marks()
-
-        try:
-            print i[1].split(", ")[0]
-            print i[1].split(", ")[1]
-            print this_year
-            newMark.reg = RegistrationS.objects.get(student__dni=i[2], curso__cycle=this_year)
-            newMark.subject = Subject.objects.get(pk=materia)
-            newMark.trim = trimestre
-            print i[columna]
-            newMark.nota = int(i[columna])
-            newMark.save()
-        except IndexError:
-            print "error"
-            pass
+        # Por cada alumno osea cada fila, pasamos por las columnas desde hasta como marcamos antes segun el trimestre
+        print desde
+        desdeAux = desde
+        while desdeAux <=hasta:
+            if str(i[desdeAux]) != "":
+                newMark = Marks()
+                try:
+                    newMark.reg = RegistrationS.objects.get(student__dni=i[2], curso__cycle=this_year)
+                    newMark.subject = Subject.objects.get(pk=materia)
+                    print "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    print trimestre
+                    newMark.trim = trimestre
+                    newMark.nota = int(i[desdeAux])
+                    newMark.save()
+                    desdeAux += 1
+                except IndexError:
+                    print "error"
+                    pass
 
     return render_to_response('docentes.html', {'rows': rows}, context)
 

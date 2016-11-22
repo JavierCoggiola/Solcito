@@ -1,0 +1,22 @@
+
+   <table style="width:100%;background-color: white;" class="card">
+      <tr>
+        <th>Alumno</th>
+          {% for trim in trimestres %}
+              <th>{{ trim.1 }}</th>
+          {% endfor %}
+      </tr>
+{% for student in students %}
+  <tr>
+    <td>{{ student.student.name }} {{ student.student.lastName }}</td>
+      {% for trim in student.trimestres %}
+          <td>{% for nota in trim.notas %}
+            <input type="text" value="{{ nota.nota }}" style="width: 10px !important; "> |
+          {% endfor %}
+               = {{ trim.final }}</td>
+      {% endfor %}
+
+  </tr>
+{% endfor %}
+
+    </table>

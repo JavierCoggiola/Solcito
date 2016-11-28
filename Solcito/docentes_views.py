@@ -47,7 +47,7 @@ def get_by_materia(request):
                 trimestre['notas'] = Marks.objects.filter(subject=materia, trim=t[0], reg=student)
                 if len(trimestre['notas'])>0:
                     notas = [int(mark.nota) for mark in trimestre['notas']]
-                    trimestre['final'] = sum(notas)/len(notas)
+                    trimestre['final'] = round(float(sum(notas)) / float(len(notas)),2)
                 student.trimestres.append(trimestre)
         return render_to_response('by_materia.html', {'students': students, 'trimestres':trim}, context)
     else:

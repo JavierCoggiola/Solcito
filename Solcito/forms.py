@@ -17,10 +17,6 @@ class RegistrationSForm(ModelForm):
         Row(Span12('curso')),
     )
 
-    def __init__(self, *args, **kwargs):
-        super(RegistrationSForm, self).__init__(*args, **kwargs)
-        self.fields['student'].queryset = Student.objects.filter(pk=self.instance.student.pk)
-
     class Meta:
         model = RegistrationS
         exclude = ('idRegistrationS',)

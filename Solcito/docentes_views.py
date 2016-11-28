@@ -64,24 +64,24 @@ def excel(request):
     rows = []
     # leer hoja 1
     sh = book.sheet_by_index(0)
-    print trimestre
+    maximo = 17
     offset = 7
     if trimestre == '1':
         desde = 3
         hasta = 6
-        columna = 7
+        columna = 3
     elif trimestre == '2':
         desde = 8
         hasta = 11
-        columna = 12
+        columna = 8
     elif trimestre == '3':
         desde = 13
         hasta = 16
-        columna = 17
+        columna = 13
     else:
         desde = 3
         hasta = 6
-        columna = 7
+        columna = 3
     # fortuna row 15 col 2
     breaking = False
     for i, row in enumerate(range(sh.nrows)):
@@ -89,36 +89,36 @@ def excel(request):
             continue
         r = []
         for j, col in enumerate(range(sh.ncols)):
-            #if (sh.cell_value(i, columna)) != "":
-            if j<17:
+            if (sh.cell_value(i, columna)) != "":
                 r.append(sh.cell_value(i, j))
             else:
                 break
-        if (sh.cell_value(i, columna)) == "":
+        if breaking:
             break
         rows.append(r)
     print rows
     # Guardar los datos del excel en la base de datos
     this_year = int(datetime.datetime.now().year)
+    margen_row = 3
     for i in rows:
         # Por cada alumno osea cada fila, pasamos por las columnas desde hasta como marcamos antes segun el trimestre
         print desde
         desdeAux = desde
-        while desdeAux <=hasta:
-            if str(i[desdeAux]) != "":
-                newMark = Marks()
-                try:
-                    newMark.reg = RegistrationS.objects.get(student__dni=i[2], curso__cycle=this_year)
-                    newMark.subject = Subject.objects.get(pk=materia)
-                    print "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                    print trimestre
-                    newMark.trim = trimestre
-                    newMark.nota = int(i[desdeAux])
-                    newMark.save()
-                    desdeAux += 1
-                except IndexError:
-                    print "error"
-                    pass
+        if i != []:
+            for j in range(hasta-desde):
+                print j
+                print j + margen_row
+                if str(i[j+desdeAux]) != "":
+                    newMark = Marks()
+                    try:
+                        newMark.reg = RegistrationS.objects.get(student__dni=i[2], curso__cycle=this_year)
+                        newMark.subject = Subject.objects.get(pk=materia)
+                        newMark.trim = trimestre
+                        newMark.nota = int(i[j+desdeAux])
+                        newMark.save()
+                    except IndexError:
+                        print "error"
+                        pass
 
     return render_to_response('docentes.html', {'rows': rows}, context)
 

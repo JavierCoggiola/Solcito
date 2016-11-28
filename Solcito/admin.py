@@ -106,30 +106,8 @@ class MarksAdmin(admin.ModelAdmin):
 admin.site.register(Marks, MarksAdmin)
 
 
-class InlineMarks(admin.TabularInline):
-    model = Marks
-    exclude = ('',)
-    verbose_name = "Nota"
-    verbose_name_plural = "Notas"
-    extra = 1
-    def get_queryset(self, request):
-        '''
-        Devuelve solo las notas de las materias que el docente esta matriculado
-        '''
-        qs = super(InlineMarks, self).get_queryset(request)
-        try:
-            materias = Subject.objects.filter(insubject__teacher=request.user.teacher)
-            return qs.filter(subject__in=materias)
-        except:
-            return qs
 
-
-class SubjectAdmin(admin.ModelAdmin):
-    search_fields = ['name']
-    list_display = (['name', 'curso'])
-    inlines = [InlineMarks]
-
-admin.site.register(Subject, SubjectAdmin)
+admin.site.register(Subject)
 
 class RegistrationDAdmin(admin.ModelAdmin):
     search_fields = ['teacher__name']

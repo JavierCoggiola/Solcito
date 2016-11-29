@@ -145,6 +145,7 @@ def submitMatricula(request):
                 gf.save()
                 gf.instance.children.add(si)
             student = Student.objects.get(dni=request.POST['dni'])
+            student.active = False
             return redirect('/genpdf/'+str(student.pk))
 
         else:

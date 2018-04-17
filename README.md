@@ -1,5 +1,5 @@
 # Solcito
-Sistema de gestion de secretaria para el ITS Villada
+Sistema de gestion de secretaria para el ITS Villada programado en sistema web Django
 
 ##Dependencias
 * Django (1.9.7)
